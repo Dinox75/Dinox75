@@ -79,8 +79,6 @@
 🔹 **Projetos de Automação com N8N** – Workflows e integrações reais  
 🔹 **Dashboards em Power BI** – Estudos e análises de dados
 
-*(Posso organizar e escrever READMEs profissionais para cada um se quiser!)*
-
 ---
 
 ## 📈 Objetivos Profissionais  
