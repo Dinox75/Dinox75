@@ -1,3 +1,5 @@
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0F172A,50:1E40AF,100:38BDF8&height=180&section=header&text=Vinicius%20Lima&fontSize=42&fontColor=FFFFFF&animation=fadeIn&fontAlignY=35&desc=Python%20%7C%20Dados%20%7C%20Automa%C3%A7%C3%A3o%20%7C%20Back-End&descAlignY=58&descSize=18" />
+
 <h1 align="center">Olá, eu sou Vinicius Lima 👋</h1>
 
 <p align="center">
@@ -5,138 +7,215 @@
 </p>
 
 <p align="center">
-  Desenvolvedor em evolução, com foco em <strong>Python</strong>, <strong>Dados</strong>, <strong>Automação</strong> e construção de projetos práticos.
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=2800&pause=900&color=38BDF8&center=true&vCenter=true&width=900&lines=Desenvolvedor+em+evolu%C3%A7%C3%A3o;Foco+em+Python%2C+Dados+e+Automa%C3%A7%C3%A3o;Construindo+projetos+pr%C3%A1ticos+para+o+portf%C3%B3lio;Transformando+estudo+em+entrega+real" alt="Typing SVG" />
 </p>
 
 <p align="center">
   <a href="mailto:vibylima75@gmail.com">
-    <img src="https://img.shields.io/badge/Email-Contato-red?style=for-the-badge&logo=gmail&logoColor=white" />
+    <img src="https://img.shields.io/badge/Email-Contato-EA4335?style=for-the-badge&logo=gmail&logoColor=white" />
   </a>
   <a href="https://www.linkedin.com/in/vinicius-lima-b98100308/" target="_blank">
-    <img src="https://img.shields.io/badge/LinkedIn-Perfil-blue?style=for-the-badge&logo=linkedin&logoColor=white" />
+    <img src="https://img.shields.io/badge/LinkedIn-Vinicius%20Lima-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
   </a>
   <a href="https://github.com/Dinox75" target="_blank">
-    <img src="https://img.shields.io/badge/GitHub-Dinox75-black?style=for-the-badge&logo=github&logoColor=white" />
+    <img src="https://img.shields.io/badge/GitHub-Dinox75-181717?style=for-the-badge&logo=github&logoColor=white" />
   </a>
+</p>
+
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=Dinox75&style=for-the-badge&color=38BDF8" alt="Visualizações do perfil" />
+  <img src="https://img.shields.io/badge/Status-Em%20evolu%C3%A7%C3%A3o-22C55E?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Foco-Back--End%20%7C%20Dados%20%7C%20Automa%C3%A7%C3%A3o-6366F1?style=for-the-badge" />
 </p>
 
 ---
 
 ## 🚀 Sobre mim
 
-Sou um estudante e desenvolvedor em evolução, construindo minha base em tecnologia por meio de projetos práticos, estudo contínuo e aplicação real do que aprendo.
+Sou estudante de **Análise e Desenvolvimento de Sistemas** e **Análise de Dados**, construindo minha base profissional com foco em projetos práticos, lógica de programação, automação e análise de dados.
 
-Hoje, concentro meus estudos e projetos em:
+Atualmente, busco transformar estudo em entrega real por meio de projetos que demonstrem:
 
-- **Python** para lógica, automação e desenvolvimento back-end
-- **Análise de Dados** com foco em estruturação, interpretação e visualização
-- **Automação de processos** com ferramentas como **N8N**
-- **Power BI**, **SQL** e aplicações voltadas para produtividade e organização
+- raciocínio lógico;
+- organização de código;
+- documentação clara;
+- aplicação prática de tecnologia;
+- evolução contínua no GitHub.
 
-Meu objetivo é conquistar uma oportunidade de entrada no mercado como **estagiário ou desenvolvedor júnior** nas áreas de:
+Meu foco profissional está direcionado para oportunidades como:
 
-- **Back-End**
-- **Dados**
-- **Automação**
+- **Estagiário em Desenvolvimento**;
+- **Desenvolvedor Back-End Júnior**;
+- **Estagiário em Dados**;
+- **Automação de Processos**;
+- **Power BI / Análise de Dados**.
 
 ---
 
 ## 🎯 Objetivo profissional
 
-Busco transformar estudo em entrega prática.
+Meu objetivo é entrar e crescer na área de tecnologia com consistência.
 
-Quero desenvolver soluções que não sejam apenas funcionais, mas também organizadas, úteis e com potencial de evolução. Estou construindo meu portfólio com foco em mostrar:
+Estou construindo um portfólio que mostre minha evolução real: projetos simples, úteis, organizados e com potencial de crescimento.
 
-- raciocínio lógico
-- evolução técnica
-- organização de código
-- documentação clara
-- aplicação prática de tecnologia no dia a dia
+Mais do que apenas estudar teoria, busco praticar, errar, corrigir, documentar e melhorar continuamente.
+
+> Cada projeto aqui representa uma etapa da minha evolução como desenvolvedor.
 
 ---
 
 ## 🧠 Tecnologias e Ferramentas
 
-### Linguagens
-<p>
-  <img src="https://skillicons.dev/icons?i=python,js,html,css" />
-</p>
+<div align="center">
 
-### Dados e Banco de Dados
-<p>
-  <img src="https://skillicons.dev/icons?i=mysql" />
-</p>
+### Linguagens e base técnica
 
-- Power BI
-- SQL
-- Estruturação e análise de dados
+<img src="https://skillicons.dev/icons?i=python,js,html,css" />
 
-### Automação e Desenvolvimento
-<p>
-  <img src="https://skillicons.dev/icons?i=git,github,vscode" />
-</p>
+<br><br>
 
-- N8N
-- Git e GitHub
-- VS Code
-- Desenvolvimento de projetos em Python
-- Automação de fluxos e rotinas
+### Dados, banco de dados e visualização
+
+<img src="https://skillicons.dev/icons?i=mysql" />
+
+<br><br>
+
+<img src="https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" />
+<img src="https://img.shields.io/badge/SQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" />
+<img src="https://img.shields.io/badge/An%C3%A1lise%20de%20Dados-0F172A?style=for-the-badge&logo=databricks&logoColor=white" />
+
+<br><br>
+
+### Desenvolvimento, versionamento e automação
+
+<img src="https://skillicons.dev/icons?i=git,github,vscode" />
+
+<br><br>
+
+<img src="https://img.shields.io/badge/N8N-Automa%C3%A7%C3%A3o-EA4B71?style=for-the-badge&logo=n8n&logoColor=white" />
+<img src="https://img.shields.io/badge/Git-Versionamento-F05032?style=for-the-badge&logo=git&logoColor=white" />
+<img src="https://img.shields.io/badge/GitHub-Portf%C3%B3lio-181717?style=for-the-badge&logo=github&logoColor=white" />
+
+</div>
 
 ---
 
-## 📚 Formação e Bootcamps
+## 📚 Formação e Estudos
 
-### ✅ Concluído
-- **Bootcamp Santander 2025 - Back-End com Python (DIO)**
+### 🎓 Formação acadêmica
 
-### ✅ Concluído
-- **Bootcamp Santander 2025 - Automação com N8N (DIO)**
+- **Análise e Desenvolvimento de Sistemas**
+- **Análise de Dados**
+- Atualmente no **3º semestre**
+- Previsão de formação: **2027**
 
-### ✅ Concluído
-- **Certificação Intermediária – Programador Júnior(FASUL)**
+### 📜 Certificações e bootcamps
 
-### ✅ Concluído
-- **Santander – Excel com Inteligência Artificial – 2º Semestre (DIO)**
-
-Além dos bootcamps, sigo aprofundando meus conhecimentos em desenvolvimento, automação, análise de dados e inteligência artificial por meio de projetos próprios e estudos contínuos.
+- **Python Fundamentals**
+- **Bootcamp Santander 2025 - Back-End com Python | DIO**
+- **Bootcamp Santander 2025 - Automação com N8N | DIO**
+- **Certificação Intermediária - Programador Júnior | FASUL**
+- **Santander - Excel com Inteligência Artificial | DIO**
+- **Basic Excel Extension Course**
+- **Basic English Extension Course**
+- **Fundamentos de IA Generativa com Bedrock | DIO**
+- **Machine Learning, MySQL, Power BI e Python Backend**
 
 ---
 
 ## 🌟 Projetos em destaque
 
-### 🔹 WorkWatch
-Sistema em Python para monitoramento de produtividade e atividade no computador.  
-Projeto voltado para prática de arquitetura, captura de eventos, organização de dados e evolução futura com dashboard e análises.
-
-### 🔹 Smart Market
-Projeto em Python focado no registro e análise de compras de supermercado.  
-Permite salvar compras, organizar histórico, comparar períodos e identificar mudanças de preço e consumo.
-
-### 🔹 Sistema Bancário (DIO)
-Aplicação em Python via console com operações como depósito, saque e extrato.  
-Projeto importante para reforçar lógica, funções, estrutura e boas práticas iniciais.
-
-### 🔹 Simulador de Entrevista
-Bot em Python que realiza perguntas, coleta respostas e faz análises com base no perfil informado.  
-Projeto desenvolvido para praticar fluxo de perguntas, organização lógica e análise de respostas.
-
-### 🔹 Projetos com N8N
-Workflows de automação com foco em integração, produtividade e construção de soluções práticas.
-
-### 🔹 Dashboards em Power BI
-Projetos de estudo voltados para visualização, análise e interpretação de dados.
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3 align="center">🛒 Smart Market</h3>
+      <p>
+        Sistema em Python para registro e análise de compras de supermercado.
+        Permite salvar compras, organizar histórico, comparar períodos e identificar mudanças de preço e consumo.
+      </p>
+      <p>
+        <strong>Foco:</strong> Python, lógica, organização de dados, JSON, comparação de históricos e evolução para análise inteligente.
+      </p>
+    </td>
+    <td width="50%" valign="top">
+      <h3 align="center">🖥️ WorkWatch</h3>
+      <p>
+        Sistema em Python voltado ao monitoramento de produtividade e atividade no computador.
+        Projeto criado para praticar arquitetura, captura de eventos, logs e futura construção de dashboard.
+      </p>
+      <p>
+        <strong>Foco:</strong> Python, monitoramento, automação, organização de logs, produtividade e análise de comportamento.
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3 align="center">🏦 Sistema Bancário</h3>
+      <p>
+        Aplicação em Python via console com operações como depósito, saque e extrato.
+        Projeto importante para reforçar lógica, funções, validações e boas práticas iniciais.
+      </p>
+      <p>
+        <strong>Foco:</strong> fundamentos de Python, controle de fluxo, funções e regras de negócio simples.
+      </p>
+    </td>
+    <td width="50%" valign="top">
+      <h3 align="center">🤖 Simulador de Entrevista</h3>
+      <p>
+        Bot em Python que realiza perguntas, coleta respostas e faz uma análise com base no perfil informado.
+        Projeto desenvolvido para praticar fluxo lógico, validações e análise de respostas.
+      </p>
+      <p>
+        <strong>Foco:</strong> Python, estruturação de perguntas, entrada de dados, análise textual e organização de código.
+      </p>
+    </td>
+  </tr>
+</table>
 
 ---
 
-## 📈 O que estou desenvolvendo agora
+## 📌 Cards de repositórios
 
-Atualmente, estou focado em evoluir nos seguintes pontos:
+<p align="center">
+  <a href="https://github.com/Dinox75/Smart_market">
+    <img height="140" src="https://github-readme-stats.vercel.app/api/pin/?username=Dinox75&repo=Smart_market&theme=tokyonight&hide_border=true" />
+  </a>
+  <a href="https://github.com/Dinox75/WorkWatch">
+    <img height="140" src="https://github-readme-stats.vercel.app/api/pin/?username=Dinox75&repo=WorkWatch&theme=tokyonight&hide_border=true" />
+  </a>
+</p>
 
-- escrita de código mais organizado e escalável
-- automações com aplicação prática
-- integração entre dados, lógica e visualização
-- documentação de projetos de forma mais profissional
-- construção de portfólio voltado ao mercado
+---
+
+## 📈 Evolução atual
+
+```text
+Python        █████████░░░░░░░░  Em evolução contínua
+Back-End      ███████░░░░░░░░░░  Construindo base sólida
+Dados         ████████░░░░░░░░░  Estudo + prática
+Power BI      ███████░░░░░░░░░░  Dashboards e análises
+SQL           ██████░░░░░░░░░░░  Consultas e estruturação
+N8N           ███████░░░░░░░░░░  Automações e integrações
+Git/GitHub    ████████░░░░░░░░░  Portfólio e versionamento
+```
+
+---
+
+## 🧩 Minha forma de aprender
+
+Acredito em evolução prática.
+
+Minha rotina de estudos envolve:
+
+- estudar conceitos;
+- praticar com exercícios;
+- criar pequenos projetos;
+- documentar o que aprendo;
+- melhorar versões anteriores;
+- subir projetos no GitHub;
+- transformar dificuldades em aprendizado real.
+
+Tenho focado principalmente em **Python**, **dados**, **automação**, **Power BI**, **SQL** e construção de projetos que possam demonstrar minha evolução profissional.
 
 ---
 
@@ -151,32 +230,73 @@ Atualmente, estou focado em evoluir nos seguintes pontos:
   <img src="https://streak-stats.demolab.com?user=Dinox75&theme=tokyonight&hide_border=true" />
 </p>
 
+<p align="center">
+  <img src="https://github-profile-trophy.vercel.app/?username=Dinox75&theme=tokyonight&no-frame=true&no-bg=true&margin-w=8&margin-h=8" />
+</p>
+
+---
+
+## 📉 Gráfico de atividade
+
+<p align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Dinox75&theme=tokyo-night&hide_border=true&area=true" />
+</p>
+
 ---
 
 ## 💼 O que você vai encontrar aqui
 
-No meu GitHub, você vai encontrar projetos voltados para:
+No meu GitHub, você encontrará projetos voltados para:
 
-- prática de **Python**
-- evolução em **Back-End**
-- estudos de **Dados**
-- experiências com **Automação**
-- projetos desenvolvidos como parte da minha jornada de aprendizado real
+- prática de **Python**;
+- desenvolvimento **Back-End**;
+- estudos de **Dados**;
+- automações com **N8N**;
+- dashboards e análises com **Power BI**;
+- projetos de aprendizado com documentação;
+- evolução progressiva como desenvolvedor.
 
-Meu foco não é apenas criar repositórios, mas construir uma trajetória consistente e visível de evolução.
+Meu objetivo não é apenas criar repositórios, mas construir uma trajetória clara, organizada e visível de crescimento técnico.
+
+---
+
+## 🛠️ Próximos passos no meu portfólio
+
+- Melhorar a documentação dos projetos existentes;
+- Criar versões mais completas dos projetos em Python;
+- Evoluir projetos de console para interfaces mais amigáveis;
+- Criar dashboards para análise de dados;
+- Aplicar automações reais com N8N;
+- Melhorar a organização dos repositórios;
+- Publicar projetos com README mais profissional.
 
 ---
 
 ## 📫 Contato
 
-- **Email:** vibylima75@gmail.com
-- **LinkedIn:** [vinicius-lima-b98100308](https://www.linkedin.com/in/vinicius-lima-b98100308/)
-- **GitHub:** [Dinox75](https://github.com/Dinox75)
+<p align="center">
+  <a href="mailto:vibylima75@gmail.com">
+    <img src="https://img.shields.io/badge/Email-vibylima75%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white" />
+  </a>
+  <a href="https://www.linkedin.com/in/vinicius-lima-b98100308/" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-Conectar-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
+  </a>
+  <a href="https://github.com/Dinox75" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-Dinox75-181717?style=for-the-badge&logo=github&logoColor=white" />
+  </a>
+</p>
 
 ---
 
 ## ⚡ Mensagem final
 
-> Estou evoluindo diariamente para transformar estudo, prática e disciplina em uma carreira sólida na tecnologia.
+<p align="center">
+  <strong>Estou evoluindo diariamente para transformar estudo, prática e disciplina em uma carreira sólida na tecnologia.</strong>
+</p>
 
-Se quiser acompanhar minha evolução, trocar ideias ou conhecer meus projetos, fique à vontade para se conectar.
+<p align="center">
+  <em>Aprendizado constante, projetos reais e melhoria contínua.</em>
+</p>
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:38BDF8,50:1E40AF,100:0F172A&height=120&section=footer" />
+
