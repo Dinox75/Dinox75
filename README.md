@@ -178,10 +178,10 @@ Mais do que apenas estudar teoria, busco praticar, errar, corrigir, documentar e
 
 <p align="center">
   <a href="https://github.com/Dinox75/Smart_market">
-    <img height="140" src="https://github-readme-stats.vercel.app/api/pin/?username=Dinox75&repo=Smart_market&theme=tokyonight&hide_border=true" />
+    <img height="140" src="https://github-readme-stats.vercel.app/api/pin?username=Dinox75&repo=Smart_market&theme=tokyonight&hide_border=true" />
   </a>
   <a href="https://github.com/Dinox75/WorkWatch">
-    <img height="140" src="https://github-readme-stats.vercel.app/api/pin/?username=Dinox75&repo=WorkWatch&theme=tokyonight&hide_border=true" />
+    <img height="140" src="https://github-readme-stats.vercel.app/api/pin?username=Dinox75&repo=WorkWatch&theme=tokyonight&hide_border=true" />
   </a>
 </p>
 
@@ -222,8 +222,8 @@ Tenho focado principalmente em **Python**, **dados**, **automação**, **Power B
 ## 📊 Estatísticas do GitHub
 
 <p align="center">
-  <img height="170" src="https://github-readme-stats.vercel.app/api?username=Dinox75&show_icons=true&theme=tokyonight&hide_border=true&include_all_commits=true&count_private=true" />
-  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Dinox75&layout=compact&theme=tokyonight&hide_border=true" />
+  <img height="170" src="https://github-readme-stats.vercel.app/api?username=Dinox75&show_icons=true&theme=tokyonight&hide_border=true&include_all_commits=true&locale=pt-br" />
+  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Dinox75&layout=compact&theme=tokyonight&hide_border=true&locale=pt-br" />
 </p>
 
 <p align="center">
