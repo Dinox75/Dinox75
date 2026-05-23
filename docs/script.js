@@ -4,6 +4,8 @@
 // =========================
 
 document.addEventListener("DOMContentLoaded", () => {
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwDj5sHZk23QTcDtjppGDMa3DanfYhOVPFWs9G4hhTFeMc2qPoVAqOuSMqrJnA2_FUa/exec";
+
   const menuMobile = document.getElementById("menuMobile");
   const navMenu = document.querySelector(".nav-menu");
   const navLinks = document.querySelectorAll(".nav-menu a");
@@ -12,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const expandableCards = document.querySelectorAll(".expandable-card");
 
   // =========================
-  // FUNÇÕES AUXILIARES
+  // MENU MOBILE
   // =========================
 
   function abrirMenu() {
@@ -40,11 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
       abrirMenu();
     }
   }
-
-
-  // =========================
-  // MENU MOBILE
-  // =========================
 
   if (menuMobile && navMenu) {
     menuMobile.addEventListener("click", (event) => {
@@ -78,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================
-  // EFEITO NO CABEÇALHO AO ROLAR
+  // HEADER AO ROLAR
   // =========================
 
   function controlarHeader() {
@@ -124,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================
-  // CARDS EXPANSÍVEIS DOS PROJETOS
+  // CARDS EXPANSÍVEIS
   // =========================
 
   expandableCards.forEach((card) => {
@@ -163,7 +160,81 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================
-  // ANIMAÇÃO SUAVE DE ENTRADA
+  // COMENTÁRIOS DINÂMICOS
+  // =========================
+
+  function escaparHTML(texto) {
+    const div = document.createElement("div");
+    div.textContent = texto;
+    return div.innerHTML;
+  }
+
+  function criarCardComentario(comentario) {
+    const nome = escaparHTML(comentario.nome || "Visitante");
+    const texto = escaparHTML(comentario.comentario || "");
+
+    return `
+      <div class="feedback-card">
+        <p>“${texto}”</p>
+        <span>${nome}</span>
+      </div>
+    `;
+  }
+
+  function carregarComentarios() {
+    const feedbackTrack = document.getElementById("feedbackTrack");
+
+    if (!feedbackTrack) return;
+
+    const callbackName = `receberComentarios_${Date.now()}`;
+
+    window[callbackName] = (comentarios) => {
+      if (Array.isArray(comentarios) && comentarios.length > 0) {
+        const comentariosDuplicados = [...comentarios, ...comentarios];
+
+        feedbackTrack.innerHTML = comentariosDuplicados
+          .map(criarCardComentario)
+          .join("");
+      }
+
+      delete window[callbackName];
+      script.remove();
+    };
+
+    const script = document.createElement("script");
+    script.src = `${APPS_SCRIPT_URL}?action=list&callback=${callbackName}&t=${Date.now()}`;
+    script.onerror = () => {
+      delete window[callbackName];
+      script.remove();
+    };
+
+    document.body.appendChild(script);
+  }
+
+  carregarComentarios();
+
+
+  // =========================
+  // ENVIO DO FEEDBACK
+  // =========================
+
+  const feedbackForm = document.getElementById("feedbackForm");
+  const feedbackStatus = document.getElementById("feedbackStatus");
+
+  if (feedbackForm && feedbackStatus) {
+    feedbackForm.addEventListener("submit", () => {
+      feedbackStatus.textContent = "Enviando feedback...";
+
+      setTimeout(() => {
+        feedbackStatus.textContent = "Feedback enviado! Ele aparecerá no site após aprovação.";
+        feedbackForm.reset();
+      }, 1200);
+    });
+  }
+
+
+  // =========================
+  // ANIMAÇÃO SUAVE
   // =========================
 
   const elementosAnimados = document.querySelectorAll(

@@ -587,101 +587,81 @@
          COMENTÁRIOS / FEEDBACKS
     ========================== -->
     <section id="comentarios" class="section comentarios">
-      <div class="section-title">
-        <p>Feedbacks e sugestões</p>
-        <h2>O que estão dizendo</h2>
+  <div class="section-title">
+    <p>Feedbacks e sugestões</p>
+    <h2>O que estão dizendo</h2>
+  </div>
+
+  <div class="feedback-carousel">
+    <div class="feedback-track" id="feedbackTrack">
+
+      <div class="feedback-card">
+        <p>“Projeto muito bem organizado e com uma proposta prática para resolver problemas do dia a dia.”</p>
+        <span>Feedback da comunidade</span>
       </div>
 
-      <div class="feedback-carousel">
-        <div class="feedback-track">
-
-          <div class="feedback-card">
-            <p>“Projeto muito bem organizado e com uma proposta prática para resolver problemas do dia a dia.”</p>
-            <span>Feedback da comunidade</span>
-          </div>
-
-          <div class="feedback-card">
-            <p>“Gostei da forma como os projetos mostram evolução, documentação e aplicação real de Python.”</p>
-            <span>Comentário recebido</span>
-          </div>
-
-          <div class="feedback-card">
-            <p>“Portfólio com boa apresentação visual e projetos que demonstram visão de produto.”</p>
-            <span>Opinião sobre o portfólio</span>
-          </div>
-
-          <div class="feedback-card">
-            <p>“A ideia de transformar problemas reais em projetos deixa o portfólio muito mais interessante.”</p>
-            <span>Observação sobre os projetos</span>
-          </div>
-
-          <div class="feedback-card">
-            <p>“Boa evolução na organização dos repositórios, documentação e apresentação dos estudos.”</p>
-            <span>Feedback técnico</span>
-          </div>
-
-          <div class="feedback-card">
-            <p>“Os projetos mostram constância, prática e vontade de evoluir na área de tecnologia.”</p>
-            <span>Comentário da comunidade</span>
-          </div>
-
-          <div class="feedback-card">
-            <p>“A página ficou clara, moderna e fácil de navegar entre projetos, redes e contato.”</p>
-            <span>Feedback visual</span>
-          </div>
-
-
-          <!-- Duplicação para criar rolagem contínua -->
-          <div class="feedback-card">
-            <p>“Projeto muito bem organizado e com uma proposta prática para resolver problemas do dia a dia.”</p>
-            <span>Feedback da comunidade</span>
-          </div>
-
-          <div class="feedback-card">
-            <p>“Gostei da forma como os projetos mostram evolução, documentação e aplicação real de Python.”</p>
-            <span>Comentário recebido</span>
-          </div>
-
-          <div class="feedback-card">
-            <p>“Portfólio com boa apresentação visual e projetos que demonstram visão de produto.”</p>
-            <span>Opinião sobre o portfólio</span>
-          </div>
-
-          <div class="feedback-card">
-            <p>“A ideia de transformar problemas reais em projetos deixa o portfólio muito mais interessante.”</p>
-            <span>Observação sobre os projetos</span>
-          </div>
-
-          <div class="feedback-card">
-            <p>“Boa evolução na organização dos repositórios, documentação e apresentação dos estudos.”</p>
-            <span>Feedback técnico</span>
-          </div>
-
-          <div class="feedback-card">
-            <p>“Os projetos mostram constância, prática e vontade de evoluir na área de tecnologia.”</p>
-            <span>Comentário da comunidade</span>
-          </div>
-
-          <div class="feedback-card">
-            <p>“A página ficou clara, moderna e fácil de navegar entre projetos, redes e contato.”</p>
-            <span>Feedback visual</span>
-          </div>
-
-        </div>
+      <div class="feedback-card">
+        <p>“Gostei da forma como os projetos mostram evolução, documentação e aplicação real de Python.”</p>
+        <span>Comentário recebido</span>
       </div>
 
-      <div class="comentario-action">
-        <p>
-          Quer deixar uma sugestão, crítica construtiva ou ideia de melhoria?
-        </p>
-
-        <a href="https://forms.gle/SEU-LINK-AQUI" target="_blank" class="btn btn-primary">
-          <i class="fa-solid fa-paper-plane"></i>
-          Deixar meu feedback
-        </a>
+      <div class="feedback-card">
+        <p>“Portfólio com boa apresentação visual e projetos que demonstram visão de produto.”</p>
+        <span>Opinião sobre o portfólio</span>
       </div>
-    </section>
 
+    </div>
+  </div>
+
+  <div class="comentario-action feedback-area">
+    <div class="feedback-text">
+      <h3>Deixe seu feedback</h3>
+      <p>
+        Envie uma sugestão, crítica construtiva ou comentário sobre meus projetos.
+        Após revisão, ele poderá aparecer aqui no portfólio.
+      </p>
+    </div>
+
+    <form
+      id="feedbackForm"
+      class="feedback-form"
+      action="https://script.google.com/macros/s/AKfycbwDj5sHZk23QTcDtjppGDMa3DanfYhOVPFWs9G4hhTFeMc2qPoVAqOuSMqrJnA2_FUa/exec"
+      method="POST"
+      target="feedbackFrame"
+    >
+      <div class="form-group">
+        <label for="nomeFeedback">Nome</label>
+        <input
+          type="text"
+          id="nomeFeedback"
+          name="nome"
+          placeholder="Seu nome"
+          maxlength="60"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="comentarioFeedback">Comentário</label>
+        <textarea
+          id="comentarioFeedback"
+          name="comentario"
+          placeholder="Escreva seu feedback..."
+          maxlength="280"
+          required
+        ></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        <i class="fa-solid fa-paper-plane"></i>
+        Deixar meu feedback
+      </button>
+
+      <p id="feedbackStatus" class="feedback-status"></p>
+    </form>
+
+    <iframe name="feedbackFrame" id="feedbackFrame" class="feedback-frame"></iframe>
+  </div>
+</section>
 
     <!-- =========================
          CONTATO
@@ -775,6 +755,6 @@
   </footer>
 
 
-  <script src="script.js?v=2"></script>git 
+  <script src="script.js?v=2"></script>
 </body>
 </html>
