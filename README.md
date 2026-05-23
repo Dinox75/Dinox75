@@ -117,42 +117,6 @@ flowchart TD
 
 ---
 
-## 🏗️ Organograma do portfólio
-
-```mermaid
-flowchart LR
-    P[Portfólio Vinicius Lima]
-
-    P --> A[Projetos em Python]
-    P --> B[Dados e Automação]
-    P --> C[Documentação]
-    P --> D[Presença Digital]
-
-    A --> A1[Smart Market]
-    A --> A2[WorkWatch]
-    A --> A3[Simulador de Escala]
-    A --> A4[Sistema de Média Escolar]
-    A --> A5[Sistema Bancário]
-    A --> A6[Simulador de Entrevista]
-
-    B --> B1[Power BI]
-    B --> B2[CSV / JSON]
-    B --> B3[N8N]
-    B --> B4[Excel e Relatórios]
-
-    C --> C1[README]
-    C --> C2[Wiki]
-    C --> C3[GitHub Pages]
-    C --> C4[Currículo]
-
-    D --> D1[LinkedIn]
-    D --> D2[TikTok]
-    D --> D3[Twitch]
-    D --> D4[Eventos e Games]
-```
-
----
-
 ## 📚 Formação e estudos
 
 ### 🎓 Formação acadêmica
