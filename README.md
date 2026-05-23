@@ -481,6 +481,16 @@ Meu objetivo não é apenas criar repositórios, mas construir uma trajetória c
   </a>
 </p>
 
+## 🐍 Minha atividade no GitHub
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Dinox75/Dinox75/output/github-contribution-grid-snake-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Dinox75/Dinox75/output/github-contribution-grid-snake.svg">
+    <img alt="Animação da cobrinha comendo minhas contribuições no GitHub" src="https://raw.githubusercontent.com/Dinox75/Dinox75/output/github-contribution-grid-snake.svg">
+  </picture>
+</p>
+
 <p align="center">
   <strong>Aprendizado constante, projetos reais e melhoria contínua.</strong>
 </p>
