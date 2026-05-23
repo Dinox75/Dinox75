@@ -401,6 +401,24 @@ Tenho focado principalmente em **Python**, **dados**, **automação**, **Power B
 
 ---
 
+## 🐍 Minha atividade no GitHub
+
+<p align="center">
+  <a href="https://github.com/Dinox75/Dinox75/actions/workflows/snake.yml">
+    <img src="https://github.com/Dinox75/Dinox75/actions/workflows/snake.yml/badge.svg" alt="Status da Snake Animation" />
+  </a>
+</p>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Dinox75/Dinox75/output/github-contribution-grid-snake-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Dinox75/Dinox75/output/github-contribution-grid-snake.svg">
+    <img alt="Snake animation das contribuições do GitHub" src="https://raw.githubusercontent.com/Dinox75/Dinox75/output/github-contribution-grid-snake.svg">
+  </picture>
+</p>
+
+---
+
 ## 📉 Gráfico de atividade
 
 <p align="center">
