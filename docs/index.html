@@ -27,13 +27,16 @@
       <ul class="nav-menu">
         <li><a href="#inicio">Início</a></li>
         <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#resumo">Resumo</a></li>
         <li><a href="#projetos">Projetos</a></li>
         <li><a href="#demos">Demos</a></li>
-        <li><a href="#entretenimento">Mídia</a></li>
-        <li><a href="#redes">Redes</a></li>
         <li><a href="#comentarios">Feedbacks</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
+
+      <a href="assets/cv/curriculo-vinicius-lima.pdf" target="_blank" class="nav-curriculo">
+        Currículo
+      </a>
 
       <button class="menu-mobile" id="menuMobile" aria-label="Abrir menu">
         ☰
@@ -61,8 +64,20 @@
         </p>
 
         <div class="hero-buttons">
-          <a href="#projetos" class="btn btn-primary">Ver Projetos</a>
-          <a href="#contato" class="btn btn-secondary">Entrar em Contato</a>
+          <a href="#projetos" class="btn btn-primary">
+            <i class="fa-solid fa-code"></i>
+            Ver Projetos
+          </a>
+
+          <a href="assets/cv/curriculo-vinicius-lima.pdf" target="_blank" class="btn btn-secondary">
+            <i class="fa-solid fa-file-arrow-down"></i>
+            Baixar Currículo
+          </a>
+
+          <a href="#comentarios" class="btn btn-outline">
+            <i class="fa-solid fa-message"></i>
+            Deixar Feedback
+          </a>
         </div>
 
         <div class="hero-social social-icons">
@@ -125,20 +140,62 @@
 
         <div class="sobre-cards">
           <div class="info-card">
+            <i class="fa-solid fa-laptop-code"></i>
             <h3>Foco atual</h3>
             <p>Python, dados, automação e desenvolvimento de sistemas.</p>
           </div>
 
           <div class="info-card">
+            <i class="fa-solid fa-diagram-project"></i>
             <h3>Objetivo</h3>
             <p>Criar projetos reais para portfólio, GitHub e LinkedIn.</p>
           </div>
 
           <div class="info-card">
+            <i class="fa-solid fa-seedling"></i>
             <h3>Perfil</h3>
             <p>Estudante em evolução, com visão prática e foco em aprendizado contínuo.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+
+    <!-- =========================
+         RESUMO RÁPIDO
+    ========================== -->
+    <section id="resumo" class="section resumo">
+      <div class="section-title">
+        <p>Resumo rápido</p>
+        <h2>Minha evolução em destaque</h2>
+      </div>
+
+      <div class="resumo-grid">
+
+        <div class="resumo-card">
+          <i class="fa-solid fa-folder-open"></i>
+          <h3>6+ projetos</h3>
+          <p>Projetos práticos publicados no GitHub com foco em aprendizado e aplicação real.</p>
+        </div>
+
+        <div class="resumo-card">
+          <i class="fa-brands fa-python"></i>
+          <h3>Python como base</h3>
+          <p>Uso Python para treinar lógica, automação, análise de dados e construção de sistemas.</p>
+        </div>
+
+        <div class="resumo-card">
+          <i class="fa-solid fa-chart-line"></i>
+          <h3>Dados e automação</h3>
+          <p>Interesse em Power BI, Excel, CSV, JSON, relatórios e automações de rotina.</p>
+        </div>
+
+        <div class="resumo-card">
+          <i class="fa-solid fa-lightbulb"></i>
+          <h3>Problemas reais</h3>
+          <p>Meus projetos nascem de dores práticas observadas no trabalho, estudos e rotina.</p>
+        </div>
+
       </div>
     </section>
 
@@ -149,17 +206,20 @@
     <section id="projetos" class="section projetos">
       <div class="section-title">
         <p>Projetos em destaque</p>
-        <h2>Minhas principais soluções</h2>
+        <h2>Soluções, dores e evolução prática</h2>
       </div>
 
       <div class="projetos-grid">
 
-        <article class="projeto-card">
-          <div class="projeto-icon">🛒</div>
+        <article class="projeto-card expandable-card">
+          <div class="projeto-header">
+            <div class="projeto-icon">🛒</div>
+            <span class="status status-dev">Em desenvolvimento</span>
+          </div>
 
           <h3>Smart Market</h3>
 
-          <p>
+          <p class="project-short">
             Sistema em Python para controle de compras de mercado, histórico de preços,
             comparação entre compras e análise de gastos.
           </p>
@@ -170,18 +230,29 @@
             <span>Automação</span>
           </div>
 
-          <a href="https://github.com/Dinox75/Smart_market" target="_blank" class="projeto-link">
-            Ver no GitHub
-          </a>
+          <div class="project-expanded">
+            <p><strong>Dor:</strong> dificuldade em acompanhar gastos, preços e variações entre compras.</p>
+            <p><strong>Solução:</strong> registrar compras, comparar preços e identificar aumentos, quedas e novos produtos.</p>
+            <p><strong>Evolução:</strong> futura leitura de nota fiscal via XML e categorização inteligente.</p>
+          </div>
+
+          <div class="project-actions">
+            <a href="https://github.com/Dinox75/Smart_market" target="_blank" class="btn-card">
+              Ver GitHub
+            </a>
+          </div>
         </article>
 
 
-        <article class="projeto-card">
-          <div class="projeto-icon">📊</div>
+        <article class="projeto-card expandable-card">
+          <div class="projeto-header">
+            <div class="projeto-icon">📊</div>
+            <span class="status status-dev">Em desenvolvimento</span>
+          </div>
 
           <h3>WorkWatch</h3>
 
-          <p>
+          <p class="project-short">
             Ferramenta local para monitoramento de produtividade no computador,
             registrando janelas ativas e atividades em arquivos CSV.
           </p>
@@ -192,18 +263,29 @@
             <span>Monitoramento</span>
           </div>
 
-          <a href="https://github.com/Dinox75/WorkWatch" target="_blank" class="projeto-link">
-            Ver no GitHub
-          </a>
+          <div class="project-expanded">
+            <p><strong>Dor:</strong> falta de visibilidade sobre como o tempo é usado no computador.</p>
+            <p><strong>Solução:</strong> registrar programas e janelas ativas para gerar dados de análise.</p>
+            <p><strong>Evolução:</strong> relatórios, dashboards e leitura de padrões de produtividade.</p>
+          </div>
+
+          <div class="project-actions">
+            <a href="https://github.com/Dinox75/WorkWatch" target="_blank" class="btn-card">
+              Ver GitHub
+            </a>
+          </div>
         </article>
 
 
-        <article class="projeto-card">
-          <div class="projeto-icon">📅</div>
+        <article class="projeto-card expandable-card">
+          <div class="projeto-header">
+            <div class="projeto-icon">📅</div>
+            <span class="status status-dev">Em desenvolvimento</span>
+          </div>
 
           <h3>Simulador de Escala</h3>
 
-          <p>
+          <p class="project-short">
             Sistema em Python criado para calcular dias de trabalho e folga com base
             em escalas configuráveis, como 6x3.
           </p>
@@ -214,9 +296,120 @@
             <span>Lógica</span>
           </div>
 
-          <a href="https://github.com/Dinox75/simulador-escala-trabalho" target="_blank" class="projeto-link">
-            Ver no GitHub
-          </a>
+          <div class="project-expanded">
+            <p><strong>Dor:</strong> dificuldade de prever folgas e dias trabalhados em escalas rotativas.</p>
+            <p><strong>Solução:</strong> calcular automaticamente o status de uma data e próximos dias da escala.</p>
+            <p><strong>Evolução:</strong> suporte a escalas mais complexas, interface visual e uso corporativo.</p>
+          </div>
+
+          <div class="project-actions">
+            <a href="https://github.com/Dinox75/simulador-escala-trabalho" target="_blank" class="btn-card">
+              Ver GitHub
+            </a>
+          </div>
+        </article>
+
+
+        <article class="projeto-card expandable-card">
+          <div class="projeto-header">
+            <div class="projeto-icon">🎓</div>
+            <span class="status status-online">Demo publicada</span>
+          </div>
+
+          <h3>Sistema de Média Escolar</h3>
+
+          <p class="project-short">
+            Projeto para cálculo de média escolar, reforçando fundamentos de lógica,
+            entrada de dados, condições e apresentação em página web.
+          </p>
+
+          <div class="tech-list">
+            <span>Python</span>
+            <span>HTML</span>
+            <span>GitHub Pages</span>
+          </div>
+
+          <div class="project-expanded">
+            <p><strong>Dor:</strong> praticar fundamentos de programação de forma simples e visual.</p>
+            <p><strong>Solução:</strong> calcular médias e transformar um exercício em projeto publicável.</p>
+            <p><strong>Evolução:</strong> versão web, documentação e publicação para apresentação no LinkedIn.</p>
+          </div>
+
+          <div class="project-actions">
+            <a href="https://github.com/Dinox75/Sistema_media_escolar" target="_blank" class="btn-card">
+              GitHub
+            </a>
+
+            <a href="https://dinox75.github.io/Sistema_media_escolar/" target="_blank" class="btn-card btn-card-secondary">
+              Demo
+            </a>
+          </div>
+        </article>
+
+
+        <article class="projeto-card expandable-card">
+          <div class="projeto-header">
+            <div class="projeto-icon">🏦</div>
+            <span class="status status-study">Desafio DIO</span>
+          </div>
+
+          <h3>Sistema Bancário DIO</h3>
+
+          <p class="project-short">
+            Desafio prático em Python para simular operações bancárias como depósito,
+            saque, extrato e controle de regras.
+          </p>
+
+          <div class="tech-list">
+            <span>Python</span>
+            <span>Funções</span>
+            <span>Regras</span>
+          </div>
+
+          <div class="project-expanded">
+            <p><strong>Dor:</strong> praticar lógica aplicada com regras de negócio simples.</p>
+            <p><strong>Solução:</strong> criar um sistema bancário de terminal com operações controladas.</p>
+            <p><strong>Evolução:</strong> refatoração com funções, organização de código e melhorias de validação.</p>
+          </div>
+
+          <div class="project-actions">
+            <a href="https://github.com/Dinox75/Sistema-bancario-DIO" target="_blank" class="btn-card">
+              Ver GitHub
+            </a>
+          </div>
+        </article>
+
+
+        <article class="projeto-card expandable-card">
+          <div class="projeto-header">
+            <div class="projeto-icon">💼</div>
+            <span class="status status-study">Projeto prático</span>
+          </div>
+
+          <h3>Simulador de Entrevista</h3>
+
+          <p class="project-short">
+            Sistema em Python para simular uma entrevista de emprego, coletar respostas
+            e organizar uma avaliação final do candidato.
+          </p>
+
+          <div class="tech-list">
+            <span>Python</span>
+            <span>Validação</span>
+            <span>Fluxo</span>
+          </div>
+
+          <div class="project-expanded">
+            <p><strong>Dor:</strong> treinar estrutura de perguntas, respostas e análise de perfil.</p>
+            <p><strong>Solução:</strong> criar um fluxo de entrevista com coleta de dados e avaliação textual.</p>
+            <p><strong>Evolução:</strong> modularização, análise por palavras-chave e interface mais amigável.</p>
+          </div>
+
+          <div class="project-actions">
+            <a href="https://github.com/Dinox75/Simulador-de-Entrevista" target="_blank" class="btn-card">
+              Ver GitHub
+            </a>
+          </div>
         </article>
 
       </div>
@@ -229,14 +422,15 @@
     <section id="demos" class="section demos">
       <div class="section-title">
         <p>Demonstrações técnicas</p>
-        <h2>Vídeos e evolução dos projetos</h2>
+        <h2>Conteúdo futuro dos projetos</h2>
       </div>
 
       <div class="demos-intro">
-        <h3>Espaço reservado para apresentar meus projetos em funcionamento</h3>
+        <h3>Área preparada para vídeos, prints e explicações técnicas</h3>
         <p>
-          Esta área será usada para publicar vídeos, prints, explicações rápidas,
-          demonstrações de funcionalidades e bastidores técnicos dos projetos do meu portfólio.
+          Esta seção será atualizada conforme novos materiais forem publicados.
+          A ideia é mostrar não só o resultado final, mas também a evolução,
+          decisões técnicas e melhorias de cada projeto.
         </p>
       </div>
 
@@ -247,61 +441,46 @@
             <i class="fa-solid fa-play"></i>
           </div>
 
-          <h3>Smart Market</h3>
+          <span class="demo-status">Planejado</span>
+
+          <h3>Vídeos demonstrativos</h3>
 
           <p>
-            Futuro vídeo demonstrando cadastro de compras, comparação de preços,
-            histórico em JSON e evolução do projeto.
+            Espaço para apresentar os projetos funcionando, mostrando telas,
+            fluxos de uso e principais funcionalidades.
           </p>
-
-          <div class="demo-actions">
-            <a href="https://github.com/Dinox75/Smart_market" target="_blank" class="projeto-link">
-              Ver repositório
-            </a>
-            <span>Em breve</span>
-          </div>
         </article>
 
 
         <article class="demo-card">
           <div class="video-placeholder">
-            <i class="fa-solid fa-play"></i>
+            <i class="fa-solid fa-image"></i>
           </div>
 
-          <h3>WorkWatch</h3>
+          <span class="demo-status">Preparando</span>
+
+          <h3>Prints e evolução visual</h3>
 
           <p>
-            Futuro vídeo mostrando o monitoramento local, registro de janelas ativas
-            e geração de dados para análise.
+            Área para inserir imagens das versões dos projetos, telas futuras,
+            protótipos e registros de melhoria.
           </p>
-
-          <div class="demo-actions">
-            <a href="https://github.com/Dinox75/WorkWatch" target="_blank" class="projeto-link">
-              Ver repositório
-            </a>
-            <span>Em breve</span>
-          </div>
         </article>
 
 
         <article class="demo-card">
           <div class="video-placeholder">
-            <i class="fa-solid fa-play"></i>
+            <i class="fa-solid fa-chalkboard-user"></i>
           </div>
 
-          <h3>Simulador de Escala</h3>
+          <span class="demo-status">Em produção</span>
+
+          <h3>Explicações técnicas</h3>
 
           <p>
-            Futuro vídeo explicando a lógica da escala 6x3, consulta de datas
-            e evolução da proposta.
+            Espaço para vídeos curtos explicando lógica, estrutura de pastas,
+            decisões de código e aprendizados.
           </p>
-
-          <div class="demo-actions">
-            <a href="https://github.com/Dinox75/simulador-escala-trabalho" target="_blank" class="projeto-link">
-              Ver repositório
-            </a>
-            <span>Em breve</span>
-          </div>
         </article>
 
       </div>
@@ -405,37 +584,90 @@
 
 
     <!-- =========================
-         COMENTÁRIOS
+         COMENTÁRIOS / FEEDBACKS
     ========================== -->
     <section id="comentarios" class="section comentarios">
       <div class="section-title">
         <p>Feedbacks e sugestões</p>
-        <h2>Comentários da comunidade</h2>
+        <h2>O que estão dizendo</h2>
       </div>
 
-      <div class="comentarios-grid">
+      <div class="feedback-carousel">
+        <div class="feedback-track">
 
-        <div class="comentario-card">
-          <p>
-            “Projeto muito bem organizado e com uma proposta prática para resolver problemas do dia a dia.”
-          </p>
-          <span>Feedback da comunidade</span>
+          <div class="feedback-card">
+            <p>“Projeto muito bem organizado e com uma proposta prática para resolver problemas do dia a dia.”</p>
+            <span>Feedback da comunidade</span>
+          </div>
+
+          <div class="feedback-card">
+            <p>“Gostei da forma como os projetos mostram evolução, documentação e aplicação real de Python.”</p>
+            <span>Comentário recebido</span>
+          </div>
+
+          <div class="feedback-card">
+            <p>“Portfólio com boa apresentação visual e projetos que demonstram visão de produto.”</p>
+            <span>Opinião sobre o portfólio</span>
+          </div>
+
+          <div class="feedback-card">
+            <p>“A ideia de transformar problemas reais em projetos deixa o portfólio muito mais interessante.”</p>
+            <span>Observação sobre os projetos</span>
+          </div>
+
+          <div class="feedback-card">
+            <p>“Boa evolução na organização dos repositórios, documentação e apresentação dos estudos.”</p>
+            <span>Feedback técnico</span>
+          </div>
+
+          <div class="feedback-card">
+            <p>“Os projetos mostram constância, prática e vontade de evoluir na área de tecnologia.”</p>
+            <span>Comentário da comunidade</span>
+          </div>
+
+          <div class="feedback-card">
+            <p>“A página ficou clara, moderna e fácil de navegar entre projetos, redes e contato.”</p>
+            <span>Feedback visual</span>
+          </div>
+
+
+          <!-- Duplicação para criar rolagem contínua -->
+          <div class="feedback-card">
+            <p>“Projeto muito bem organizado e com uma proposta prática para resolver problemas do dia a dia.”</p>
+            <span>Feedback da comunidade</span>
+          </div>
+
+          <div class="feedback-card">
+            <p>“Gostei da forma como os projetos mostram evolução, documentação e aplicação real de Python.”</p>
+            <span>Comentário recebido</span>
+          </div>
+
+          <div class="feedback-card">
+            <p>“Portfólio com boa apresentação visual e projetos que demonstram visão de produto.”</p>
+            <span>Opinião sobre o portfólio</span>
+          </div>
+
+          <div class="feedback-card">
+            <p>“A ideia de transformar problemas reais em projetos deixa o portfólio muito mais interessante.”</p>
+            <span>Observação sobre os projetos</span>
+          </div>
+
+          <div class="feedback-card">
+            <p>“Boa evolução na organização dos repositórios, documentação e apresentação dos estudos.”</p>
+            <span>Feedback técnico</span>
+          </div>
+
+          <div class="feedback-card">
+            <p>“Os projetos mostram constância, prática e vontade de evoluir na área de tecnologia.”</p>
+            <span>Comentário da comunidade</span>
+          </div>
+
+          <div class="feedback-card">
+            <p>“A página ficou clara, moderna e fácil de navegar entre projetos, redes e contato.”</p>
+            <span>Feedback visual</span>
+          </div>
+
         </div>
-
-        <div class="comentario-card">
-          <p>
-            “Gostei da forma como os projetos mostram evolução, documentação e aplicação real de Python.”
-          </p>
-          <span>Comentário recebido</span>
-        </div>
-
-        <div class="comentario-card">
-          <p>
-            “Portfólio com boa apresentação visual e projetos que demonstram visão de produto.”
-          </p>
-          <span>Opinião sobre o portfólio</span>
-        </div>
-
       </div>
 
       <div class="comentario-action">
@@ -443,8 +675,9 @@
           Quer deixar uma sugestão, crítica construtiva ou ideia de melhoria?
         </p>
 
-        <a href="https://forms.gle/SEU-LINK-AQUI" target="_blank" class="btn btn-secondary">
-          Enviar sugestão
+        <a href="https://forms.gle/SEU-LINK-AQUI" target="_blank" class="btn btn-primary">
+          <i class="fa-solid fa-paper-plane"></i>
+          Deixar meu feedback
         </a>
       </div>
     </section>
@@ -475,6 +708,11 @@
             Fique à vontade para me chamar para conversar sobre tecnologia, projetos,
             estudos, colaboração, networking ou sugestões para melhorar meu portfólio.
           </p>
+
+          <div class="contato-highlight">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Disponível para networking, feedbacks e oportunidades de entrada na área.</span>
+          </div>
         </div>
 
         <div class="contato-cards">
@@ -508,6 +746,14 @@
             <div>
               <h3>GitHub</h3>
               <p>Ver meus repositórios</p>
+            </div>
+          </a>
+
+          <a href="assets/cv/curriculo-vinicius-lima.pdf" target="_blank" class="contato-card">
+            <i class="fa-solid fa-file-lines"></i>
+            <div>
+              <h3>Currículo</h3>
+              <p>Visualizar currículo em PDF</p>
             </div>
           </a>
 
