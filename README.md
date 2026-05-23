@@ -391,6 +391,14 @@ Tenho focado principalmente em **Python**, **dados**, **automação**, **Power B
 
 ---
 
+## 📡 Painel automático do perfil
+
+<p align="center">
+  <img src="./github-metrics.svg" width="100%" alt="GitHub Metrics de Vinicius Lima" />
+</p>
+
+---
+
 ## 🗺️ Roadmap
 
 ```mermaid
