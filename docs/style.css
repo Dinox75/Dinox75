@@ -716,3 +716,12 @@ section {
     width: 100%;
   }
 }
+
+/* =========================
+   EFEITO EXTRA DO HEADER
+========================= */
+
+.header-scroll {
+  background: rgba(2, 6, 23, 0.96);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+}
