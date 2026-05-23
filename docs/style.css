@@ -1278,3 +1278,22 @@ section {
     width: 55px;
   }
 }
+
+/* =========================
+   CARD EXPANDIDO POR CLIQUE
+========================= */
+
+.expandable-card.card-open .project-expanded {
+  max-height: 280px;
+  opacity: 1;
+  margin-top: 8px;
+}
+
+.expandable-card.card-open::after {
+  opacity: 0;
+}
+
+.expandable-card:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 4px;
+}

@@ -1,119 +1,190 @@
 // =========================
-// MENU MOBILE
+// PORTFÓLIO | VINICIUS LIMA
+// Interações gerais da página
 // =========================
 
-const menuMobile = document.getElementById("menuMobile");
-const navMenu = document.querySelector(".nav-menu");
-const navLinks = document.querySelectorAll(".nav-menu a");
-const header = document.querySelector(".header");
+document.addEventListener("DOMContentLoaded", () => {
+  const menuMobile = document.getElementById("menuMobile");
+  const navMenu = document.querySelector(".nav-menu");
+  const navLinks = document.querySelectorAll(".nav-menu a");
+  const header = document.querySelector(".header");
+  const sections = document.querySelectorAll("section[id]");
+  const expandableCards = document.querySelectorAll(".expandable-card");
 
-// Abre e fecha o menu mobile
-if (menuMobile && navMenu) {
-  menuMobile.addEventListener("click", () => {
-    navMenu.classList.toggle("active");
+  // =========================
+  // FUNÇÕES AUXILIARES
+  // =========================
 
-    if (navMenu.classList.contains("active")) {
-      menuMobile.innerHTML = "✕";
-      menuMobile.setAttribute("aria-label", "Fechar menu");
-    } else {
-      menuMobile.innerHTML = "☰";
-      menuMobile.setAttribute("aria-label", "Abrir menu");
-    }
-  });
-}
+  function abrirMenu() {
+    if (!menuMobile || !navMenu) return;
 
-// Fecha o menu ao clicar em qualquer link
-navLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    navMenu.classList.remove("active");
-    menuMobile.innerHTML = "☰";
-    menuMobile.setAttribute("aria-label", "Abrir menu");
-  });
-});
+    navMenu.classList.add("active");
+    menuMobile.innerHTML = "✕";
+    menuMobile.setAttribute("aria-label", "Fechar menu");
+  }
 
+  function fecharMenu() {
+    if (!menuMobile || !navMenu) return;
 
-// =========================
-// FECHAR MENU AO CLICAR FORA
-// =========================
-
-document.addEventListener("click", (event) => {
-  const clicouNoMenu = navMenu.contains(event.target);
-  const clicouNoBotao = menuMobile.contains(event.target);
-
-  if (!clicouNoMenu && !clicouNoBotao) {
     navMenu.classList.remove("active");
     menuMobile.innerHTML = "☰";
     menuMobile.setAttribute("aria-label", "Abrir menu");
   }
-});
+
+  function alternarMenu() {
+    if (!navMenu) return;
+
+    if (navMenu.classList.contains("active")) {
+      fecharMenu();
+    } else {
+      abrirMenu();
+    }
+  }
 
 
-// =========================
-// EFEITO NO CABEÇALHO AO ROLAR
-// =========================
+  // =========================
+  // MENU MOBILE
+  // =========================
 
-if (header) {
-  window.addEventListener("scroll", () => {
+  if (menuMobile && navMenu) {
+    menuMobile.addEventListener("click", (event) => {
+      event.stopPropagation();
+      alternarMenu();
+    });
+  }
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      fecharMenu();
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!menuMobile || !navMenu) return;
+
+    const clicouNoMenu = navMenu.contains(event.target);
+    const clicouNoBotao = menuMobile.contains(event.target);
+
+    if (!clicouNoMenu && !clicouNoBotao) {
+      fecharMenu();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      fecharMenu();
+    }
+  });
+
+
+  // =========================
+  // EFEITO NO CABEÇALHO AO ROLAR
+  // =========================
+
+  function controlarHeader() {
+    if (!header) return;
+
     if (window.scrollY > 80) {
       header.classList.add("header-scroll");
     } else {
       header.classList.remove("header-scroll");
     }
-  });
-}
+  }
+
+  controlarHeader();
+  window.addEventListener("scroll", controlarHeader);
 
 
-// =========================
-// DESTACAR LINK ATIVO NO MENU
-// =========================
+  // =========================
+  // LINK ATIVO NO MENU
+  // =========================
 
-const sections = document.querySelectorAll("section[id]");
+  function ativarLinkMenu() {
+    const scrollAtual = window.scrollY + 130;
 
-function ativarLinkMenu() {
-  const scrollAtual = window.scrollY + 120;
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const sectionId = section.getAttribute("id");
 
-  sections.forEach((section) => {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.offsetHeight;
-    const sectionId = section.getAttribute("id");
+      const linkMenu = document.querySelector(`.nav-menu a[href="#${sectionId}"]`);
 
-    const linkMenu = document.querySelector(`.nav-menu a[href="#${sectionId}"]`);
+      if (scrollAtual >= sectionTop && scrollAtual < sectionTop + sectionHeight) {
+        navLinks.forEach((link) => link.classList.remove("active-link"));
 
-    if (scrollAtual >= sectionTop && scrollAtual < sectionTop + sectionHeight) {
-      navLinks.forEach((link) => link.classList.remove("active-link"));
-
-      if (linkMenu) {
-        linkMenu.classList.add("active-link");
-      }
-    }
-  });
-}
-
-window.addEventListener("scroll", ativarLinkMenu);
-
-
-// =========================
-// ANIMAÇÃO SUAVE DE ENTRADA
-// =========================
-
-const elementosAnimados = document.querySelectorAll(
-  ".section-title, .projeto-card, .demo-card, .rede-card, .comentario-card, .contato-card, .info-card"
-);
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
+        if (linkMenu) {
+          linkMenu.classList.add("active-link");
+        }
       }
     });
-  },
-  {
-    threshold: 0.12,
   }
-);
 
-elementosAnimados.forEach((elemento) => {
-  elemento.classList.add("hidden");
-  observer.observe(elemento);
+  ativarLinkMenu();
+  window.addEventListener("scroll", ativarLinkMenu);
+
+
+  // =========================
+  // CARDS EXPANSÍVEIS DOS PROJETOS
+  // =========================
+
+  expandableCards.forEach((card) => {
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-label", "Expandir detalhes do projeto");
+
+    card.addEventListener("click", (event) => {
+      const clicouEmLink = event.target.closest("a");
+
+      if (clicouEmLink) return;
+
+      expandableCards.forEach((outroCard) => {
+        if (outroCard !== card) {
+          outroCard.classList.remove("card-open");
+          outroCard.setAttribute("aria-label", "Expandir detalhes do projeto");
+        }
+      });
+
+      card.classList.toggle("card-open");
+
+      if (card.classList.contains("card-open")) {
+        card.setAttribute("aria-label", "Recolher detalhes do projeto");
+      } else {
+        card.setAttribute("aria-label", "Expandir detalhes do projeto");
+      }
+    });
+
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        card.click();
+      }
+    });
+  });
+
+
+  // =========================
+  // ANIMAÇÃO SUAVE DE ENTRADA
+  // =========================
+
+  const elementosAnimados = document.querySelectorAll(
+    ".section-title, .sobre-text, .info-card, .resumo-card, .projeto-card, .demo-card, .entretenimento-text, .entretenimento-gallery, .rede-card, .comentario-action, .contato-content"
+  );
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    },
+    {
+      threshold: 0.12,
+    }
+  );
+
+  elementosAnimados.forEach((elemento) => {
+    elemento.classList.add("hidden");
+    observer.observe(elemento);
+  });
 });
