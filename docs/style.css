@@ -1300,36 +1300,25 @@ section {
 
 /* =========================
    BORDA NEON ANIMADA DA PÁGINA
+   Versão mais compatível
 ========================= */
 
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
-  padding: 1px;
-
-  background: linear-gradient(
-    120deg,
-    rgba(56, 189, 248, 0.65),
-    rgba(139, 92, 246, 0.55),
-    rgba(34, 197, 94, 0.45),
-    rgba(236, 72, 153, 0.45),
-    rgba(56, 189, 248, 0.65)
-  );
-
-  background-size: 400% 400%;
-  animation: neonBorderMove 14s ease infinite;
-
+  inset: 8px;
   pointer-events: none;
-  z-index: 1200;
-  opacity: 0.35;
+  z-index: 2000;
 
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  border-radius: 18px;
 
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  box-shadow:
+    0 0 12px rgba(56, 189, 248, 0.22),
+    0 0 26px rgba(139, 92, 246, 0.14),
+    inset 0 0 16px rgba(56, 189, 248, 0.08);
+
+  animation: neonPulse 5s ease-in-out infinite;
 }
 
 body::after {
@@ -1343,26 +1332,43 @@ body::after {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(56, 189, 248, 0.65),
-    rgba(139, 92, 246, 0.55),
+    rgba(56, 189, 248, 0.85),
+    rgba(139, 92, 246, 0.75),
+    rgba(34, 197, 94, 0.55),
     transparent
   );
 
+  box-shadow:
+    0 0 10px rgba(56, 189, 248, 0.35),
+    0 0 22px rgba(139, 92, 246, 0.25);
+
   pointer-events: none;
-  z-index: 998;
-  opacity: 0.45;
+  z-index: 1001;
+  opacity: 0.85;
 }
 
-@keyframes neonBorderMove {
+@keyframes neonPulse {
   0% {
-    background-position: 0% 50%;
+    border-color: rgba(56, 189, 248, 0.35);
+    box-shadow:
+      0 0 10px rgba(56, 189, 248, 0.16),
+      0 0 22px rgba(139, 92, 246, 0.10),
+      inset 0 0 12px rgba(56, 189, 248, 0.06);
   }
 
   50% {
-    background-position: 100% 50%;
+    border-color: rgba(139, 92, 246, 0.55);
+    box-shadow:
+      0 0 16px rgba(56, 189, 248, 0.28),
+      0 0 34px rgba(139, 92, 246, 0.20),
+      inset 0 0 18px rgba(34, 197, 94, 0.08);
   }
 
   100% {
-    background-position: 0% 50%;
+    border-color: rgba(56, 189, 248, 0.35);
+    box-shadow:
+      0 0 10px rgba(56, 189, 248, 0.16),
+      0 0 22px rgba(139, 92, 246, 0.10),
+      inset 0 0 12px rgba(56, 189, 248, 0.06);
   }
 }
