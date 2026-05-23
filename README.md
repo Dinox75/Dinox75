@@ -427,14 +427,6 @@ Tenho focado principalmente em **Python**, **dados**, **automação**, **Power B
 
 ---
 
-## 📉 Gráfico de atividade
-
-<p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Dinox75&theme=tokyo-night&hide_border=true&area=true" />
-</p>
-
----
-
 ## 🗺️ Roadmap
 
 ```mermaid
