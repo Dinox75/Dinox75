@@ -12,10 +12,30 @@
   <!-- Ícones das redes sociais -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 
 <body>
+
+  <!-- =========================
+       FUNDO PIXEL ART ANIMADO
+  ========================== -->
+  <div class="pixel-background" aria-hidden="true">
+    <span class="pixel-dot dot-1"></span>
+    <span class="pixel-dot dot-2"></span>
+    <span class="pixel-dot dot-3"></span>
+    <span class="pixel-dot dot-4"></span>
+    <span class="pixel-dot dot-5"></span>
+    <span class="pixel-dot dot-6"></span>
+
+    <span class="pixel-star star-1"></span>
+    <span class="pixel-star star-2"></span>
+    <span class="pixel-star star-3"></span>
+
+    <span class="pixel-cube cube-1"></span>
+    <span class="pixel-cube cube-2"></span>
+  </div>
+
 
   <!-- =========================
        CABEÇALHO / MENU
@@ -30,6 +50,7 @@
         <li><a href="#resumo">Resumo</a></li>
         <li><a href="#projetos">Projetos</a></li>
         <li><a href="#demos">Demos</a></li>
+        <li><a href="#entretenimento">Mídia</a></li>
         <li><a href="#comentarios">Feedbacks</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
@@ -496,6 +517,20 @@
         <h2>Games, eventos e criação de conteúdo</h2>
       </div>
 
+      <div class="pixel-game-banner">
+        <div class="minecraft-block">
+          <span></span>
+        </div>
+
+        <div class="pixel-game-text">
+          <h3>Espaço gamer e cultura digital</h3>
+          <p>
+            Uma área separada dos projetos técnicos para mostrar eventos, games,
+            criação de conteúdo e meu lado mais criativo.
+          </p>
+        </div>
+      </div>
+
       <div class="entretenimento-content">
 
         <div class="entretenimento-text">
@@ -587,81 +622,82 @@
          COMENTÁRIOS / FEEDBACKS
     ========================== -->
     <section id="comentarios" class="section comentarios">
-  <div class="section-title">
-    <p>Feedbacks e sugestões</p>
-    <h2>O que estão dizendo</h2>
-  </div>
-
-  <div class="feedback-carousel">
-    <div class="feedback-track" id="feedbackTrack">
-
-      <div class="feedback-card">
-        <p>“Projeto muito bem organizado e com uma proposta prática para resolver problemas do dia a dia.”</p>
-        <span>Feedback da comunidade</span>
+      <div class="section-title">
+        <p>Feedbacks e sugestões</p>
+        <h2>O que estão dizendo</h2>
       </div>
 
-      <div class="feedback-card">
-        <p>“Gostei da forma como os projetos mostram evolução, documentação e aplicação real de Python.”</p>
-        <span>Comentário recebido</span>
+      <div class="feedback-carousel">
+        <div class="feedback-track" id="feedbackTrack">
+
+          <div class="feedback-card">
+            <p>“Projeto muito bem organizado e com uma proposta prática para resolver problemas do dia a dia.”</p>
+            <span>Feedback da comunidade</span>
+          </div>
+
+          <div class="feedback-card">
+            <p>“Gostei da forma como os projetos mostram evolução, documentação e aplicação real de Python.”</p>
+            <span>Comentário recebido</span>
+          </div>
+
+          <div class="feedback-card">
+            <p>“Portfólio com boa apresentação visual e projetos que demonstram visão de produto.”</p>
+            <span>Opinião sobre o portfólio</span>
+          </div>
+
+        </div>
       </div>
 
-      <div class="feedback-card">
-        <p>“Portfólio com boa apresentação visual e projetos que demonstram visão de produto.”</p>
-        <span>Opinião sobre o portfólio</span>
-      </div>
+      <div class="comentario-action feedback-area">
+        <div class="feedback-text">
+          <h3>Deixe seu feedback</h3>
+          <p>
+            Envie uma sugestão, crítica construtiva ou comentário sobre meus projetos.
+            Após revisão, ele poderá aparecer aqui no portfólio.
+          </p>
+        </div>
 
-    </div>
-  </div>
-
-  <div class="comentario-action feedback-area">
-    <div class="feedback-text">
-      <h3>Deixe seu feedback</h3>
-      <p>
-        Envie uma sugestão, crítica construtiva ou comentário sobre meus projetos.
-        Após revisão, ele poderá aparecer aqui no portfólio.
-      </p>
-    </div>
-
-    <form
-      id="feedbackForm"
-      class="feedback-form"
-      action="https://script.google.com/macros/s/AKfycbwDj5sHZk23QTcDtjppGDMa3DanfYhOVPFWs9G4hhTFeMc2qPoVAqOuSMqrJnA2_FUa/exec"
-      method="POST"
-      target="feedbackFrame"
-    >
-      <div class="form-group">
-        <label for="nomeFeedback">Nome</label>
-        <input
-          type="text"
-          id="nomeFeedback"
-          name="nome"
-          placeholder="Seu nome"
-          maxlength="60"
+        <form
+          id="feedbackForm"
+          class="feedback-form"
+          action="https://script.google.com/macros/s/AKfycbwDj5sHZk23QTcDtjppGDMa3DanfYhOVPFWs9G4hhTFeMc2qPoVAqOuSMqrJnA2_FUa/exec"
+          method="POST"
+          target="feedbackFrame"
         >
+          <div class="form-group">
+            <label for="nomeFeedback">Nome</label>
+            <input
+              type="text"
+              id="nomeFeedback"
+              name="nome"
+              placeholder="Seu nome"
+              maxlength="60"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="comentarioFeedback">Comentário</label>
+            <textarea
+              id="comentarioFeedback"
+              name="comentario"
+              placeholder="Escreva seu feedback..."
+              maxlength="280"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-paper-plane"></i>
+            Deixar meu feedback
+          </button>
+
+          <p id="feedbackStatus" class="feedback-status"></p>
+        </form>
+
+        <iframe name="feedbackFrame" id="feedbackFrame" class="feedback-frame"></iframe>
       </div>
+    </section>
 
-      <div class="form-group">
-        <label for="comentarioFeedback">Comentário</label>
-        <textarea
-          id="comentarioFeedback"
-          name="comentario"
-          placeholder="Escreva seu feedback..."
-          maxlength="280"
-          required
-        ></textarea>
-      </div>
-
-      <button type="submit" class="btn btn-primary">
-        <i class="fa-solid fa-paper-plane"></i>
-        Deixar meu feedback
-      </button>
-
-      <p id="feedbackStatus" class="feedback-status"></p>
-    </form>
-
-    <iframe name="feedbackFrame" id="feedbackFrame" class="feedback-frame"></iframe>
-  </div>
-</section>
 
     <!-- =========================
          CONTATO
@@ -755,6 +791,6 @@
   </footer>
 
 
-  <script src="script.js?v=2"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>
