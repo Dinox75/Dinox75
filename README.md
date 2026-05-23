@@ -419,6 +419,14 @@ Tenho focado principalmente em **Python**, **dados**, **automação**, **Power B
 
 ---
 
+## 🧊 Contribuições em 3D
+
+<p align="center">
+  <img src="./profile-3d-contrib/profile-night-rainbow.svg" width="100%" alt="Gráfico 3D das contribuições no GitHub" />
+</p>
+
+---
+
 ## 📉 Gráfico de atividade
 
 <p align="center">
