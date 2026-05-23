@@ -9,6 +9,9 @@
 
   <title>Vinicius Lima | Portfólio</title>
 
+  <!-- Ícones das redes sociais -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -25,23 +28,25 @@
         <li><a href="#inicio">Início</a></li>
         <li><a href="#sobre">Sobre</a></li>
         <li><a href="#projetos">Projetos</a></li>
-        <li><a href="#midia">Mídia</a></li>
-        <li><a href="#comentarios">Comentários</a></li>
+        <li><a href="#demos">Demos</a></li>
+        <li><a href="#entretenimento">Mídia</a></li>
+        <li><a href="#redes">Redes</a></li>
+        <li><a href="#comentarios">Feedbacks</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
 
-      <button class="menu-mobile" id="menuMobile">
+      <button class="menu-mobile" id="menuMobile" aria-label="Abrir menu">
         ☰
       </button>
     </nav>
   </header>
 
 
-  <!-- =========================
-       SEÇÃO INICIAL
-  ========================== -->
   <main>
 
+    <!-- =========================
+         HERO / INÍCIO
+    ========================== -->
     <section id="inicio" class="hero">
       <div class="hero-content">
         <p class="tag">Desenvolvimento • Dados • Automação</p>
@@ -60,11 +65,26 @@
           <a href="#contato" class="btn btn-secondary">Entrar em Contato</a>
         </div>
 
-        <div class="hero-social">
-          <a href="https://github.com/Dinox75" target="_blank">GitHub</a>
-          <a href="https://www.linkedin.com/in/vinicius-limajr/" target="_blank">LinkedIn</a>
-          <a href="https://www.tiktok.com/@dinox_xv" target="_blank">TikTok</a>
-          <a href="https://www.twitch.tv/dinox_xv" target="_blank">Twitch</a>
+        <div class="hero-social social-icons">
+          <a href="https://github.com/Dinox75" target="_blank" aria-label="GitHub">
+            <i class="fa-brands fa-github"></i>
+          </a>
+
+          <a href="https://www.linkedin.com/in/vinicius-limajr/" target="_blank" aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+
+          <a href="https://www.tiktok.com/@dinox_xv" target="_blank" aria-label="TikTok">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+
+          <a href="https://www.twitch.tv/dinox_xv" target="_blank" aria-label="Twitch">
+            <i class="fa-brands fa-twitch"></i>
+          </a>
+
+          <a href="https://www.instagram.com/vinicius.lima75?igsh=emc4eDl2c3cxa2Vp" target="_blank" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
         </div>
       </div>
 
@@ -93,7 +113,7 @@
           <p>
             Tenho direcionado meus estudos para Python, automação, análise de dados,
             Power BI, GitHub e desenvolvimento de projetos com aplicação prática.
-            Meu objetivo é construir soluções úteis, documentadas e com potencial
+            Meu objetivo é construir soluções úteis, bem documentadas e com potencial
             para evoluir para produtos reais.
           </p>
 
@@ -204,38 +224,135 @@
 
 
     <!-- =========================
-         MÍDIA / VÍDEOS / IMAGENS
+         DEMONSTRAÇÕES DOS PROJETOS
     ========================== -->
-    <section id="midia" class="section midia">
+    <section id="demos" class="section demos">
       <div class="section-title">
-        <p>Conteúdo e bastidores</p>
-        <h2>Mídia, vídeos e imagens</h2>
+        <p>Demonstrações técnicas</p>
+        <h2>Vídeos e evolução dos projetos</h2>
       </div>
 
-      <div class="midia-content">
+      <div class="demos-intro">
+        <h3>Espaço reservado para apresentar meus projetos em funcionamento</h3>
+        <p>
+          Esta área será usada para publicar vídeos, prints, explicações rápidas,
+          demonstrações de funcionalidades e bastidores técnicos dos projetos do meu portfólio.
+        </p>
+      </div>
 
-        <div class="midia-text">
-          <h3>Espaço para futuras demonstrações</h3>
+      <div class="demos-grid">
+
+        <article class="demo-card">
+          <div class="video-placeholder">
+            <i class="fa-solid fa-play"></i>
+          </div>
+
+          <h3>Smart Market</h3>
 
           <p>
-            Esta seção será usada para adicionar vídeos demonstrando meus projetos,
-            bastidores de desenvolvimento, imagens de eventos, estudos e conteúdos
-            relacionados à tecnologia.
+            Futuro vídeo demonstrando cadastro de compras, comparação de preços,
+            histórico em JSON e evolução do projeto.
+          </p>
+
+          <div class="demo-actions">
+            <a href="https://github.com/Dinox75/Smart_market" target="_blank" class="projeto-link">
+              Ver repositório
+            </a>
+            <span>Em breve</span>
+          </div>
+        </article>
+
+
+        <article class="demo-card">
+          <div class="video-placeholder">
+            <i class="fa-solid fa-play"></i>
+          </div>
+
+          <h3>WorkWatch</h3>
+
+          <p>
+            Futuro vídeo mostrando o monitoramento local, registro de janelas ativas
+            e geração de dados para análise.
+          </p>
+
+          <div class="demo-actions">
+            <a href="https://github.com/Dinox75/WorkWatch" target="_blank" class="projeto-link">
+              Ver repositório
+            </a>
+            <span>Em breve</span>
+          </div>
+        </article>
+
+
+        <article class="demo-card">
+          <div class="video-placeholder">
+            <i class="fa-solid fa-play"></i>
+          </div>
+
+          <h3>Simulador de Escala</h3>
+
+          <p>
+            Futuro vídeo explicando a lógica da escala 6x3, consulta de datas
+            e evolução da proposta.
+          </p>
+
+          <div class="demo-actions">
+            <a href="https://github.com/Dinox75/simulador-escala-trabalho" target="_blank" class="projeto-link">
+              Ver repositório
+            </a>
+            <span>Em breve</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         ENTRETENIMENTO E EVENTOS
+    ========================== -->
+    <section id="entretenimento" class="section entretenimento">
+      <div class="section-title">
+        <p>Além do código</p>
+        <h2>Games, eventos e criação de conteúdo</h2>
+      </div>
+
+      <div class="entretenimento-content">
+
+        <div class="entretenimento-text">
+          <h3>Meu lado criativo também faz parte da minha jornada</h3>
+
+          <p>
+            Além dos estudos e projetos de desenvolvimento, também mantenho contato
+            com games, eventos de tecnologia, cultura digital e criação de conteúdo.
           </p>
 
           <p>
-            Também pretendo conectar esta área com publicações do LinkedIn, TikTok,
-            Twitch e outros conteúdos digitais.
+            Esta seção é separada dos projetos técnicos para manter o portfólio organizado,
+            mas ainda mostrar um pouco da minha identidade, hobbies e presença digital.
           </p>
 
-          <a href="https://www.twitch.tv/dinox_xv" target="_blank" class="btn btn-primary">
-            Acompanhar na Twitch
-          </a>
+          <div class="entretenimento-buttons">
+            <a href="https://www.twitch.tv/dinox_xv" target="_blank" class="btn btn-primary">
+              <i class="fa-brands fa-twitch"></i>
+              Twitch
+            </a>
+
+            <a href="https://www.tiktok.com/@dinox_xv" target="_blank" class="btn btn-secondary">
+              <i class="fa-brands fa-tiktok"></i>
+              TikTok
+            </a>
+
+            <a href="https://www.instagram.com/vinicius.lima75?igsh=emc4eDl2c3cxa2Vp" target="_blank" class="btn btn-outline">
+              <i class="fa-brands fa-instagram"></i>
+              Instagram
+            </a>
+          </div>
         </div>
 
-        <div class="midia-gallery">
-          <img src="assets/img/bgs-games.jpg" alt="Vinicius Lima jogando em evento de games">
-          <img src="assets/img/bgs-tech.jpg" alt="Vinicius Lima em evento de tecnologia e games">
+        <div class="entretenimento-gallery">
+          <img src="assets/img/bgs-games.jpg" alt="Vinicius Lima em evento de games">
+          <img src="assets/img/bgs-tech.jpg" alt="Vinicius Lima em evento de tecnologia">
         </div>
 
       </div>
@@ -245,7 +362,7 @@
     <!-- =========================
          REDES SOCIAIS
     ========================== -->
-    <section class="section redes">
+    <section id="redes" class="section redes">
       <div class="section-title">
         <p>Onde me encontrar</p>
         <h2>Redes e canais</h2>
@@ -254,26 +371,31 @@
       <div class="redes-grid">
 
         <a href="https://github.com/Dinox75" target="_blank" class="rede-card">
+          <i class="fa-brands fa-github"></i>
           <h3>GitHub</h3>
           <p>Projetos, códigos e evolução prática.</p>
         </a>
 
         <a href="https://www.linkedin.com/in/vinicius-limajr/" target="_blank" class="rede-card">
+          <i class="fa-brands fa-linkedin-in"></i>
           <h3>LinkedIn</h3>
           <p>Trajetória profissional, estudos e publicações.</p>
         </a>
 
         <a href="https://www.tiktok.com/@dinox_xv" target="_blank" class="rede-card">
+          <i class="fa-brands fa-tiktok"></i>
           <h3>TikTok</h3>
           <p>Conteúdos rápidos sobre estudos, tecnologia e rotina.</p>
         </a>
 
         <a href="https://www.twitch.tv/dinox_xv" target="_blank" class="rede-card">
+          <i class="fa-brands fa-twitch"></i>
           <h3>Twitch</h3>
           <p>Games, lives e criação de conteúdo.</p>
         </a>
 
         <a href="https://www.instagram.com/vinicius.lima75?igsh=emc4eDl2c3cxa2Vp" target="_blank" class="rede-card">
+          <i class="fa-brands fa-instagram"></i>
           <h3>Instagram</h3>
           <p>Momentos pessoais, bastidores e rotina.</p>
         </a>
@@ -334,36 +456,61 @@
     <section id="contato" class="section contato">
       <div class="section-title">
         <p>Vamos conversar?</p>
-        <h2>Contato</h2>
+        <h2>Contato profissional</h2>
       </div>
 
       <div class="contato-content">
 
         <div class="contato-text">
-          <h3>Estou aberto a conexões, feedbacks e oportunidades</h3>
+          <span class="contato-badge">Aberto a conexões</span>
+
+          <h3>Entre em contato para trocar ideias, enviar feedbacks ou falar sobre oportunidades</h3>
 
           <p>
-            Entre em contato para conversar sobre tecnologia, projetos, oportunidades,
-            estudos, colaboração ou sugestões para melhorar meu portfólio.
+            Estou construindo minha trajetória em tecnologia com foco em projetos práticos,
+            documentação, evolução constante e presença profissional no GitHub e LinkedIn.
+          </p>
+
+          <p>
+            Fique à vontade para me chamar para conversar sobre tecnologia, projetos,
+            estudos, colaboração, networking ou sugestões para melhorar meu portfólio.
           </p>
         </div>
 
-        <div class="contato-buttons">
-          <a href="mailto:vibylima75@gmail.com" class="btn btn-primary">
-            Enviar E-mail
+        <div class="contato-cards">
+
+          <a href="mailto:vibylima75@gmail.com" class="contato-card">
+            <i class="fa-solid fa-envelope"></i>
+            <div>
+              <h3>E-mail</h3>
+              <p>Enviar mensagem profissional</p>
+            </div>
           </a>
 
-          <a href="https://wa.me/5535991189012" target="_blank" class="btn btn-secondary">
-            Falar pelo WhatsApp
+          <a href="https://wa.me/5535991189012" target="_blank" class="contato-card">
+            <i class="fa-brands fa-whatsapp"></i>
+            <div>
+              <h3>WhatsApp</h3>
+              <p>Falar diretamente comigo</p>
+            </div>
           </a>
 
-          <a href="https://github.com/Dinox75" target="_blank" class="btn btn-outline">
-            Ver GitHub
+          <a href="https://www.linkedin.com/in/vinicius-limajr/" target="_blank" class="contato-card">
+            <i class="fa-brands fa-linkedin-in"></i>
+            <div>
+              <h3>LinkedIn</h3>
+              <p>Conectar profissionalmente</p>
+            </div>
           </a>
 
-          <a href="https://www.linkedin.com/in/vinicius-limajr/" target="_blank" class="btn btn-outline">
-            Ver LinkedIn
+          <a href="https://github.com/Dinox75" target="_blank" class="contato-card">
+            <i class="fa-brands fa-github"></i>
+            <div>
+              <h3>GitHub</h3>
+              <p>Ver meus repositórios</p>
+            </div>
           </a>
+
         </div>
 
       </div>
