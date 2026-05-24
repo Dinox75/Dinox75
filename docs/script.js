@@ -183,240 +183,351 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================
-  // COMENTÁRIOS DINÂMICOS
-  // =========================
+// COMENTÁRIOS DINÂMICOS + CARROSSEL INFINITO
+// =========================
 
-  function criarCardComentario(comentario) {
-    const nome = escaparHTML(comentario.nome || "Visitante");
-    const texto = escaparHTML(comentario.comentario || "");
+function criarCardComentario(comentario) {
+  const nome = escaparHTML(comentario.nome || "Visitante");
+  const texto = escaparHTML(comentario.comentario || "");
 
-    return `
-      <div class="feedback-card">
-        <p>“${texto}”</p>
-        <span>${nome}</span>
-      </div>
-    `;
+  return `
+    <div class="feedback-card">
+      <p>“${texto}”</p>
+      <span>${nome}</span>
+    </div>
+  `;
+}
+
+let limparCarrosselFeedback = null;
+
+function configurarCarrosselFeedback() {
+  const carousel = document.getElementById("feedbackCarousel");
+  const track = document.getElementById("feedbackTrack");
+  const btnPrev = document.getElementById("feedbackPrev");
+  const btnNext = document.getElementById("feedbackNext");
+  const sectionComentarios = document.getElementById("comentarios");
+
+  if (!carousel || !track || !sectionComentarios) return;
+
+  if (limparCarrosselFeedback) {
+    limparCarrosselFeedback();
+    limparCarrosselFeedback = null;
   }
 
-  function configurarCarrosselFeedback() {
-    const carousel = document.getElementById("feedbackCarousel");
-    const track = document.getElementById("feedbackTrack");
-    const btnPrev = document.getElementById("feedbackPrev");
-    const btnNext = document.getElementById("feedbackNext");
-    const sectionComentarios = document.getElementById("comentarios");
+  track.querySelectorAll('[data-clone="true"]').forEach((clone) => {
+    clone.remove();
+  });
 
-    if (!carousel || !track || !sectionComentarios) return;
+  let cardsReais = Array.from(track.querySelectorAll(".feedback-card"));
 
-    if (carousel.dataset.configurado === "true") {
+  if (cardsReais.length === 0) return;
+
+  let indiceAtual = 0;
+  let quantidadeClones = 1;
+  let autoScroll = null;
+  let timeoutRetorno = null;
+  let pausadoPeloUsuario = false;
+  let travadoDuranteReset = false;
+
+  function obterGap() {
+    const estilosTrack = window.getComputedStyle(track);
+    return parseFloat(estilosTrack.columnGap || estilosTrack.gap) || 22;
+  }
+
+  function obterLarguraCard() {
+    const card = track.querySelector(".feedback-card");
+
+    if (!card) return 360;
+
+    return card.getBoundingClientRect().width + obterGap();
+  }
+
+  function obterQuantidadeVisivel() {
+    const larguraCard = obterLarguraCard();
+
+    if (!larguraCard) return 1;
+
+    return Math.max(1, Math.ceil(carousel.clientWidth / larguraCard));
+  }
+
+  function removerClones() {
+    track.querySelectorAll('[data-clone="true"]').forEach((clone) => {
+      clone.remove();
+    });
+  }
+
+  function criarClone(card) {
+    const clone = card.cloneNode(true);
+    clone.dataset.clone = "true";
+    clone.setAttribute("aria-hidden", "true");
+    return clone;
+  }
+
+  function montarLoop() {
+    removerClones();
+
+    cardsReais = Array.from(track.querySelectorAll(".feedback-card"));
+
+    if (cardsReais.length <= 1) {
+      indiceAtual = 0;
+      aplicarTransform(false);
       return;
     }
 
-    carousel.dataset.configurado = "true";
+    quantidadeClones = Math.min(obterQuantidadeVisivel(), cardsReais.length);
 
-    let autoScroll = null;
-    let tempoRetorno = null;
-    let usuarioInteragiu = false;
+    const clonesInicio = cardsReais
+      .slice(-quantidadeClones)
+      .map(criarClone);
 
-    function obterDistanciaCard() {
-      const card = track.querySelector(".feedback-card");
+    const clonesFim = cardsReais
+      .slice(0, quantidadeClones)
+      .map(criarClone);
 
-      if (!card) return 380;
-
-      const estilosTrack = window.getComputedStyle(track);
-      const gap = parseFloat(estilosTrack.columnGap || estilosTrack.gap) || 22;
-
-      return card.getBoundingClientRect().width + gap;
-    }
-
-    function obterLimiteScroll() {
-      return carousel.scrollWidth - carousel.clientWidth;
-    }
-
-    function resetarCarrossel() {
-      carousel.scrollTo({
-        left: 0,
-        behavior: "auto",
-      });
-    }
-
-    function pararAutoScroll() {
-      clearInterval(autoScroll);
-      autoScroll = null;
-    }
-
-    function iniciarAutoScroll() {
-      pararAutoScroll();
-
-      if (usuarioInteragiu) return;
-
-      autoScroll = setInterval(() => {
-        if (document.hidden) return;
-
-        irParaProximo(false);
-      }, 4200);
-    }
-
-    function pausarTemporariamente() {
-      usuarioInteragiu = true;
-      pararAutoScroll();
-      clearTimeout(tempoRetorno);
-
-      tempoRetorno = setTimeout(() => {
-        usuarioInteragiu = false;
-        iniciarAutoScroll();
-      }, 7000);
-    }
-
-    function irParaProximo(manual = true) {
-      const limite = obterLimiteScroll();
-
-      if (limite <= 0) return;
-
-      if (carousel.scrollLeft >= limite - 20) {
-        resetarCarrossel();
-      }
-
-      carousel.scrollBy({
-        left: obterDistanciaCard(),
-        behavior: "smooth",
-      });
-
-      if (manual) {
-        pausarTemporariamente();
-      }
-    }
-
-    function irParaAnterior(manual = true) {
-      const limite = obterLimiteScroll();
-
-      if (limite <= 0) return;
-
-      if (carousel.scrollLeft <= 10) {
-        carousel.scrollTo({
-          left: limite,
-          behavior: "auto",
-        });
-      }
-
-      carousel.scrollBy({
-        left: -obterDistanciaCard(),
-        behavior: "smooth",
-      });
-
-      if (manual) {
-        pausarTemporariamente();
-      }
-    }
-
-    if (btnNext) {
-      btnNext.addEventListener("click", () => {
-        irParaProximo(true);
-      });
-    }
-
-    if (btnPrev) {
-      btnPrev.addEventListener("click", () => {
-        irParaAnterior(true);
-      });
-    }
-
-    carousel.addEventListener("mouseenter", () => {
-      pararAutoScroll();
+    clonesInicio.forEach((clone) => {
+      track.insertBefore(clone, track.firstChild);
     });
 
-    carousel.addEventListener("mouseleave", () => {
-      iniciarAutoScroll();
+    clonesFim.forEach((clone) => {
+      track.appendChild(clone);
     });
 
-    carousel.addEventListener("touchstart", () => {
-      pausarTemporariamente();
-    }, {
-      passive: true,
-    });
-
-    carousel.addEventListener("wheel", () => {
-      pausarTemporariamente();
-    }, {
-      passive: true,
-    });
-
-    const observerFeedback = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            resetarCarrossel();
-            usuarioInteragiu = false;
-            iniciarAutoScroll();
-          } else {
-            pararAutoScroll();
-          }
-        });
-      },
-      {
-        threshold: 0.35,
-      }
-    );
-
-    observerFeedback.observe(sectionComentarios);
+    indiceAtual = quantidadeClones;
+    aplicarTransform(false);
   }
 
-  function carregarComentarios() {
-    const feedbackTrack = document.getElementById("feedbackTrack");
+  function aplicarTransform(comAnimacao = true) {
+    const distancia = obterLarguraCard();
+    const deslocamento = indiceAtual * distancia;
 
-    if (!feedbackTrack) return;
-
-    const callbackName = `receberComentarios_${Date.now()}`;
-    const script = document.createElement("script");
-
-    let callbackExecutado = false;
-
-    function limparJSONP() {
-      delete window[callbackName];
-
-      if (script.parentNode) {
-        script.remove();
-      }
+    if (comAnimacao) {
+      track.style.transition = "transform 0.45s ease";
+    } else {
+      track.style.transition = "none";
     }
 
-    function usarComentariosPadrao() {
-      configurarCarrosselFeedback();
+    track.style.transform = `translateX(-${deslocamento}px)`;
+  }
+
+  function irParaProximo(manual = true) {
+    if (cardsReais.length <= 1 || travadoDuranteReset) return;
+
+    indiceAtual += 1;
+    aplicarTransform(true);
+
+    if (manual) {
+      pausarTemporariamente();
+    }
+  }
+
+  function irParaAnterior(manual = true) {
+    if (cardsReais.length <= 1 || travadoDuranteReset) return;
+
+    indiceAtual -= 1;
+    aplicarTransform(true);
+
+    if (manual) {
+      pausarTemporariamente();
+    }
+  }
+
+  function corrigirLoopInfinito() {
+    if (cardsReais.length <= 1) return;
+
+    const totalReais = cardsReais.length;
+    const inicioReais = quantidadeClones;
+    const fimReais = quantidadeClones + totalReais - 1;
+
+    if (indiceAtual > fimReais) {
+      travadoDuranteReset = true;
+      indiceAtual = inicioReais;
+      aplicarTransform(false);
+
+      requestAnimationFrame(() => {
+        travadoDuranteReset = false;
+      });
     }
 
-    const timerFallback = setTimeout(() => {
-      if (!callbackExecutado) {
-        usarComentariosPadrao();
-        limparJSONP();
+    if (indiceAtual < inicioReais) {
+      travadoDuranteReset = true;
+      indiceAtual = fimReais;
+      aplicarTransform(false);
+
+      requestAnimationFrame(() => {
+        travadoDuranteReset = false;
+      });
+    }
+  }
+
+  function pararAutoScroll() {
+    clearInterval(autoScroll);
+    autoScroll = null;
+  }
+
+  function iniciarAutoScroll() {
+    pararAutoScroll();
+
+    if (pausadoPeloUsuario || cardsReais.length <= 1) return;
+
+    autoScroll = setInterval(() => {
+      if (!document.hidden) {
+        irParaProximo(false);
       }
-    }, 3500);
+    }, 4200);
+  }
 
-    window[callbackName] = (comentarios) => {
-      callbackExecutado = true;
-      clearTimeout(timerFallback);
+  function pausarTemporariamente() {
+    pausadoPeloUsuario = true;
+    pararAutoScroll();
+    clearTimeout(timeoutRetorno);
 
-      if (Array.isArray(comentarios) && comentarios.length > 0) {
-        const comentariosDuplicados = [...comentarios, ...comentarios];
+    timeoutRetorno = setTimeout(() => {
+      pausadoPeloUsuario = false;
+      iniciarAutoScroll();
+    }, 7000);
+  }
 
-        feedbackTrack.innerHTML = comentariosDuplicados
-          .map(criarCardComentario)
-          .join("");
+  function reiniciarNoComeco() {
+    indiceAtual = quantidadeClones;
+    aplicarTransform(false);
+  }
+
+  function aoEntrarOuSairDaSecao(entries) {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        reiniciarNoComeco();
+        pausadoPeloUsuario = false;
+        iniciarAutoScroll();
+      } else {
+        pararAutoScroll();
       }
+    });
+  }
 
-      configurarCarrosselFeedback();
-      limparJSONP();
-    };
+  function remontarAoRedimensionar() {
+    pararAutoScroll();
+    montarLoop();
+    iniciarAutoScroll();
+  }
 
-    script.src = `${APPS_SCRIPT_URL}?action=list&callback=${callbackName}&t=${Date.now()}`;
+  btnNext?.addEventListener("click", () => {
+    irParaProximo(true);
+  });
 
-    script.onerror = () => {
-      clearTimeout(timerFallback);
+  btnPrev?.addEventListener("click", () => {
+    irParaAnterior(true);
+  });
+
+  carousel.addEventListener("mouseenter", pararAutoScroll);
+
+  carousel.addEventListener("mouseleave", iniciarAutoScroll);
+
+  carousel.addEventListener("touchstart", pausarTemporariamente, {
+    passive: true,
+  });
+
+  track.addEventListener("transitionend", corrigirLoopInfinito);
+
+  window.addEventListener("resize", remontarAoRedimensionar);
+
+  const observerFeedback = new IntersectionObserver(aoEntrarOuSairDaSecao, {
+    threshold: 0.35,
+  });
+
+  observerFeedback.observe(sectionComentarios);
+
+  montarLoop();
+
+  limparCarrosselFeedback = () => {
+    pararAutoScroll();
+    clearTimeout(timeoutRetorno);
+
+    btnNext?.removeEventListener("click", irParaProximo);
+    btnPrev?.removeEventListener("click", irParaAnterior);
+
+    carousel.removeEventListener("mouseenter", pararAutoScroll);
+    carousel.removeEventListener("mouseleave", iniciarAutoScroll);
+    track.removeEventListener("transitionend", corrigirLoopInfinito);
+    window.removeEventListener("resize", remontarAoRedimensionar);
+
+    observerFeedback.disconnect();
+  };
+}
+
+function removerComentariosDuplicados(comentarios) {
+  const vistos = new Set();
+
+  return comentarios.filter((comentario) => {
+    const nome = String(comentario.nome || "Visitante").trim().toLowerCase();
+    const texto = String(comentario.comentario || "").trim().toLowerCase();
+    const chave = `${nome}-${texto}`;
+
+    if (vistos.has(chave)) {
+      return false;
+    }
+
+    vistos.add(chave);
+    return true;
+  });
+}
+
+function carregarComentarios() {
+  const feedbackTrack = document.getElementById("feedbackTrack");
+
+  if (!feedbackTrack) return;
+
+  const callbackName = `receberComentarios_${Date.now()}`;
+  const script = document.createElement("script");
+
+  let callbackExecutado = false;
+
+  function limparJSONP() {
+    delete window[callbackName];
+
+    if (script.parentNode) {
+      script.remove();
+    }
+  }
+
+  function usarComentariosPadrao() {
+    configurarCarrosselFeedback();
+  }
+
+  const timerFallback = setTimeout(() => {
+    if (!callbackExecutado) {
       usarComentariosPadrao();
       limparJSONP();
-    };
+    }
+  }, 3500);
 
-    document.body.appendChild(script);
-  }
+  window[callbackName] = (comentarios) => {
+    callbackExecutado = true;
+    clearTimeout(timerFallback);
 
-  carregarComentarios();
+    if (Array.isArray(comentarios) && comentarios.length > 0) {
+      const comentariosUnicos = removerComentariosDuplicados(comentarios);
+
+      feedbackTrack.innerHTML = comentariosUnicos
+        .map(criarCardComentario)
+        .join("");
+    }
+
+    configurarCarrosselFeedback();
+    limparJSONP();
+  };
+
+  script.src = `${APPS_SCRIPT_URL}?action=list&callback=${callbackName}&t=${Date.now()}`;
+
+  script.onerror = () => {
+    clearTimeout(timerFallback);
+    usarComentariosPadrao();
+    limparJSONP();
+  };
+
+  document.body.appendChild(script);
+}
+
+carregarComentarios();
 
 
   // =========================
