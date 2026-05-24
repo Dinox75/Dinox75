@@ -202,6 +202,7 @@ section {
 
 .hero h1 span {
   background: linear-gradient(135deg, var(--blue), var(--purple));
+  background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
 }
@@ -874,12 +875,22 @@ section {
 
 /* =========================
    FEEDBACKS / COMENTÁRIOS
+   Carrossel interativo por JavaScript
 ========================= */
 
+.feedback-slider {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+}
+
 .feedback-carousel {
+  position: relative;
   width: 100%;
   overflow: hidden;
-  position: relative;
   padding: 8px 0 18px;
 }
 
@@ -888,7 +899,7 @@ section {
   content: "";
   position: absolute;
   top: 0;
-  width: 110px;
+  width: 88px;
   height: 100%;
   z-index: 2;
   pointer-events: none;
@@ -908,17 +919,18 @@ section {
   display: flex;
   gap: 22px;
   width: max-content;
-  animation: feedbackScroll 42s linear infinite;
-}
 
-.feedback-track:hover {
-  animation-play-state: paused;
+  transform: translateX(0);
+  transition: transform 0.45s ease;
+
+  animation: none;
+  will-change: transform;
 }
 
 .feedback-card {
   width: 360px;
   min-height: 190px;
-  flex-shrink: 0;
+  flex: 0 0 360px;
 }
 
 .feedback-card p {
@@ -932,25 +944,82 @@ section {
   font-weight: 800;
 }
 
-@keyframes feedbackScroll {
-  from {
-    transform: translateX(0);
-  }
+.feedback-card small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  margin-top: 8px;
+}
 
-  to {
-    transform: translateX(-50%);
-  }
+.feedback-nav {
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--text-main);
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  cursor: pointer;
+  transition: 0.3s ease;
+  z-index: 5;
+}
+
+.feedback-nav:hover {
+  color: white;
+  background: linear-gradient(135deg, var(--blue-strong), var(--purple));
+  border-color: transparent;
+  transform: translateY(-3px);
+}
+
+.feedback-nav:active {
+  transform: scale(0.96);
 }
 
 .comentario-action {
   margin: 34px auto 0;
-  max-width: 760px;
-  text-align: center;
+  max-width: 980px;
+  text-align: left;
 }
 
 .comentario-action p {
   color: var(--text-secondary);
   margin-bottom: 20px;
+}
+
+.feedback-status.sucesso {
+  color: var(--green);
+}
+
+.feedback-status.erro {
+  color: var(--pink);
+}
+
+@media (max-width: 720px) {
+  .feedback-slider {
+    grid-template-columns: 38px 1fr 38px;
+    gap: 8px;
+  }
+
+  .feedback-nav {
+    width: 38px;
+    height: 38px;
+    font-size: 0.85rem;
+  }
+
+  .feedback-carousel::before,
+  .feedback-carousel::after {
+    width: 34px;
+  }
+
+  .feedback-card {
+    width: 300px;
+    flex-basis: 300px;
+  }
 }
 
 
@@ -1868,109 +1937,3 @@ body::after {
   color: var(--text-secondary);
 }
 
-
-/* =========================
-   FEEDBACKS - CARROSSEL INTERATIVO
-========================= */
-
-.feedback-slider {
-  position: relative;
-
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 14px;
-}
-
-.feedback-carousel {
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-
-  padding: 8px 0 18px;
-
-  scrollbar-width: none;
-}
-
-.feedback-carousel::-webkit-scrollbar {
-  display: none;
-}
-
-.feedback-track {
-  display: flex;
-  gap: 22px;
-  width: max-content;
-
-  animation: none !important;
-  transform: none !important;
-}
-
-.feedback-track:hover {
-  animation-play-state: running;
-}
-
-.feedback-card {
-  width: 360px;
-  min-height: 190px;
-  flex-shrink: 0;
-  scroll-snap-align: center;
-}
-
-.feedback-nav {
-  width: 46px;
-  height: 46px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: var(--text-main);
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-
-  cursor: pointer;
-  transition: 0.3s ease;
-  z-index: 5;
-}
-
-.feedback-nav:hover {
-  color: white;
-  background: linear-gradient(135deg, var(--blue-strong), var(--purple));
-  border-color: transparent;
-  transform: translateY(-3px);
-}
-
-.feedback-nav:active {
-  transform: scale(0.96);
-}
-
-@media (max-width: 980px) {
-  .sobre-timeline {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 720px) {
-  .feedback-slider {
-    grid-template-columns: 1fr;
-  }
-
-  .feedback-nav {
-    display: none;
-  }
-
-  .feedback-carousel {
-    overflow-x: auto;
-  }
-
-  .feedback-card {
-    width: 310px;
-  }
-
-  .sobre-timeline {
-    grid-template-columns: 1fr;
-  }
-}
