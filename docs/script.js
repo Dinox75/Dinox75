@@ -1,7 +1,6 @@
 // =========================
-// PORTFÓLIO 3D GAME | VINICIUS LIMA
-// Interações gerais da página
-// Versão: v9
+// PORTFÓLIO GAME AVANÇADO | VINICIUS LIMA
+// Versão: v10 corrigida
 // =========================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -20,17 +19,65 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("themeToggle");
   const themeTransition = document.getElementById("themeTransition");
 
+  const mascot = document.getElementById("mascot");
+  const mascotButton = document.getElementById("mascotButton");
+  const mascotBubble = document.getElementById("mascotBubble");
+
+  const roomDialog = document.getElementById("roomDialog");
+  const roomDialogBadge = document.getElementById("roomDialogBadge");
+  const roomDialogTitle = document.getElementById("roomDialogTitle");
+  const roomDialogText = document.getElementById("roomDialogText");
+  const roomDialogLink = document.getElementById("roomDialogLink");
+  const closeDialogButtons = document.querySelectorAll("[data-close-dialog]");
+
+
+  // =========================
+  // PIXELS DA TRANSIÇÃO DE TEMA
+  // =========================
+
+  function criarPixelsDeTema() {
+    if (!themeTransition || themeTransition.children.length > 0) return;
+
+    const colunas = 14;
+    const linhas = 9;
+    const total = colunas * linhas;
+
+    for (let i = 0; i < total; i += 1) {
+      const pixel = document.createElement("span");
+
+      pixel.className = "theme-pixel";
+
+      const coluna = i % colunas;
+      const linha = Math.floor(i / colunas);
+      const delay = (coluna + linha) * 0.025;
+
+      pixel.style.animationDelay = `${delay}s`;
+
+      themeTransition.appendChild(pixel);
+    }
+  }
+
+  criarPixelsDeTema();
+
 
   // =========================
   // TEMA CLARO / ESCURO
   // =========================
 
   function obterTemaSalvo() {
-    return localStorage.getItem("portfolio-theme") || "dark";
+    try {
+      return localStorage.getItem("portfolio-theme") || "dark";
+    } catch {
+      return "dark";
+    }
   }
 
   function salvarTema(tema) {
-    localStorage.setItem("portfolio-theme", tema);
+    try {
+      localStorage.setItem("portfolio-theme", tema);
+    } catch {
+      return;
+    }
   }
 
   function atualizarBotaoTema(tema) {
@@ -90,9 +137,15 @@ document.addEventListener("DOMContentLoaded", () => {
       themeTransition.classList.add("active");
     }
 
+    if (novoTema === "light") {
+      falarMascote("Amanhecendo o mapa... tema claro ativado.");
+    } else {
+      falarMascote("Modo noturno ativado. Neon ligado.");
+    }
+
     setTimeout(() => {
       aplicarTema(novoTema);
-    }, 430);
+    }, 460);
 
     setTimeout(() => {
       if (themeTransition) {
@@ -100,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       trocandoTema = false;
-    }, 1250);
+    }, 1500);
   }
 
   aplicarTema(obterTemaSalvo());
@@ -167,6 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       fecharMenu();
+      fecharDialog();
     }
   });
 
@@ -178,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================
-  // HEADER AO ROLAR
+  // HEADER E LINK ATIVO
   // =========================
 
   function controlarHeader() {
@@ -191,11 +245,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-
-  // =========================
-  // LINK ATIVO NO MENU
-  // =========================
-
   function ativarLinkMenu() {
     const scrollAtual = window.scrollY + 140;
 
@@ -204,10 +253,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const sectionHeight = section.offsetHeight;
       const sectionId = section.getAttribute("id");
 
+      if (!sectionId) return;
+
       const linkMenu = document.querySelector(`.nav-menu a[href="#${sectionId}"]`);
 
       if (scrollAtual >= sectionTop && scrollAtual < sectionTop + sectionHeight) {
-        navLinks.forEach((link) => link.classList.remove("active-link"));
+        navLinks.forEach((link) => {
+          link.classList.remove("active-link");
+        });
 
         if (linkMenu) {
           linkMenu.classList.add("active-link");
@@ -229,7 +282,219 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================
-  // CARDS EXPANSÍVEIS DOS PROJETOS
+  // MASCOTE
+  // =========================
+
+  const mensagensMascote = [
+    "Clique no monitor para abrir os projetos.",
+    "A estante mostra a parte de estudos e evolução.",
+    "O portal leva para contato profissional.",
+    "O painel mostra dados e automação.",
+    "Você pode trocar o tema no botão do topo.",
+    "Passe o mouse nos cards para sentir o efeito 3D."
+  ];
+
+  let timeoutMascote = null;
+  let alvoMascote = {
+    x: window.innerWidth - 120,
+    y: window.innerHeight - 110,
+  };
+
+  let posMascote = {
+    x: window.innerWidth - 120,
+    y: window.innerHeight - 110,
+  };
+
+  function falarMascote(mensagem, tempo = 4200) {
+    if (!mascot || !mascotBubble) return;
+
+    mascotBubble.textContent = mensagem;
+    mascot.classList.add("talking");
+
+    clearTimeout(timeoutMascote);
+
+    timeoutMascote = setTimeout(() => {
+      mascot.classList.remove("talking");
+    }, tempo);
+  }
+
+  function mensagemAleatoriaMascote() {
+    const indice = Math.floor(Math.random() * mensagensMascote.length);
+    falarMascote(mensagensMascote[indice]);
+  }
+
+  if (mascotButton) {
+    mascotButton.addEventListener("click", () => {
+      mensagemAleatoriaMascote();
+    });
+  }
+
+  document.addEventListener("mousemove", (event) => {
+    if (!mascot) return;
+
+    const dispositivoTouch = window.matchMedia("(pointer: coarse)").matches;
+    const prefereMenosMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (dispositivoTouch || prefereMenosMovimento) return;
+
+    alvoMascote = {
+      x: Math.min(window.innerWidth - 110, Math.max(24, event.clientX + 26)),
+      y: Math.min(window.innerHeight - 105, Math.max(90, event.clientY + 24)),
+    };
+  }, {
+    passive: true,
+  });
+
+  function animarMascote() {
+    if (!mascot) return;
+
+    posMascote.x += (alvoMascote.x - posMascote.x) * 0.035;
+    posMascote.y += (alvoMascote.y - posMascote.y) * 0.035;
+
+    const baseX = window.innerWidth - 122;
+    const baseY = window.innerHeight - 122;
+
+    mascot.style.transform = `
+      translate3d(
+        ${posMascote.x - baseX}px,
+        ${posMascote.y - baseY}px,
+        0
+      )
+    `;
+
+    requestAnimationFrame(animarMascote);
+  }
+
+  if (mascot) {
+    requestAnimationFrame(animarMascote);
+
+    setTimeout(() => {
+      falarMascote("Bem-vindo ao meu portfólio. O quarto interativo está logo abaixo.");
+    }, 900);
+  }
+
+
+  // =========================
+  // QUARTO INTERATIVO
+  // =========================
+
+  const dadosDoQuarto = {
+    projetos: {
+      badge: "Terminal",
+      titulo: "Projetos em destaque",
+      texto: "Aqui estão meus principais projetos: Smart Market, WorkWatch, Simulador de Escala, Sistema de Média Escolar, Sistema Bancário DIO e Simulador de Entrevista.",
+      link: "#projetos",
+      cta: "Abrir projetos",
+      fala: "Terminal acessado. Os projetos são a parte mais importante do mapa."
+    },
+
+    dados: {
+      badge: "Painel de dados",
+      titulo: "Dados, automação e análise",
+      texto: "Meu foco atual envolve Python, Power BI, Excel, CSV, JSON, relatórios e automações voltadas para problemas reais.",
+      link: "#skills",
+      cta: "Ver habilidades",
+      fala: "Painel de dados aberto. Aqui ficam as skills de análise e automação."
+    },
+
+    estudos: {
+      badge: "Estante",
+      titulo: "Estudos e evolução contínua",
+      texto: "Minha evolução vem de estudo constante, prática com Python, documentação no GitHub, criação de Wikis e projetos publicados.",
+      link: "#sobre",
+      cta: "Ver trajetória",
+      fala: "A estante guarda a evolução: estudar, praticar, documentar e melhorar."
+    },
+
+    contato: {
+      badge: "Portal",
+      titulo: "Contato profissional",
+      texto: "Use esta área para acessar e-mail, WhatsApp, LinkedIn, GitHub e currículo. Estou aberto a conexões, feedbacks e oportunidades de entrada na área.",
+      link: "#contato",
+      cta: "Ir para contato",
+      fala: "Portal aberto. Caminho direto para contato e networking."
+    },
+
+    midia: {
+      badge: "Arcade",
+      titulo: "Games, eventos e criação de conteúdo",
+      texto: "Além da tecnologia, também mantenho contato com games, eventos, cultura digital e criação de conteúdo.",
+      link: "#entretenimento",
+      cta: "Ver mídia",
+      fala: "Arcade ligado. Essa parte mostra seu lado criativo."
+    },
+
+    curriculo: {
+      badge: "Documento",
+      titulo: "Currículo profissional",
+      texto: "Acesse meu currículo em PDF para ver minha formação, certificados e informações profissionais.",
+      link: "assets/cv/curriculo-vinicius-lima.pdf",
+      cta: "Abrir currículo",
+      fala: "Documento encontrado. Currículo pronto para visualização."
+    }
+  };
+
+  function abrirDialog(chave) {
+    const dados = dadosDoQuarto[chave];
+
+    if (!dados || !roomDialog) return;
+    if (!roomDialogBadge || !roomDialogTitle || !roomDialogText || !roomDialogLink) return;
+
+    roomDialogBadge.textContent = dados.badge;
+    roomDialogTitle.textContent = dados.titulo;
+    roomDialogText.textContent = dados.texto;
+
+    roomDialogLink.textContent = dados.cta;
+    roomDialogLink.setAttribute("href", dados.link);
+
+    if (dados.link.endsWith(".pdf")) {
+      roomDialogLink.setAttribute("target", "_blank");
+      roomDialogLink.setAttribute("rel", "noopener noreferrer");
+    } else {
+      roomDialogLink.removeAttribute("target");
+      roomDialogLink.removeAttribute("rel");
+    }
+
+    roomDialog.classList.add("active");
+    roomDialog.setAttribute("aria-hidden", "false");
+
+    falarMascote(dados.fala);
+  }
+
+  function fecharDialog() {
+    if (!roomDialog) return;
+
+    roomDialog.classList.remove("active");
+    roomDialog.setAttribute("aria-hidden", "true");
+  }
+
+  document.querySelectorAll(".room-object").forEach((objeto) => {
+    objeto.addEventListener("click", () => {
+      abrirDialog(objeto.dataset.room);
+    });
+
+    objeto.addEventListener("mouseenter", () => {
+      const dados = dadosDoQuarto[objeto.dataset.room];
+
+      if (dados) {
+        falarMascote(dados.fala, 2800);
+      }
+    });
+  });
+
+  closeDialogButtons.forEach((botao) => {
+    botao.addEventListener("click", fecharDialog);
+  });
+
+  if (roomDialogLink) {
+    roomDialogLink.addEventListener("click", () => {
+      fecharDialog();
+    });
+  }
+
+
+  // =========================
+  // CARDS EXPANSÍVEIS
   // =========================
 
   expandableCards.forEach((card) => {
@@ -253,6 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (card.classList.contains("card-open")) {
         card.setAttribute("aria-label", "Recolher detalhes do projeto");
+        falarMascote("Detalhes do projeto abertos. Boa leitura.");
       } else {
         card.setAttribute("aria-label", "Expandir detalhes do projeto");
       }
@@ -272,9 +538,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
 
   function configurarEfeito3D() {
-    const elementos3D = document.querySelectorAll(
-      ".card-3d, .hero-card-3d"
-    );
+    const elementos3D = document.querySelectorAll(".card-tilt, .hero-card-3d");
 
     const prefereMenosMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const dispositivoTouch = window.matchMedia("(pointer: coarse)").matches;
@@ -282,6 +546,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (prefereMenosMovimento || dispositivoTouch) return;
 
     elementos3D.forEach((elemento) => {
+      if (elemento.dataset.tiltConfigurado === "true") return;
+
+      elemento.dataset.tiltConfigurado = "true";
+
       elemento.addEventListener("mousemove", (event) => {
         const rect = elemento.getBoundingClientRect();
 
@@ -312,8 +580,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================
-  // UTILITÁRIO DE SEGURANÇA
-  // Evita que comentários virem HTML dentro do site
+  // COMENTÁRIOS
   // =========================
 
   function escaparHTML(texto) {
@@ -322,17 +589,12 @@ document.addEventListener("DOMContentLoaded", () => {
     return div.innerHTML;
   }
 
-
-  // =========================
-  // COMENTÁRIOS DINÂMICOS + CARROSSEL INFINITO
-  // =========================
-
   function criarCardComentario(comentario) {
     const nome = escaparHTML(comentario.nome || "Visitante");
     const texto = escaparHTML(comentario.comentario || "");
 
     return `
-      <div class="feedback-card card-3d">
+      <div class="feedback-card card-3d card-tilt">
         <p>“${texto}”</p>
         <span>${nome}</span>
       </div>
@@ -556,13 +818,17 @@ document.addEventListener("DOMContentLoaded", () => {
       iniciarAutoScroll();
     }
 
-    btnNext?.addEventListener("click", () => {
-      irParaProximo(true);
-    });
+    if (btnNext) {
+      btnNext.addEventListener("click", () => {
+        irParaProximo(true);
+      });
+    }
 
-    btnPrev?.addEventListener("click", () => {
-      irParaAnterior(true);
-    });
+    if (btnPrev) {
+      btnPrev.addEventListener("click", () => {
+        irParaAnterior(true);
+      });
+    }
 
     carousel.addEventListener("mouseenter", pararAutoScroll);
     carousel.addEventListener("mouseleave", iniciarAutoScroll);
@@ -647,6 +913,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       configurarCarrosselFeedback();
+      configurarEfeito3D();
       limparJSONP();
     };
 
@@ -709,17 +976,19 @@ document.addEventListener("DOMContentLoaded", () => {
           botaoFeedback.style.opacity = "1";
           botaoFeedback.style.cursor = "pointer";
         }
+
+        falarMascote("Feedback enviado para aprovação. Obrigado pela ajuda!");
       }, 1400);
     });
   }
 
 
   // =========================
-  // ANIMAÇÃO SUAVE AO ENTRAR NA TELA
+  // ANIMAÇÕES DE ENTRADA
   // =========================
 
   const elementosAnimados = document.querySelectorAll(
-    ".section-title, .hero-content, .hero-stage, .sobre-text, .sobre-panel, .sobre-timeline, .timeline-item, .info-card, .resumo-card, .projeto-card, .demo-card, .entretenimento-text, .entretenimento-gallery, .rede-card, .feedback-slider, .comentario-action, .contato-content"
+    ".section-title, .hero-content, .hero-stage, .room-instructions, .game-room, .quest-log, .sobre-text, .sobre-panel, .sobre-timeline, .timeline-item, .info-card, .resumo-card, .projeto-card, .skill-tree, .entretenimento-text, .entretenimento-gallery, .feedback-slider, .comentario-action, .contato-content"
   );
 
   if ("IntersectionObserver" in window) {

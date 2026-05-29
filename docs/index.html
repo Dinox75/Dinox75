@@ -7,51 +7,42 @@
 
   <meta
     name="description"
-    content="Portfólio de Vinicius Lima - Projetos em Python, análise de dados, automação, Power BI, GitHub Pages e desenvolvimento de soluções práticas."
+    content="Portfólio game interativo de Vinicius Lima - Projetos em Python, análise de dados, automação, Power BI, GitHub Pages e desenvolvimento de soluções práticas."
   >
 
   <meta name="theme-color" content="#020617">
 
-  <meta property="og:title" content="Vinicius Lima | Portfólio">
+  <meta property="og:title" content="Vinicius Lima | Portfólio Game">
   <meta
     property="og:description"
-    content="Projetos em Python, dados, automação, Power BI, GitHub e desenvolvimento de soluções práticas."
+    content="Portfólio interativo com visual 3D game, projetos em Python, dados, automação, Power BI e GitHub."
   >
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dinox75.github.io/Dinox75/">
 
-  <title>Vinicius Lima | Portfólio 3D</title>
+  <title>Vinicius Lima | Portfólio Game</title>
 
-  <!-- Ícones das redes sociais -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
   >
 
-  <link rel="stylesheet" href="style.css?v=9">
+  <link rel="stylesheet" href="style.css?v=10">
 </head>
 
 <body>
 
   <!-- =========================
-       TRANSIÇÃO PIXELADA DE TEMA
+       TRANSIÇÃO PIXELADA
   ========================== -->
-  <div class="theme-transition" id="themeTransition" aria-hidden="true">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+  <div class="theme-transition" id="themeTransition" aria-hidden="true"></div>
 
 
   <!-- =========================
-       FUNDO 3D / PIXEL GAME
+       MUNDO DE FUNDO
   ========================== -->
   <div class="game-world" aria-hidden="true">
+    <div class="world-sky"></div>
     <div class="world-grid"></div>
 
     <span class="floating-cube cube-a"></span>
@@ -66,11 +57,28 @@
     <span class="pixel-star star-1"></span>
     <span class="pixel-star star-2"></span>
     <span class="pixel-star star-3"></span>
+    <span class="pixel-star star-4"></span>
   </div>
 
 
   <!-- =========================
-       CABEÇALHO / MENU
+       MASCOTE INTERATIVO
+  ========================== -->
+  <aside class="mascot" id="mascot" aria-label="Mascote do portfólio">
+    <div class="mascot-bubble" id="mascotBubble">
+      Clique nos objetos do quarto para explorar o portfólio.
+    </div>
+
+    <button class="mascot-sprite" id="mascotButton" type="button" aria-label="Dica do mascote">
+      <span class="mascot-eye eye-left"></span>
+      <span class="mascot-eye eye-right"></span>
+      <span class="mascot-mouth"></span>
+    </button>
+  </aside>
+
+
+  <!-- =========================
+       CABEÇALHO
   ========================== -->
   <header class="header">
     <nav class="navbar">
@@ -81,11 +89,10 @@
 
       <ul class="nav-menu">
         <li><a href="#inicio">Início</a></li>
+        <li><a href="#game-room">Quarto Game</a></li>
         <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#resumo">Resumo</a></li>
         <li><a href="#projetos">Projetos</a></li>
-        <li><a href="#demos">Demos</a></li>
-        <li><a href="#entretenimento">Mídia</a></li>
+        <li><a href="#skills">Skills</a></li>
         <li><a href="#comentarios">Feedbacks</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
@@ -100,7 +107,7 @@
           <span class="theme-toggle-icon">
             <i class="fa-solid fa-moon"></i>
           </span>
-          <span class="theme-toggle-text">Tema</span>
+          <span class="theme-toggle-text">Escuro</span>
         </button>
 
         <a
@@ -123,39 +130,34 @@
   <main>
 
     <!-- =========================
-         HERO / INÍCIO
+         HERO
     ========================== -->
     <section id="inicio" class="hero hero-3d">
       <div class="hero-content">
         <p class="tag">
           <i class="fa-solid fa-gamepad"></i>
-          Desenvolvimento • Dados • Automação
+          Modo Portfólio • Desenvolvimento • Dados • Automação
         </p>
 
         <h1>Olá, eu sou <span>Vinicius Lima</span></h1>
 
-        <h2>Desenvolvedor em formação com foco em sistemas, dados e soluções práticas</h2>
+        <h2>Desenvolvedor em formação criando soluções práticas com tecnologia</h2>
 
         <p class="hero-description">
-          Estou construindo minha trajetória em tecnologia por meio de projetos reais,
-          estudos constantes e documentação prática. Meu foco atual está em Python,
-          análise de dados, automação, Power BI, GitHub e desenvolvimento de sistemas.
+          Bem-vindo ao meu portfólio em formato de experiência interativa. Aqui você
+          pode explorar minha trajetória, projetos, estudos e canais profissionais
+          como se estivesse navegando por um pequeno hub de jogo.
         </p>
 
         <div class="hero-buttons">
-          <a href="#projetos" class="btn btn-primary">
-            <i class="fa-solid fa-code"></i>
-            Ver Projetos
+          <a href="#game-room" class="btn btn-primary">
+            <i class="fa-solid fa-door-open"></i>
+            Entrar no Quarto
           </a>
 
-          <a
-            href="assets/cv/curriculo-vinicius-lima.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-secondary"
-          >
-            <i class="fa-solid fa-file-arrow-down"></i>
-            Baixar Currículo
+          <a href="#projetos" class="btn btn-secondary">
+            <i class="fa-solid fa-code"></i>
+            Ver Projetos
           </a>
 
           <a href="#comentarios" class="btn btn-outline">
@@ -165,55 +167,30 @@
         </div>
 
         <div class="hero-social social-icons">
-          <a
-            href="https://github.com/Dinox75"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-          >
+          <a href="https://github.com/Dinox75" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
             <i class="fa-brands fa-github"></i>
           </a>
 
-          <a
-            href="https://www.linkedin.com/in/vinicius-limajr/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-          >
+          <a href="https://www.linkedin.com/in/vinicius-limajr/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
             <i class="fa-brands fa-linkedin-in"></i>
           </a>
 
-          <a
-            href="https://www.tiktok.com/@dinox_xv"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="TikTok"
-          >
+          <a href="https://www.tiktok.com/@dinox_xv" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
             <i class="fa-brands fa-tiktok"></i>
           </a>
 
-          <a
-            href="https://www.twitch.tv/dinox_xv"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Twitch"
-          >
+          <a href="https://www.twitch.tv/dinox_xv" target="_blank" rel="noopener noreferrer" aria-label="Twitch">
             <i class="fa-brands fa-twitch"></i>
           </a>
 
-          <a
-            href="https://www.instagram.com/vinicius.lima75?igsh=emc4eDl2c3cxa2Vp"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
+          <a href="https://www.instagram.com/vinicius.lima75?igsh=emc4eDl2c3cxa2Vp" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <i class="fa-brands fa-instagram"></i>
           </a>
         </div>
       </div>
 
-      <div class="hero-stage" aria-label="Área visual 3D do portfólio">
-        <div class="hero-card-3d">
+      <div class="hero-stage" aria-label="Painel do jogador">
+        <div class="hero-card-3d card-tilt">
           <div class="hero-image">
             <img src="assets/img/perfil-vinicius.jpg" alt="Foto de Vinicius Lima">
           </div>
@@ -221,7 +198,7 @@
           <div class="player-card">
             <span class="player-level">LVL 03</span>
             <h3>Vinicius Lima</h3>
-            <p>Data Analysis & Systems Development</p>
+            <p>Análise de Dados e Desenvolvimento de Sistemas</p>
           </div>
         </div>
 
@@ -244,7 +221,110 @@
 
 
     <!-- =========================
-         SOBRE MIM
+         QUARTO GAME INTERATIVO
+    ========================== -->
+    <section id="game-room" class="section game-room-section">
+      <div class="section-title">
+        <p>Exploração interativa</p>
+        <h2>Meu quarto tech em modo game</h2>
+      </div>
+
+      <div class="room-instructions glass-3d">
+        <i class="fa-solid fa-circle-info"></i>
+        <p>
+          Clique nos objetos do quarto. Cada item abre uma parte da minha trajetória:
+          projetos, estudos, currículo, dados, redes e contato profissional.
+        </p>
+      </div>
+
+      <div class="game-room" id="interactiveRoom" aria-label="Quarto interativo do portfólio">
+        <div class="room-wall">
+          <button class="room-object object-monitor" type="button" data-room="projetos" aria-label="Abrir projetos">
+            <span class="monitor-screen">Projetos</span>
+          </button>
+
+          <button class="room-object object-board" type="button" data-room="dados" aria-label="Abrir painel de dados">
+            <span>Dados</span>
+          </button>
+
+          <button class="room-object object-shelf" type="button" data-room="estudos" aria-label="Abrir estudos">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <button class="room-object object-portal" type="button" data-room="contato" aria-label="Abrir contato">
+            <span></span>
+          </button>
+
+          <button class="room-object object-arcade" type="button" data-room="midia" aria-label="Abrir mídia">
+            <span>PLAY</span>
+          </button>
+
+          <button class="room-object object-cv" type="button" data-room="curriculo" aria-label="Abrir currículo">
+            <i class="fa-solid fa-file-lines"></i>
+          </button>
+
+          <div class="room-desk"></div>
+          <div class="room-chair"></div>
+          <div class="room-floor"></div>
+        </div>
+      </div>
+
+      <div class="quest-log glass-3d">
+        <h3>Missões do portfólio</h3>
+
+        <div class="quest-grid">
+          <a href="#sobre" class="quest-item">
+            <span>01</span>
+            <strong>Conhecer trajetória</strong>
+          </a>
+
+          <a href="#projetos" class="quest-item">
+            <span>02</span>
+            <strong>Explorar projetos</strong>
+          </a>
+
+          <a href="#skills" class="quest-item">
+            <span>03</span>
+            <strong>Ver habilidades</strong>
+          </a>
+
+          <a href="#contato" class="quest-item">
+            <span>04</span>
+            <strong>Entrar em contato</strong>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================
+         MODAL DO QUARTO
+    ========================== -->
+    <div class="room-dialog" id="roomDialog" aria-hidden="true">
+      <div class="room-dialog-backdrop" data-close-dialog></div>
+
+      <article class="room-dialog-card glass-3d" role="dialog" aria-modal="true" aria-labelledby="roomDialogTitle">
+        <button class="room-dialog-close" type="button" data-close-dialog aria-label="Fechar janela">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <span class="dialog-badge" id="roomDialogBadge">Objeto</span>
+        <h3 id="roomDialogTitle">Título</h3>
+        <p id="roomDialogText">Descrição</p>
+
+        <div class="dialog-actions">
+          <a href="#sobre" class="btn btn-primary" id="roomDialogLink">
+            Explorar
+          </a>
+        </div>
+      </article>
+    </div>
+
+
+    <!-- =========================
+         SOBRE
     ========================== -->
     <section id="sobre" class="section sobre">
       <div class="section-title">
@@ -298,19 +378,19 @@
         </div>
 
         <div class="sobre-cards sobre-side">
-          <div class="info-card card-3d">
+          <div class="info-card card-3d card-tilt">
             <i class="fa-solid fa-laptop-code"></i>
             <h3>Foco atual</h3>
             <p>Python, dados, automação, Power BI e desenvolvimento de sistemas.</p>
           </div>
 
-          <div class="info-card card-3d">
+          <div class="info-card card-3d card-tilt">
             <i class="fa-solid fa-diagram-project"></i>
             <h3>Projetos reais</h3>
             <p>Criação de soluções baseadas em dores práticas do trabalho, estudos e rotina.</p>
           </div>
 
-          <div class="info-card card-3d">
+          <div class="info-card card-3d card-tilt">
             <i class="fa-solid fa-chart-line"></i>
             <h3>Evolução visível</h3>
             <p>Registro minha evolução através de GitHub, README, Wikis, LinkedIn e portfólio.</p>
@@ -319,25 +399,25 @@
       </div>
 
       <div class="sobre-timeline">
-        <article class="timeline-item card-3d">
+        <article class="timeline-item card-3d card-tilt">
           <span>01</span>
           <h3>Estudo</h3>
           <p>Aprendo fundamentos, pratico lógica e reforço conceitos importantes.</p>
         </article>
 
-        <article class="timeline-item card-3d">
+        <article class="timeline-item card-3d card-tilt">
           <span>02</span>
           <h3>Projeto</h3>
           <p>Transformo o conteúdo estudado em pequenos sistemas e soluções práticas.</p>
         </article>
 
-        <article class="timeline-item card-3d">
+        <article class="timeline-item card-3d card-tilt">
           <span>03</span>
           <h3>Documentação</h3>
           <p>Organizo README, Wiki, prints, explicações e versões para apresentar melhor.</p>
         </article>
 
-        <article class="timeline-item card-3d">
+        <article class="timeline-item card-3d card-tilt">
           <span>04</span>
           <h3>Evolução</h3>
           <p>Melhoro o projeto, publico no GitHub e compartilho minha evolução no LinkedIn.</p>
@@ -347,7 +427,7 @@
 
 
     <!-- =========================
-         RESUMO RÁPIDO
+         RESUMO
     ========================== -->
     <section id="resumo" class="section resumo">
       <div class="section-title">
@@ -356,25 +436,25 @@
       </div>
 
       <div class="resumo-grid">
-        <div class="resumo-card card-3d">
+        <div class="resumo-card card-3d card-tilt">
           <i class="fa-solid fa-folder-open"></i>
           <h3>6+ projetos</h3>
           <p>Projetos práticos publicados no GitHub com foco em aprendizado e aplicação real.</p>
         </div>
 
-        <div class="resumo-card card-3d">
+        <div class="resumo-card card-3d card-tilt">
           <i class="fa-brands fa-python"></i>
           <h3>Python como base</h3>
           <p>Uso Python para treinar lógica, automação, análise de dados e construção de sistemas.</p>
         </div>
 
-        <div class="resumo-card card-3d">
+        <div class="resumo-card card-3d card-tilt">
           <i class="fa-solid fa-chart-line"></i>
           <h3>Dados e automação</h3>
           <p>Interesse em Power BI, Excel, CSV, JSON, relatórios e automações de rotina.</p>
         </div>
 
-        <div class="resumo-card card-3d">
+        <div class="resumo-card card-3d card-tilt">
           <i class="fa-solid fa-lightbulb"></i>
           <h3>Problemas reais</h3>
           <p>Meus projetos nascem de dores práticas observadas no trabalho, estudos e rotina.</p>
@@ -394,7 +474,7 @@
 
       <div class="projetos-grid">
 
-        <article class="projeto-card expandable-card card-3d">
+        <article class="projeto-card expandable-card card-3d card-tilt">
           <div class="projeto-header">
             <div class="projeto-icon">🛒</div>
             <span class="status status-dev">Em desenvolvimento</span>
@@ -420,19 +500,14 @@
           </div>
 
           <div class="project-actions">
-            <a
-              href="https://github.com/Dinox75/Smart_market"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-card"
-            >
+            <a href="https://github.com/Dinox75/Smart_market" target="_blank" rel="noopener noreferrer" class="btn-card">
               Ver GitHub
             </a>
           </div>
         </article>
 
 
-        <article class="projeto-card expandable-card card-3d">
+        <article class="projeto-card expandable-card card-3d card-tilt">
           <div class="projeto-header">
             <div class="projeto-icon">📊</div>
             <span class="status status-dev">Em desenvolvimento</span>
@@ -458,19 +533,14 @@
           </div>
 
           <div class="project-actions">
-            <a
-              href="https://github.com/Dinox75/WorkWatch"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-card"
-            >
+            <a href="https://github.com/Dinox75/WorkWatch" target="_blank" rel="noopener noreferrer" class="btn-card">
               Ver GitHub
             </a>
           </div>
         </article>
 
 
-        <article class="projeto-card expandable-card card-3d">
+        <article class="projeto-card expandable-card card-3d card-tilt">
           <div class="projeto-header">
             <div class="projeto-icon">📅</div>
             <span class="status status-dev">Em desenvolvimento</span>
@@ -496,19 +566,14 @@
           </div>
 
           <div class="project-actions">
-            <a
-              href="https://github.com/Dinox75/simulador-escala-trabalho"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-card"
-            >
+            <a href="https://github.com/Dinox75/simulador-escala-trabalho" target="_blank" rel="noopener noreferrer" class="btn-card">
               Ver GitHub
             </a>
           </div>
         </article>
 
 
-        <article class="projeto-card expandable-card card-3d">
+        <article class="projeto-card expandable-card card-3d card-tilt">
           <div class="projeto-header">
             <div class="projeto-icon">🎓</div>
             <span class="status status-online">Demo publicada</span>
@@ -534,28 +599,18 @@
           </div>
 
           <div class="project-actions">
-            <a
-              href="https://github.com/Dinox75/Sistema_media_escolar"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-card"
-            >
+            <a href="https://github.com/Dinox75/Sistema_media_escolar" target="_blank" rel="noopener noreferrer" class="btn-card">
               GitHub
             </a>
 
-            <a
-              href="https://dinox75.github.io/Sistema_media_escolar/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-card btn-card-secondary"
-            >
+            <a href="https://dinox75.github.io/Sistema_media_escolar/" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-secondary">
               Demo
             </a>
           </div>
         </article>
 
 
-        <article class="projeto-card expandable-card card-3d">
+        <article class="projeto-card expandable-card card-3d card-tilt">
           <div class="projeto-header">
             <div class="projeto-icon">🏦</div>
             <span class="status status-study">Desafio DIO</span>
@@ -581,19 +636,14 @@
           </div>
 
           <div class="project-actions">
-            <a
-              href="https://github.com/Dinox75/Sistema-bancario-DIO"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-card"
-            >
+            <a href="https://github.com/Dinox75/Sistema-bancario-DIO" target="_blank" rel="noopener noreferrer" class="btn-card">
               Ver GitHub
             </a>
           </div>
         </article>
 
 
-        <article class="projeto-card expandable-card card-3d">
+        <article class="projeto-card expandable-card card-3d card-tilt">
           <div class="projeto-header">
             <div class="projeto-icon">💼</div>
             <span class="status status-study">Projeto prático</span>
@@ -619,12 +669,7 @@
           </div>
 
           <div class="project-actions">
-            <a
-              href="https://github.com/Dinox75/Simulador-de-Entrevista"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-card"
-            >
+            <a href="https://github.com/Dinox75/Simulador-de-Entrevista" target="_blank" rel="noopener noreferrer" class="btn-card">
               Ver GitHub
             </a>
           </div>
@@ -635,76 +680,56 @@
 
 
     <!-- =========================
-         DEMONSTRAÇÕES DOS PROJETOS
+         SKILLS
     ========================== -->
-    <section id="demos" class="section demos">
+    <section id="skills" class="section skills">
       <div class="section-title">
-        <p>Demonstrações técnicas</p>
-        <h2>Conteúdo futuro dos projetos</h2>
+        <p>Mapa de habilidades</p>
+        <h2>Minha árvore de evolução</h2>
       </div>
 
-      <div class="demos-intro glass-3d">
-        <h3>Área preparada para vídeos, prints e explicações técnicas</h3>
-        <p>
-          Esta seção será atualizada conforme novos materiais forem publicados.
-          A ideia é mostrar não só o resultado final, mas também a evolução,
-          decisões técnicas, estrutura de pastas e melhorias de cada projeto.
-        </p>
-      </div>
+      <div class="skill-tree glass-3d">
+        <div class="skill-node active">
+          <i class="fa-brands fa-python"></i>
+          <h3>Python</h3>
+          <p>Lógica, automação, JSON, CSV e sistemas CLI.</p>
+        </div>
 
-      <div class="demos-grid">
-        <article class="demo-card card-3d">
-          <div class="video-placeholder">
-            <i class="fa-solid fa-play"></i>
-          </div>
+        <div class="skill-node active">
+          <i class="fa-solid fa-chart-simple"></i>
+          <h3>Dados</h3>
+          <p>Power BI, Excel, relatórios e análise de informações.</p>
+        </div>
 
-          <span class="demo-status">Planejado</span>
+        <div class="skill-node">
+          <i class="fa-solid fa-robot"></i>
+          <h3>Automação</h3>
+          <p>Processos práticos, n8n e ideias para reduzir tarefas repetitivas.</p>
+        </div>
 
-          <h3>Vídeos demonstrativos</h3>
+        <div class="skill-node">
+          <i class="fa-solid fa-server"></i>
+          <h3>Back-End</h3>
+          <p>Organização de código, regras de negócio e estruturação de sistemas.</p>
+        </div>
 
-          <p>
-            Espaço para apresentar os projetos funcionando, mostrando telas,
-            fluxos de uso e principais funcionalidades.
-          </p>
-        </article>
+        <div class="skill-node">
+          <i class="fa-brands fa-github"></i>
+          <h3>GitHub</h3>
+          <p>Documentação, README, Wiki, versionamento e portfólio público.</p>
+        </div>
 
-
-        <article class="demo-card card-3d">
-          <div class="video-placeholder">
-            <i class="fa-solid fa-image"></i>
-          </div>
-
-          <span class="demo-status">Preparando</span>
-
-          <h3>Prints e evolução visual</h3>
-
-          <p>
-            Área para inserir imagens das versões dos projetos, telas futuras,
-            protótipos e registros de melhoria.
-          </p>
-        </article>
-
-
-        <article class="demo-card card-3d">
-          <div class="video-placeholder">
-            <i class="fa-solid fa-chalkboard-user"></i>
-          </div>
-
-          <span class="demo-status">Em produção</span>
-
-          <h3>Explicações técnicas</h3>
-
-          <p>
-            Espaço para vídeos curtos explicando lógica, organização, decisões de código
-            e aprendizados.
-          </p>
-        </article>
+        <div class="skill-node">
+          <i class="fa-solid fa-book-open"></i>
+          <h3>Aprendizado</h3>
+          <p>Estudo contínuo com foco em evolução visível e projetos aplicáveis.</p>
+        </div>
       </div>
     </section>
 
 
     <!-- =========================
-         ENTRETENIMENTO E EVENTOS
+         MÍDIA
     ========================== -->
     <section id="entretenimento" class="section entretenimento">
       <div class="section-title">
@@ -737,36 +762,21 @@
 
           <p>
             Esta seção é separada dos projetos técnicos para manter o portfólio organizado,
-            mas ainda mostrar um pouco da minha identidade, hobbies e presença digital.
+            mas ainda mostra minha identidade, hobbies e presença digital.
           </p>
 
           <div class="entretenimento-buttons">
-            <a
-              href="https://www.twitch.tv/dinox_xv"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-primary"
-            >
+            <a href="https://www.twitch.tv/dinox_xv" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
               <i class="fa-brands fa-twitch"></i>
               Twitch
             </a>
 
-            <a
-              href="https://www.tiktok.com/@dinox_xv"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-secondary"
-            >
+            <a href="https://www.tiktok.com/@dinox_xv" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
               <i class="fa-brands fa-tiktok"></i>
               TikTok
             </a>
 
-            <a
-              href="https://www.instagram.com/vinicius.lima75?igsh=emc4eDl2c3cxa2Vp"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-outline"
-            >
+            <a href="https://www.instagram.com/vinicius.lima75?igsh=emc4eDl2c3cxa2Vp" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
               <i class="fa-brands fa-instagram"></i>
               Instagram
             </a>
@@ -774,91 +784,15 @@
         </div>
 
         <div class="entretenimento-gallery">
-          <img
-            src="assets/img/bgs-games.jpg"
-            alt="Vinicius Lima em evento de games"
-            loading="lazy"
-          >
-          <img
-            src="assets/img/bgs-tech.jpg"
-            alt="Vinicius Lima em evento de tecnologia"
-            loading="lazy"
-          >
+          <img src="assets/img/bgs-games.jpg" alt="Vinicius Lima em evento de games" loading="lazy">
+          <img src="assets/img/bgs-tech.jpg" alt="Vinicius Lima em evento de tecnologia" loading="lazy">
         </div>
       </div>
     </section>
 
 
     <!-- =========================
-         REDES SOCIAIS
-    ========================== -->
-    <section id="redes" class="section redes">
-      <div class="section-title">
-        <p>Onde me encontrar</p>
-        <h2>Redes e canais</h2>
-      </div>
-
-      <div class="redes-grid">
-        <a
-          href="https://github.com/Dinox75"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="rede-card card-3d"
-        >
-          <i class="fa-brands fa-github"></i>
-          <h3>GitHub</h3>
-          <p>Projetos, códigos e evolução prática.</p>
-        </a>
-
-        <a
-          href="https://www.linkedin.com/in/vinicius-limajr/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="rede-card card-3d"
-        >
-          <i class="fa-brands fa-linkedin-in"></i>
-          <h3>LinkedIn</h3>
-          <p>Trajetória profissional, estudos e publicações.</p>
-        </a>
-
-        <a
-          href="https://www.tiktok.com/@dinox_xv"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="rede-card card-3d"
-        >
-          <i class="fa-brands fa-tiktok"></i>
-          <h3>TikTok</h3>
-          <p>Conteúdos rápidos sobre estudos, tecnologia e rotina.</p>
-        </a>
-
-        <a
-          href="https://www.twitch.tv/dinox_xv"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="rede-card card-3d"
-        >
-          <i class="fa-brands fa-twitch"></i>
-          <h3>Twitch</h3>
-          <p>Games, lives e criação de conteúdo.</p>
-        </a>
-
-        <a
-          href="https://www.instagram.com/vinicius.lima75?igsh=emc4eDl2c3cxa2Vp"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="rede-card card-3d"
-        >
-          <i class="fa-brands fa-instagram"></i>
-          <h3>Instagram</h3>
-          <p>Momentos pessoais, bastidores e rotina.</p>
-        </a>
-      </div>
-    </section>
-
-
-    <!-- =========================
-         COMENTÁRIOS / FEEDBACKS
+         FEEDBACKS
     ========================== -->
     <section id="comentarios" class="section comentarios">
       <div class="section-title">
@@ -867,42 +801,30 @@
       </div>
 
       <div class="feedback-slider">
-        <button
-          class="feedback-nav feedback-prev"
-          id="feedbackPrev"
-          aria-label="Comentário anterior"
-          type="button"
-        >
+        <button class="feedback-nav feedback-prev" id="feedbackPrev" aria-label="Comentário anterior" type="button">
           <i class="fa-solid fa-chevron-left"></i>
         </button>
 
         <div class="feedback-carousel" id="feedbackCarousel">
           <div class="feedback-track" id="feedbackTrack">
-
-            <div class="feedback-card card-3d">
+            <div class="feedback-card card-3d card-tilt">
               <p>“Projeto muito bem organizado e com uma proposta prática para resolver problemas do dia a dia.”</p>
               <span>Feedback da comunidade</span>
             </div>
 
-            <div class="feedback-card card-3d">
+            <div class="feedback-card card-3d card-tilt">
               <p>“Gostei da forma como os projetos mostram evolução, documentação e aplicação real de Python.”</p>
               <span>Comentário recebido</span>
             </div>
 
-            <div class="feedback-card card-3d">
+            <div class="feedback-card card-3d card-tilt">
               <p>“Portfólio com boa apresentação visual e projetos que demonstram visão de produto.”</p>
               <span>Opinião sobre o portfólio</span>
             </div>
-
           </div>
         </div>
 
-        <button
-          class="feedback-nav feedback-next"
-          id="feedbackNext"
-          aria-label="Próximo comentário"
-          type="button"
-        >
+        <button class="feedback-nav feedback-next" id="feedbackNext" aria-label="Próximo comentário" type="button">
           <i class="fa-solid fa-chevron-right"></i>
         </button>
       </div>
@@ -925,24 +847,12 @@
         >
           <div class="form-group">
             <label for="nomeFeedback">Nome</label>
-            <input
-              type="text"
-              id="nomeFeedback"
-              name="nome"
-              placeholder="Seu nome"
-              maxlength="60"
-            >
+            <input type="text" id="nomeFeedback" name="nome" placeholder="Seu nome" maxlength="60">
           </div>
 
           <div class="form-group">
             <label for="comentarioFeedback">Comentário</label>
-            <textarea
-              id="comentarioFeedback"
-              name="comentario"
-              placeholder="Escreva seu feedback..."
-              maxlength="280"
-              required
-            ></textarea>
+            <textarea id="comentarioFeedback" name="comentario" placeholder="Escreva seu feedback..." maxlength="280" required></textarea>
           </div>
 
           <button type="submit" class="btn btn-primary">
@@ -953,12 +863,7 @@
           <p id="feedbackStatus" class="feedback-status"></p>
         </form>
 
-        <iframe
-          name="feedbackFrame"
-          id="feedbackFrame"
-          class="feedback-frame"
-          title="Envio de feedback"
-        ></iframe>
+        <iframe name="feedbackFrame" id="feedbackFrame" class="feedback-frame" title="Envio de feedback"></iframe>
       </div>
     </section>
 
@@ -995,7 +900,7 @@
         </div>
 
         <div class="contato-cards">
-          <a href="mailto:vibylima75@gmail.com" class="contato-card card-3d">
+          <a href="mailto:vibylima75@gmail.com" class="contato-card card-3d card-tilt">
             <i class="fa-solid fa-envelope"></i>
             <div>
               <h3>E-mail</h3>
@@ -1003,12 +908,7 @@
             </div>
           </a>
 
-          <a
-            href="https://wa.me/5535991189012"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="contato-card card-3d"
-          >
+          <a href="https://wa.me/5535991189012" target="_blank" rel="noopener noreferrer" class="contato-card card-3d card-tilt">
             <i class="fa-brands fa-whatsapp"></i>
             <div>
               <h3>WhatsApp</h3>
@@ -1016,12 +916,7 @@
             </div>
           </a>
 
-          <a
-            href="https://www.linkedin.com/in/vinicius-limajr/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="contato-card card-3d"
-          >
+          <a href="https://www.linkedin.com/in/vinicius-limajr/" target="_blank" rel="noopener noreferrer" class="contato-card card-3d card-tilt">
             <i class="fa-brands fa-linkedin-in"></i>
             <div>
               <h3>LinkedIn</h3>
@@ -1029,12 +924,7 @@
             </div>
           </a>
 
-          <a
-            href="https://github.com/Dinox75"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="contato-card card-3d"
-          >
+          <a href="https://github.com/Dinox75" target="_blank" rel="noopener noreferrer" class="contato-card card-3d card-tilt">
             <i class="fa-brands fa-github"></i>
             <div>
               <h3>GitHub</h3>
@@ -1042,12 +932,7 @@
             </div>
           </a>
 
-          <a
-            href="assets/cv/curriculo-vinicius-lima.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="contato-card card-3d"
-          >
+          <a href="assets/cv/curriculo-vinicius-lima.pdf" target="_blank" rel="noopener noreferrer" class="contato-card card-3d card-tilt">
             <i class="fa-solid fa-file-lines"></i>
             <div>
               <h3>Currículo</h3>
@@ -1061,9 +946,6 @@
   </main>
 
 
-  <!-- =========================
-       RODAPÉ
-  ========================== -->
   <footer class="footer">
     <p>
       Desenvolvido por <strong>Vinicius Lima</strong> • Portfólio publicado com GitHub Pages
@@ -1071,6 +953,6 @@
   </footer>
 
 
-  <script src="script.js?v=9"></script>
+  <script src="script.js?v=10"></script>
 </body>
 </html>
