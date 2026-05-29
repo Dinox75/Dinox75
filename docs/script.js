@@ -1,10 +1,14 @@
 // =========================
-// PORTFÓLIO | VINICIUS LIMA
+// PORTFÓLIO 3D GAME | VINICIUS LIMA
 // Interações gerais da página
+// Versão: v9
 // =========================
 
 document.addEventListener("DOMContentLoaded", () => {
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwDj5sHZk23QTcDtjppGDMa3DanfYhOVPFWs9G4hhTFeMc2qPoVAqOuSMqrJnA2_FUa/exec";
+
+  const html = document.documentElement;
+  const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 
   const menuMobile = document.getElementById("menuMobile");
   const navMenu = document.querySelector(".nav-menu");
@@ -12,6 +16,99 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".header");
   const sections = document.querySelectorAll("section[id]");
   const expandableCards = document.querySelectorAll(".expandable-card");
+
+  const themeToggle = document.getElementById("themeToggle");
+  const themeTransition = document.getElementById("themeTransition");
+
+
+  // =========================
+  // TEMA CLARO / ESCURO
+  // =========================
+
+  function obterTemaSalvo() {
+    return localStorage.getItem("portfolio-theme") || "dark";
+  }
+
+  function salvarTema(tema) {
+    localStorage.setItem("portfolio-theme", tema);
+  }
+
+  function atualizarBotaoTema(tema) {
+    if (!themeToggle) return;
+
+    const icone = themeToggle.querySelector(".theme-toggle-icon i");
+    const texto = themeToggle.querySelector(".theme-toggle-text");
+
+    if (tema === "light") {
+      if (icone) {
+        icone.className = "fa-solid fa-sun";
+      }
+
+      if (texto) {
+        texto.textContent = "Claro";
+      }
+
+      themeToggle.setAttribute("aria-label", "Alternar para tema escuro");
+    } else {
+      if (icone) {
+        icone.className = "fa-solid fa-moon";
+      }
+
+      if (texto) {
+        texto.textContent = "Escuro";
+      }
+
+      themeToggle.setAttribute("aria-label", "Alternar para tema claro");
+    }
+  }
+
+  function aplicarTema(tema) {
+    html.setAttribute("data-theme", tema);
+    salvarTema(tema);
+    atualizarBotaoTema(tema);
+
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute("content", tema === "light" ? "#eff8ff" : "#020617");
+    }
+  }
+
+  let trocandoTema = false;
+
+  function alternarTemaComTransicao() {
+    if (trocandoTema) return;
+
+    trocandoTema = true;
+
+    const temaAtual = html.getAttribute("data-theme") || "dark";
+    const novoTema = temaAtual === "dark" ? "light" : "dark";
+
+    if (themeTransition) {
+      themeTransition.classList.remove("active");
+
+      void themeTransition.offsetWidth;
+
+      themeTransition.classList.add("active");
+    }
+
+    setTimeout(() => {
+      aplicarTema(novoTema);
+    }, 430);
+
+    setTimeout(() => {
+      if (themeTransition) {
+        themeTransition.classList.remove("active");
+      }
+
+      trocandoTema = false;
+    }, 1250);
+  }
+
+  aplicarTema(obterTemaSalvo());
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", alternarTemaComTransicao);
+  }
+
 
   // =========================
   // MENU MOBILE
@@ -171,6 +268,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================
+  // EFEITO 3D NOS CARDS
+  // =========================
+
+  function configurarEfeito3D() {
+    const elementos3D = document.querySelectorAll(
+      ".card-3d, .hero-card-3d"
+    );
+
+    const prefereMenosMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const dispositivoTouch = window.matchMedia("(pointer: coarse)").matches;
+
+    if (prefereMenosMovimento || dispositivoTouch) return;
+
+    elementos3D.forEach((elemento) => {
+      elemento.addEventListener("mousemove", (event) => {
+        const rect = elemento.getBoundingClientRect();
+
+        const posicaoX = event.clientX - rect.left;
+        const posicaoY = event.clientY - rect.top;
+
+        const centroX = rect.width / 2;
+        const centroY = rect.height / 2;
+
+        const rotacaoX = ((posicaoY - centroY) / centroY) * -5;
+        const rotacaoY = ((posicaoX - centroX) / centroX) * 5;
+
+        elemento.style.transform = `
+          perspective(900px)
+          rotateX(${rotacaoX}deg)
+          rotateY(${rotacaoY}deg)
+          translateY(-8px)
+        `;
+      });
+
+      elemento.addEventListener("mouseleave", () => {
+        elemento.style.transform = "";
+      });
+    });
+  }
+
+  configurarEfeito3D();
+
+
+  // =========================
   // UTILITÁRIO DE SEGURANÇA
   // Evita que comentários virem HTML dentro do site
   // =========================
@@ -183,351 +324,344 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================
-// COMENTÁRIOS DINÂMICOS + CARROSSEL INFINITO
-// =========================
+  // COMENTÁRIOS DINÂMICOS + CARROSSEL INFINITO
+  // =========================
 
-function criarCardComentario(comentario) {
-  const nome = escaparHTML(comentario.nome || "Visitante");
-  const texto = escaparHTML(comentario.comentario || "");
+  function criarCardComentario(comentario) {
+    const nome = escaparHTML(comentario.nome || "Visitante");
+    const texto = escaparHTML(comentario.comentario || "");
 
-  return `
-    <div class="feedback-card">
-      <p>“${texto}”</p>
-      <span>${nome}</span>
-    </div>
-  `;
-}
-
-let limparCarrosselFeedback = null;
-
-function configurarCarrosselFeedback() {
-  const carousel = document.getElementById("feedbackCarousel");
-  const track = document.getElementById("feedbackTrack");
-  const btnPrev = document.getElementById("feedbackPrev");
-  const btnNext = document.getElementById("feedbackNext");
-  const sectionComentarios = document.getElementById("comentarios");
-
-  if (!carousel || !track || !sectionComentarios) return;
-
-  if (limparCarrosselFeedback) {
-    limparCarrosselFeedback();
-    limparCarrosselFeedback = null;
+    return `
+      <div class="feedback-card card-3d">
+        <p>“${texto}”</p>
+        <span>${nome}</span>
+      </div>
+    `;
   }
 
-  track.querySelectorAll('[data-clone="true"]').forEach((clone) => {
-    clone.remove();
-  });
+  function removerComentariosDuplicados(comentarios) {
+    const vistos = new Set();
 
-  let cardsReais = Array.from(track.querySelectorAll(".feedback-card"));
+    return comentarios.filter((comentario) => {
+      const nome = String(comentario.nome || "Visitante").trim().toLowerCase();
+      const texto = String(comentario.comentario || "").trim().toLowerCase();
+      const chave = `${nome}-${texto}`;
 
-  if (cardsReais.length === 0) return;
+      if (!texto) return false;
 
-  let indiceAtual = 0;
-  let quantidadeClones = 1;
-  let autoScroll = null;
-  let timeoutRetorno = null;
-  let pausadoPeloUsuario = false;
-  let travadoDuranteReset = false;
+      if (vistos.has(chave)) {
+        return false;
+      }
 
-  function obterGap() {
-    const estilosTrack = window.getComputedStyle(track);
-    return parseFloat(estilosTrack.columnGap || estilosTrack.gap) || 22;
-  }
-
-  function obterLarguraCard() {
-    const card = track.querySelector(".feedback-card");
-
-    if (!card) return 360;
-
-    return card.getBoundingClientRect().width + obterGap();
-  }
-
-  function obterQuantidadeVisivel() {
-    const larguraCard = obterLarguraCard();
-
-    if (!larguraCard) return 1;
-
-    return Math.max(1, Math.ceil(carousel.clientWidth / larguraCard));
-  }
-
-  function removerClones() {
-    track.querySelectorAll('[data-clone="true"]').forEach((clone) => {
-      clone.remove();
+      vistos.add(chave);
+      return true;
     });
   }
 
-  function criarClone(card) {
-    const clone = card.cloneNode(true);
-    clone.dataset.clone = "true";
-    clone.setAttribute("aria-hidden", "true");
-    return clone;
-  }
+  function configurarCarrosselFeedback() {
+    const carousel = document.getElementById("feedbackCarousel");
+    const track = document.getElementById("feedbackTrack");
+    const btnPrev = document.getElementById("feedbackPrev");
+    const btnNext = document.getElementById("feedbackNext");
+    const sectionComentarios = document.getElementById("comentarios");
 
-  function montarLoop() {
-    removerClones();
+    if (!carousel || !track || !sectionComentarios) return;
 
-    cardsReais = Array.from(track.querySelectorAll(".feedback-card"));
-
-    if (cardsReais.length <= 1) {
-      indiceAtual = 0;
-      aplicarTransform(false);
+    if (track.dataset.carouselConfigurado === "true") {
       return;
     }
 
-    quantidadeClones = Math.min(obterQuantidadeVisivel(), cardsReais.length);
+    track.dataset.carouselConfigurado = "true";
 
-    const clonesInicio = cardsReais
-      .slice(-quantidadeClones)
-      .map(criarClone);
+    let cardsReais = [];
+    let indiceAtual = 0;
+    let quantidadeClones = 1;
+    let autoScroll = null;
+    let timeoutRetorno = null;
+    let pausadoPeloUsuario = false;
+    let travadoDuranteReset = false;
 
-    const clonesFim = cardsReais
-      .slice(0, quantidadeClones)
-      .map(criarClone);
-
-    clonesInicio.forEach((clone) => {
-      track.insertBefore(clone, track.firstChild);
-    });
-
-    clonesFim.forEach((clone) => {
-      track.appendChild(clone);
-    });
-
-    indiceAtual = quantidadeClones;
-    aplicarTransform(false);
-  }
-
-  function aplicarTransform(comAnimacao = true) {
-    const distancia = obterLarguraCard();
-    const deslocamento = indiceAtual * distancia;
-
-    if (comAnimacao) {
-      track.style.transition = "transform 0.45s ease";
-    } else {
-      track.style.transition = "none";
+    function obterCardsReais() {
+      return Array.from(track.querySelectorAll(".feedback-card:not([data-clone='true'])"));
     }
 
-    track.style.transform = `translateX(-${deslocamento}px)`;
-  }
-
-  function irParaProximo(manual = true) {
-    if (cardsReais.length <= 1 || travadoDuranteReset) return;
-
-    indiceAtual += 1;
-    aplicarTransform(true);
-
-    if (manual) {
-      pausarTemporariamente();
+    function obterGap() {
+      const estilosTrack = window.getComputedStyle(track);
+      return parseFloat(estilosTrack.columnGap || estilosTrack.gap) || 22;
     }
-  }
 
-  function irParaAnterior(manual = true) {
-    if (cardsReais.length <= 1 || travadoDuranteReset) return;
+    function obterLarguraCard() {
+      const card = track.querySelector(".feedback-card");
 
-    indiceAtual -= 1;
-    aplicarTransform(true);
+      if (!card) return 360;
 
-    if (manual) {
-      pausarTemporariamente();
+      return card.getBoundingClientRect().width + obterGap();
     }
-  }
 
-  function corrigirLoopInfinito() {
-    if (cardsReais.length <= 1) return;
+    function obterQuantidadeVisivel() {
+      const larguraCard = obterLarguraCard();
 
-    const totalReais = cardsReais.length;
-    const inicioReais = quantidadeClones;
-    const fimReais = quantidadeClones + totalReais - 1;
+      if (!larguraCard) return 1;
 
-    if (indiceAtual > fimReais) {
-      travadoDuranteReset = true;
-      indiceAtual = inicioReais;
-      aplicarTransform(false);
+      return Math.max(1, Math.ceil(carousel.clientWidth / larguraCard));
+    }
 
-      requestAnimationFrame(() => {
-        travadoDuranteReset = false;
+    function removerClones() {
+      track.querySelectorAll("[data-clone='true']").forEach((clone) => {
+        clone.remove();
       });
     }
 
-    if (indiceAtual < inicioReais) {
-      travadoDuranteReset = true;
-      indiceAtual = fimReais;
-      aplicarTransform(false);
-
-      requestAnimationFrame(() => {
-        travadoDuranteReset = false;
-      });
+    function criarClone(card) {
+      const clone = card.cloneNode(true);
+      clone.dataset.clone = "true";
+      clone.setAttribute("aria-hidden", "true");
+      return clone;
     }
-  }
 
-  function pararAutoScroll() {
-    clearInterval(autoScroll);
-    autoScroll = null;
-  }
+    function aplicarTransform(comAnimacao = true) {
+      const distancia = obterLarguraCard();
+      const deslocamento = indiceAtual * distancia;
 
-  function iniciarAutoScroll() {
-    pararAutoScroll();
-
-    if (pausadoPeloUsuario || cardsReais.length <= 1) return;
-
-    autoScroll = setInterval(() => {
-      if (!document.hidden) {
-        irParaProximo(false);
+      if (comAnimacao) {
+        track.style.transition = "transform 0.45s ease";
+      } else {
+        track.style.transition = "none";
       }
-    }, 4200);
-  }
 
-  function pausarTemporariamente() {
-    pausadoPeloUsuario = true;
-    pararAutoScroll();
-    clearTimeout(timeoutRetorno);
+      track.style.transform = `translateX(-${deslocamento}px)`;
+    }
 
-    timeoutRetorno = setTimeout(() => {
-      pausadoPeloUsuario = false;
-      iniciarAutoScroll();
-    }, 7000);
-  }
+    function montarLoop() {
+      removerClones();
 
-  function reiniciarNoComeco() {
-    indiceAtual = quantidadeClones;
-    aplicarTransform(false);
-  }
+      cardsReais = obterCardsReais();
 
-  function aoEntrarOuSairDaSecao(entries) {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        reiniciarNoComeco();
+      if (cardsReais.length === 0) return;
+
+      if (cardsReais.length === 1) {
+        indiceAtual = 0;
+        aplicarTransform(false);
+        return;
+      }
+
+      quantidadeClones = Math.min(obterQuantidadeVisivel(), cardsReais.length);
+
+      const clonesInicio = cardsReais
+        .slice(-quantidadeClones)
+        .map(criarClone);
+
+      const clonesFim = cardsReais
+        .slice(0, quantidadeClones)
+        .map(criarClone);
+
+      clonesInicio.forEach((clone) => {
+        track.insertBefore(clone, track.firstChild);
+      });
+
+      clonesFim.forEach((clone) => {
+        track.appendChild(clone);
+      });
+
+      indiceAtual = quantidadeClones;
+      aplicarTransform(false);
+    }
+
+    function corrigirLoopInfinito() {
+      if (cardsReais.length <= 1) return;
+
+      const totalReais = cardsReais.length;
+      const inicioReais = quantidadeClones;
+      const fimReais = quantidadeClones + totalReais - 1;
+
+      if (indiceAtual > fimReais) {
+        travadoDuranteReset = true;
+        indiceAtual = inicioReais;
+        aplicarTransform(false);
+
+        requestAnimationFrame(() => {
+          travadoDuranteReset = false;
+        });
+      }
+
+      if (indiceAtual < inicioReais) {
+        travadoDuranteReset = true;
+        indiceAtual = fimReais;
+        aplicarTransform(false);
+
+        requestAnimationFrame(() => {
+          travadoDuranteReset = false;
+        });
+      }
+    }
+
+    function irParaProximo(manual = true) {
+      if (cardsReais.length <= 1 || travadoDuranteReset) return;
+
+      indiceAtual += 1;
+      aplicarTransform(true);
+
+      if (manual) {
+        pausarTemporariamente();
+      }
+    }
+
+    function irParaAnterior(manual = true) {
+      if (cardsReais.length <= 1 || travadoDuranteReset) return;
+
+      indiceAtual -= 1;
+      aplicarTransform(true);
+
+      if (manual) {
+        pausarTemporariamente();
+      }
+    }
+
+    function pararAutoScroll() {
+      clearInterval(autoScroll);
+      autoScroll = null;
+    }
+
+    function iniciarAutoScroll() {
+      pararAutoScroll();
+
+      if (pausadoPeloUsuario || cardsReais.length <= 1) return;
+
+      autoScroll = setInterval(() => {
+        if (!document.hidden) {
+          irParaProximo(false);
+        }
+      }, 4200);
+    }
+
+    function pausarTemporariamente() {
+      pausadoPeloUsuario = true;
+      pararAutoScroll();
+      clearTimeout(timeoutRetorno);
+
+      timeoutRetorno = setTimeout(() => {
         pausadoPeloUsuario = false;
         iniciarAutoScroll();
-      } else {
-        pararAutoScroll();
-      }
+      }, 7000);
+    }
+
+    function reiniciarNoComeco() {
+      indiceAtual = quantidadeClones;
+      aplicarTransform(false);
+    }
+
+    function remontarCarrossel() {
+      pararAutoScroll();
+      montarLoop();
+      iniciarAutoScroll();
+    }
+
+    btnNext?.addEventListener("click", () => {
+      irParaProximo(true);
     });
-  }
 
-  function remontarAoRedimensionar() {
-    pararAutoScroll();
+    btnPrev?.addEventListener("click", () => {
+      irParaAnterior(true);
+    });
+
+    carousel.addEventListener("mouseenter", pararAutoScroll);
+    carousel.addEventListener("mouseleave", iniciarAutoScroll);
+
+    carousel.addEventListener("touchstart", () => {
+      pausarTemporariamente();
+    }, {
+      passive: true,
+    });
+
+    track.addEventListener("transitionend", corrigirLoopInfinito);
+
+    window.addEventListener("resize", () => {
+      clearTimeout(timeoutRetorno);
+
+      timeoutRetorno = setTimeout(() => {
+        remontarCarrossel();
+      }, 250);
+    });
+
+    const observerFeedback = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            reiniciarNoComeco();
+            pausadoPeloUsuario = false;
+            iniciarAutoScroll();
+          } else {
+            pararAutoScroll();
+          }
+        });
+      },
+      {
+        threshold: 0.35,
+      }
+    );
+
+    observerFeedback.observe(sectionComentarios);
+
     montarLoop();
-    iniciarAutoScroll();
   }
 
-  btnNext?.addEventListener("click", () => {
-    irParaProximo(true);
-  });
+  function carregarComentarios() {
+    const feedbackTrack = document.getElementById("feedbackTrack");
 
-  btnPrev?.addEventListener("click", () => {
-    irParaAnterior(true);
-  });
+    if (!feedbackTrack) return;
 
-  carousel.addEventListener("mouseenter", pararAutoScroll);
+    const callbackName = `receberComentarios_${Date.now()}`;
+    const script = document.createElement("script");
 
-  carousel.addEventListener("mouseleave", iniciarAutoScroll);
+    let callbackExecutado = false;
 
-  carousel.addEventListener("touchstart", pausarTemporariamente, {
-    passive: true,
-  });
+    function limparJSONP() {
+      delete window[callbackName];
 
-  track.addEventListener("transitionend", corrigirLoopInfinito);
-
-  window.addEventListener("resize", remontarAoRedimensionar);
-
-  const observerFeedback = new IntersectionObserver(aoEntrarOuSairDaSecao, {
-    threshold: 0.35,
-  });
-
-  observerFeedback.observe(sectionComentarios);
-
-  montarLoop();
-
-  limparCarrosselFeedback = () => {
-    pararAutoScroll();
-    clearTimeout(timeoutRetorno);
-
-    btnNext?.removeEventListener("click", irParaProximo);
-    btnPrev?.removeEventListener("click", irParaAnterior);
-
-    carousel.removeEventListener("mouseenter", pararAutoScroll);
-    carousel.removeEventListener("mouseleave", iniciarAutoScroll);
-    track.removeEventListener("transitionend", corrigirLoopInfinito);
-    window.removeEventListener("resize", remontarAoRedimensionar);
-
-    observerFeedback.disconnect();
-  };
-}
-
-function removerComentariosDuplicados(comentarios) {
-  const vistos = new Set();
-
-  return comentarios.filter((comentario) => {
-    const nome = String(comentario.nome || "Visitante").trim().toLowerCase();
-    const texto = String(comentario.comentario || "").trim().toLowerCase();
-    const chave = `${nome}-${texto}`;
-
-    if (vistos.has(chave)) {
-      return false;
+      if (script.parentNode) {
+        script.remove();
+      }
     }
 
-    vistos.add(chave);
-    return true;
-  });
-}
-
-function carregarComentarios() {
-  const feedbackTrack = document.getElementById("feedbackTrack");
-
-  if (!feedbackTrack) return;
-
-  const callbackName = `receberComentarios_${Date.now()}`;
-  const script = document.createElement("script");
-
-  let callbackExecutado = false;
-
-  function limparJSONP() {
-    delete window[callbackName];
-
-    if (script.parentNode) {
-      script.remove();
+    function usarComentariosPadrao() {
+      configurarCarrosselFeedback();
     }
-  }
 
-  function usarComentariosPadrao() {
-    configurarCarrosselFeedback();
-  }
+    const timerFallback = setTimeout(() => {
+      if (!callbackExecutado) {
+        usarComentariosPadrao();
+        limparJSONP();
+      }
+    }, 3500);
 
-  const timerFallback = setTimeout(() => {
-    if (!callbackExecutado) {
+    window[callbackName] = (comentarios) => {
+      callbackExecutado = true;
+      clearTimeout(timerFallback);
+
+      if (Array.isArray(comentarios) && comentarios.length > 0) {
+        const comentariosUnicos = removerComentariosDuplicados(comentarios);
+
+        feedbackTrack.innerHTML = comentariosUnicos
+          .map(criarCardComentario)
+          .join("");
+      }
+
+      configurarCarrosselFeedback();
+      limparJSONP();
+    };
+
+    script.src = `${APPS_SCRIPT_URL}?action=list&callback=${callbackName}&t=${Date.now()}`;
+
+    script.onerror = () => {
+      clearTimeout(timerFallback);
       usarComentariosPadrao();
       limparJSONP();
-    }
-  }, 3500);
+    };
 
-  window[callbackName] = (comentarios) => {
-    callbackExecutado = true;
-    clearTimeout(timerFallback);
+    document.body.appendChild(script);
+  }
 
-    if (Array.isArray(comentarios) && comentarios.length > 0) {
-      const comentariosUnicos = removerComentariosDuplicados(comentarios);
-
-      feedbackTrack.innerHTML = comentariosUnicos
-        .map(criarCardComentario)
-        .join("");
-    }
-
-    configurarCarrosselFeedback();
-    limparJSONP();
-  };
-
-  script.src = `${APPS_SCRIPT_URL}?action=list&callback=${callbackName}&t=${Date.now()}`;
-
-  script.onerror = () => {
-    clearTimeout(timerFallback);
-    usarComentariosPadrao();
-    limparJSONP();
-  };
-
-  document.body.appendChild(script);
-}
-
-carregarComentarios();
+  carregarComentarios();
 
 
   // =========================
@@ -585,7 +719,7 @@ carregarComentarios();
   // =========================
 
   const elementosAnimados = document.querySelectorAll(
-    ".section-title, .sobre-text, .sobre-panel, .sobre-timeline, .timeline-item, .info-card, .resumo-card, .projeto-card, .demo-card, .entretenimento-text, .entretenimento-gallery, .rede-card, .feedback-slider, .comentario-action, .contato-content"
+    ".section-title, .hero-content, .hero-stage, .sobre-text, .sobre-panel, .sobre-timeline, .timeline-item, .info-card, .resumo-card, .projeto-card, .demo-card, .entretenimento-text, .entretenimento-gallery, .rede-card, .feedback-slider, .comentario-action, .contato-content"
   );
 
   if ("IntersectionObserver" in window) {
