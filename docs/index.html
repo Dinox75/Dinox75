@@ -27,10 +27,43 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
   >
 
-  <link rel="stylesheet" href="style.css?v=12">
+  <link rel="stylesheet" href="style.css?v=13">
 </head>
 
 <body>
+
+  <!-- =========================
+       INTRO / RECEPÇÃO IMERSIVA
+  ========================== -->
+  <div class="intro-gate" id="introGate" aria-hidden="false">
+    <div class="intro-grid" aria-hidden="true"></div>
+
+    <div class="intro-card">
+      <span class="intro-badge">Sistema iniciado</span>
+      <h1>Bem-vindo ao portfólio de <span>Vinicius Lima</span></h1>
+      <p>
+        Carregando mapa interativo, projetos, habilidades, mascote e quarto tech.
+      </p>
+
+      <div class="intro-terminal" aria-label="Terminal de inicialização">
+        <span>&gt; inicializando_portfolio_game.exe</span>
+        <span>&gt; carregando_projetos_python...</span>
+        <span>&gt; ativando_mascote_interativo...</span>
+        <span>&gt; pronto_para_explorar.</span>
+      </div>
+
+      <button class="intro-skip" id="introSkip" type="button">
+        Entrar agora
+      </button>
+    </div>
+  </div>
+
+
+  <!-- =========================
+       BARRA DE PROGRESSO DO SCROLL
+  ========================== -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
 
   <!-- =========================
        TRANSIÇÃO PIXELADA
@@ -61,15 +94,15 @@
   </div>
 
 
-<!-- =========================
-     MASCOTE INTERATIVO
-========================== -->
-  <aside class="mascot" id="mascot" aria-label="Mascote do portfólio">
+  <!-- =========================
+       MASCOTE INTERATIVO
+  ========================== -->
+  <aside class="mascot" id="mascot" aria-label="Mascote robô do portfólio">
     <div class="mascot-bubble" id="mascotBubble">
-      Clique nos objetos do quarto para explorar o portfólio.
+      Bem-vindo! Clique nos objetos do quarto para explorar.
     </div>
 
-    <button class="mascot-sprite" id="mascotButton" type="button" aria-label="Dica do mascote">
+    <button class="mascot-sprite" id="mascotButton" type="button" aria-label="Pedir dica ao mascote">
       <img
         src="assets/img/Robozinho.png"
         alt="Mascote robô do portfólio"
@@ -78,8 +111,13 @@
 
       <span class="mascot-pupil pupil-left" id="pupilLeft"></span>
       <span class="mascot-pupil pupil-right" id="pupilRight"></span>
+
+      <span class="dizzy-star dizzy-a"></span>
+      <span class="dizzy-star dizzy-b"></span>
+      <span class="dizzy-star dizzy-c"></span>
     </button>
   </aside>
+
 
   <!-- =========================
        CABEÇALHO
@@ -267,6 +305,10 @@
 
           <button class="room-object object-cv" type="button" data-room="curriculo" aria-label="Abrir currículo">
             <i class="fa-solid fa-file-lines"></i>
+          </button>
+
+          <button class="room-object object-terminal" type="button" data-room="github" aria-label="Abrir GitHub">
+            <span>&gt;_</span>
           </button>
 
           <div class="room-desk"></div>
@@ -957,6 +999,6 @@
   </footer>
 
 
-  <script src="script.js?v=12"></script>
+  <script src="script.js?v=13"></script>
 </body>
 </html>

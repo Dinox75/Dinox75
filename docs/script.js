@@ -1,6 +1,6 @@
 // =========================
-// PORTFÓLIO GAME AVANÇADO | VINICIUS LIMA
-// Versão: v10 corrigida
+// PORTFÓLIO GAME IMERSIVO | VINICIUS LIMA
+// Versão: v13
 // =========================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const html = document.documentElement;
   const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+  const introGate = document.getElementById("introGate");
+  const introSkip = document.getElementById("introSkip");
+  const scrollProgress = document.getElementById("scrollProgress");
 
   const menuMobile = document.getElementById("menuMobile");
   const navMenu = document.querySelector(".nav-menu");
@@ -22,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const mascot = document.getElementById("mascot");
   const mascotButton = document.getElementById("mascotButton");
   const mascotBubble = document.getElementById("mascotBubble");
+  const pupilLeft = document.getElementById("pupilLeft");
+  const pupilRight = document.getElementById("pupilRight");
+  const interactiveRoom = document.getElementById("interactiveRoom");
 
   const roomDialog = document.getElementById("roomDialog");
   const roomDialogBadge = document.getElementById("roomDialogBadge");
@@ -38,21 +44,19 @@ document.addEventListener("DOMContentLoaded", () => {
   function criarPixelsDeTema() {
     if (!themeTransition || themeTransition.children.length > 0) return;
 
-    const colunas = 14;
-    const linhas = 9;
+    const colunas = 18;
+    const linhas = 12;
     const total = colunas * linhas;
 
     for (let i = 0; i < total; i += 1) {
       const pixel = document.createElement("span");
-
       pixel.className = "theme-pixel";
 
       const coluna = i % colunas;
       const linha = Math.floor(i / colunas);
-      const delay = (coluna + linha) * 0.025;
+      const delay = (coluna + linha) * 0.018;
 
       pixel.style.animationDelay = `${delay}s`;
-
       themeTransition.appendChild(pixel);
     }
   }
@@ -65,19 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
 
   function obterTemaSalvo() {
-    try {
-      return localStorage.getItem("portfolio-theme") || "dark";
-    } catch {
-      return "dark";
-    }
+    return localStorage.getItem("portfolio-theme") || "dark";
   }
 
   function salvarTema(tema) {
-    try {
-      localStorage.setItem("portfolio-theme", tema);
-    } catch {
-      return;
-    }
+    localStorage.setItem("portfolio-theme", tema);
   }
 
   function atualizarBotaoTema(tema) {
@@ -87,24 +83,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const texto = themeToggle.querySelector(".theme-toggle-text");
 
     if (tema === "light") {
-      if (icone) {
-        icone.className = "fa-solid fa-sun";
-      }
-
-      if (texto) {
-        texto.textContent = "Claro";
-      }
-
+      if (icone) icone.className = "fa-solid fa-sun";
+      if (texto) texto.textContent = "Claro";
       themeToggle.setAttribute("aria-label", "Alternar para tema escuro");
     } else {
-      if (icone) {
-        icone.className = "fa-solid fa-moon";
-      }
-
-      if (texto) {
-        texto.textContent = "Escuro";
-      }
-
+      if (icone) icone.className = "fa-solid fa-moon";
+      if (texto) texto.textContent = "Escuro";
       themeToggle.setAttribute("aria-label", "Alternar para tema claro");
     }
   }
@@ -131,17 +115,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (themeTransition) {
       themeTransition.classList.remove("active");
-
       void themeTransition.offsetWidth;
-
       themeTransition.classList.add("active");
     }
 
-    if (novoTema === "light") {
-      falarMascote("Amanhecendo o mapa... tema claro ativado.");
-    } else {
-      falarMascote("Modo noturno ativado. Neon ligado.");
-    }
+    falarMascote(
+      novoTema === "light"
+        ? "Amanhecendo o mapa... tema claro ativado."
+        : "Modo noturno ativado. Neon ligado."
+    );
 
     setTimeout(() => {
       aplicarTema(novoTema);
@@ -253,14 +235,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const sectionHeight = section.offsetHeight;
       const sectionId = section.getAttribute("id");
 
-      if (!sectionId) return;
-
       const linkMenu = document.querySelector(`.nav-menu a[href="#${sectionId}"]`);
 
       if (scrollAtual >= sectionTop && scrollAtual < sectionTop + sectionHeight) {
-        navLinks.forEach((link) => {
-          link.classList.remove("active-link");
-        });
+        navLinks.forEach((link) => link.classList.remove("active-link"));
 
         if (linkMenu) {
           linkMenu.classList.add("active-link");
@@ -282,82 +260,160 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================
-// MASCOTE FIXO COM OLHOS SEGUINDO O CURSOR
-// =========================
+  // MASCOTE FIXO COM OLHOS + REAÇÃO AO SCROLL
+  // =========================
 
-    const mensagensMascote = [
-      "Clique no monitor para abrir os projetos.",
-      "A estante mostra a parte de estudos e evolução.",
-      "O portal leva para contato profissional.",
-      "O painel mostra dados e automação.",
-      "Você pode trocar o tema no botão do topo.",
-      "Passe o mouse nos cards para sentir o efeito 3D."
-    ];
+  const mensagensMascote = [
+    "Clique no monitor para abrir os projetos.",
+    "A estante mostra estudos, documentação e evolução.",
+    "O portal leva para contato profissional.",
+    "O painel mostra dados e automação.",
+    "O terminal abre o GitHub.",
+    "Passe o mouse nos cards para sentir o efeito 3D.",
+    "Role devagar para aproveitar melhor a experiência."
+  ];
 
-    let timeoutMascote = null;
+  let timeoutMascote = null;
+  let mascoteLivreParaFalar = true;
+  let ultimoScrollY = window.scrollY;
+  let ultimoTempoScroll = performance.now();
+  let timeoutZonzo = null;
 
-    const pupilLeft = document.getElementById("pupilLeft");
-    const pupilRight = document.getElementById("pupilRight");
+  function falarMascote(mensagem, tempo = 4200) {
+    if (!mascot || !mascotBubble) return;
 
-    function falarMascote(mensagem, tempo = 4200) {
-      if (!mascot || !mascotBubble) return;
+    mascotBubble.textContent = mensagem;
+    mascot.classList.add("talking");
 
-      mascotBubble.textContent = mensagem;
-      mascot.classList.add("talking");
+    clearTimeout(timeoutMascote);
 
-      clearTimeout(timeoutMascote);
+    timeoutMascote = setTimeout(() => {
+      mascot.classList.remove("talking");
+    }, tempo);
+  }
 
-      timeoutMascote = setTimeout(() => {
-        mascot.classList.remove("talking");
-      }, tempo);
-    }
+  function falarMascoteComIntervalo(mensagem) {
+    if (!mascoteLivreParaFalar) return;
 
-    function mensagemAleatoriaMascote() {
-      const indice = Math.floor(Math.random() * mensagensMascote.length);
-      falarMascote(mensagensMascote[indice]);
-    }
+    mascoteLivreParaFalar = false;
+    falarMascote(mensagem, 3600);
 
-    function moverOlhosDoMascote(event) {
-      if (!pupilLeft || !pupilRight) return;
+    setTimeout(() => {
+      mascoteLivreParaFalar = true;
+    }, 6000);
+  }
 
-      const prefereMenosMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function mensagemAleatoriaMascote() {
+    const indice = Math.floor(Math.random() * mensagensMascote.length);
+    falarMascote(mensagensMascote[indice]);
+  }
 
-      if (prefereMenosMovimento) return;
+  function moverOlhosDoMascote(event) {
+    if (!pupilLeft || !pupilRight) return;
 
-      const pupilas = [pupilLeft, pupilRight];
+    const reduzido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      pupilas.forEach((pupila) => {
-        const rect = pupila.getBoundingClientRect();
+    if (reduzido) return;
 
-        const centroX = rect.left + rect.width / 2;
-        const centroY = rect.top + rect.height / 2;
+    [pupilLeft, pupilRight].forEach((pupila) => {
+      const rect = pupila.getBoundingClientRect();
+      const centroX = rect.left + rect.width / 2;
+      const centroY = rect.top + rect.height / 2;
+      const angulo = Math.atan2(event.clientY - centroY, event.clientX - centroX);
+      const distancia = 5;
+      const moverX = Math.cos(angulo) * distancia;
+      const moverY = Math.sin(angulo) * distancia;
 
-        const angulo = Math.atan2(event.clientY - centroY, event.clientX - centroX);
-
-        const distancia = 5;
-
-        const moverX = Math.cos(angulo) * distancia;
-        const moverY = Math.sin(angulo) * distancia;
-
-        pupila.style.transform = `translate(${moverX}px, ${moverY}px)`;
-      });
-    }
-
-    if (mascotButton) {
-      mascotButton.addEventListener("click", () => {
-        mensagemAleatoriaMascote();
-      });
-    }
-
-    document.addEventListener("mousemove", moverOlhosDoMascote, {
-      passive: true,
+      pupila.style.transform = `translate(${moverX}px, ${moverY}px)`;
     });
 
-    if (mascot) {
-      setTimeout(() => {
-        falarMascote("Bem-vindo ao meu portfólio. Clique nos objetos do quarto para explorar.");
-      }, 900);
+    const mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
+    const mouseY = (event.clientY / window.innerHeight - 0.5) * 2;
+
+    html.style.setProperty("--mouse-x", mouseX.toFixed(3));
+    html.style.setProperty("--mouse-y", mouseY.toFixed(3));
+  }
+
+  if (mascotButton) {
+    mascotButton.addEventListener("click", mensagemAleatoriaMascote);
+  }
+
+  document.addEventListener("mousemove", moverOlhosDoMascote, {
+    passive: true,
+  });
+
+  if (mascot) {
+    setTimeout(() => {
+      falarMascote("Bem-vindo ao meu mapa! Comece pelo quarto interativo.");
+    }, 900);
+  }
+
+
+  // =========================
+  // INTRO IMERSIVA
+  // =========================
+
+  function encerrarIntro() {
+    if (!introGate) return;
+
+    introGate.classList.add("hide");
+    introGate.setAttribute("aria-hidden", "true");
+
+    setTimeout(() => {
+      introGate.style.display = "none";
+      falarMascote("Mapa carregado. Clique nos objetos do quarto para explorar.");
+    }, 720);
+  }
+
+  if (introSkip) {
+    introSkip.addEventListener("click", encerrarIntro);
+  }
+
+  setTimeout(encerrarIntro, 3600);
+
+
+  // =========================
+  // SCROLL IMERSIVO
+  // =========================
+
+  function atualizarScrollProgress() {
+    if (!scrollProgress) return;
+
+    const alturaTotal = document.documentElement.scrollHeight - window.innerHeight;
+    const progresso = alturaTotal > 0 ? (window.scrollY / alturaTotal) * 100 : 0;
+
+    scrollProgress.style.width = `${progresso}%`;
+  }
+
+  function reagirVelocidadeScroll() {
+    const agora = performance.now();
+    const deltaY = Math.abs(window.scrollY - ultimoScrollY);
+    const deltaTempo = Math.max(16, agora - ultimoTempoScroll);
+    const velocidade = deltaY / deltaTempo;
+
+    if (velocidade > 2.2 && mascot) {
+      mascot.classList.add("dizzy");
+      falarMascoteComIntervalo("Uau, scroll rápido! Fiquei meio zonzo aqui.");
+
+      clearTimeout(timeoutZonzo);
+
+      timeoutZonzo = setTimeout(() => {
+        mascot.classList.remove("dizzy");
+      }, 1300);
     }
+
+    ultimoScrollY = window.scrollY;
+    ultimoTempoScroll = agora;
+  }
+
+  window.addEventListener("scroll", () => {
+    atualizarScrollProgress();
+    reagirVelocidadeScroll();
+  }, {
+    passive: true,
+  });
+
+  atualizarScrollProgress();
 
 
   // =========================
@@ -373,7 +429,6 @@ document.addEventListener("DOMContentLoaded", () => {
       cta: "Abrir projetos",
       fala: "Terminal acessado. Os projetos são a parte mais importante do mapa."
     },
-
     dados: {
       badge: "Painel de dados",
       titulo: "Dados, automação e análise",
@@ -382,7 +437,6 @@ document.addEventListener("DOMContentLoaded", () => {
       cta: "Ver habilidades",
       fala: "Painel de dados aberto. Aqui ficam as skills de análise e automação."
     },
-
     estudos: {
       badge: "Estante",
       titulo: "Estudos e evolução contínua",
@@ -391,7 +445,6 @@ document.addEventListener("DOMContentLoaded", () => {
       cta: "Ver trajetória",
       fala: "A estante guarda a evolução: estudar, praticar, documentar e melhorar."
     },
-
     contato: {
       badge: "Portal",
       titulo: "Contato profissional",
@@ -400,7 +453,6 @@ document.addEventListener("DOMContentLoaded", () => {
       cta: "Ir para contato",
       fala: "Portal aberto. Caminho direto para contato e networking."
     },
-
     midia: {
       badge: "Arcade",
       titulo: "Games, eventos e criação de conteúdo",
@@ -409,7 +461,6 @@ document.addEventListener("DOMContentLoaded", () => {
       cta: "Ver mídia",
       fala: "Arcade ligado. Essa parte mostra seu lado criativo."
     },
-
     curriculo: {
       badge: "Documento",
       titulo: "Currículo profissional",
@@ -417,6 +468,14 @@ document.addEventListener("DOMContentLoaded", () => {
       link: "assets/cv/curriculo-vinicius-lima.pdf",
       cta: "Abrir currículo",
       fala: "Documento encontrado. Currículo pronto para visualização."
+    },
+    github: {
+      badge: "Terminal",
+      titulo: "GitHub e repositórios",
+      texto: "Meu GitHub reúne projetos, estudos, documentação, READMEs, Wikis e minha evolução prática em tecnologia.",
+      link: "https://github.com/Dinox75",
+      cta: "Abrir GitHub",
+      fala: "Terminal aberto. Repositórios carregados."
     }
   };
 
@@ -424,16 +483,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const dados = dadosDoQuarto[chave];
 
     if (!dados || !roomDialog) return;
-    if (!roomDialogBadge || !roomDialogTitle || !roomDialogText || !roomDialogLink) return;
 
     roomDialogBadge.textContent = dados.badge;
     roomDialogTitle.textContent = dados.titulo;
     roomDialogText.textContent = dados.texto;
-
     roomDialogLink.textContent = dados.cta;
     roomDialogLink.setAttribute("href", dados.link);
 
-    if (dados.link.endsWith(".pdf")) {
+    if (dados.link.endsWith(".pdf") || dados.link.startsWith("http")) {
       roomDialogLink.setAttribute("target", "_blank");
       roomDialogLink.setAttribute("rel", "noopener noreferrer");
     } else {
@@ -461,7 +518,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     objeto.addEventListener("mouseenter", () => {
       const dados = dadosDoQuarto[objeto.dataset.room];
-
       if (dados) {
         falarMascote(dados.fala, 2800);
       }
@@ -477,6 +533,36 @@ document.addEventListener("DOMContentLoaded", () => {
       fecharDialog();
     });
   }
+
+  if (interactiveRoom) {
+    interactiveRoom.addEventListener("mousemove", (event) => {
+      const rect = interactiveRoom.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 24;
+      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 24;
+
+      interactiveRoom.style.setProperty("--room-x", `${x}px`);
+      interactiveRoom.style.setProperty("--room-y", `${y}px`);
+    });
+
+    interactiveRoom.addEventListener("mouseleave", () => {
+      interactiveRoom.style.setProperty("--room-x", "0px");
+      interactiveRoom.style.setProperty("--room-y", "0px");
+    });
+  }
+
+  document.addEventListener("click", (event) => {
+    const pixel = document.createElement("span");
+
+    pixel.className = "click-pixel";
+    pixel.style.left = `${event.clientX}px`;
+    pixel.style.top = `${event.clientY}px`;
+
+    document.body.appendChild(pixel);
+
+    setTimeout(() => {
+      pixel.remove();
+    }, 650);
+  });
 
 
   // =========================
@@ -532,10 +618,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (prefereMenosMovimento || dispositivoTouch) return;
 
     elementos3D.forEach((elemento) => {
-      if (elemento.dataset.tiltConfigurado === "true") return;
-
-      elemento.dataset.tiltConfigurado = "true";
-
       elemento.addEventListener("mousemove", (event) => {
         const rect = elemento.getBoundingClientRect();
 
@@ -548,6 +630,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const rotacaoX = ((posicaoY - centroY) / centroY) * -5;
         const rotacaoY = ((posicaoX - centroX) / centroX) * 5;
 
+        const glowX = (posicaoX / rect.width) * 100;
+        const glowY = (posicaoY / rect.height) * 100;
+
+        elemento.style.setProperty("--glow-x", `${glowX}%`);
+        elemento.style.setProperty("--glow-y", `${glowY}%`);
+
         elemento.style.transform = `
           perspective(900px)
           rotateX(${rotacaoX}deg)
@@ -558,6 +646,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       elemento.addEventListener("mouseleave", () => {
         elemento.style.transform = "";
+        elemento.style.removeProperty("--glow-x");
+        elemento.style.removeProperty("--glow-y");
       });
     });
   }
@@ -804,17 +894,13 @@ document.addEventListener("DOMContentLoaded", () => {
       iniciarAutoScroll();
     }
 
-    if (btnNext) {
-      btnNext.addEventListener("click", () => {
-        irParaProximo(true);
-      });
-    }
+    btnNext?.addEventListener("click", () => {
+      irParaProximo(true);
+    });
 
-    if (btnPrev) {
-      btnPrev.addEventListener("click", () => {
-        irParaAnterior(true);
-      });
-    }
+    btnPrev?.addEventListener("click", () => {
+      irParaAnterior(true);
+    });
 
     carousel.addEventListener("mouseenter", pararAutoScroll);
     carousel.addEventListener("mouseleave", iniciarAutoScroll);
@@ -899,7 +985,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       configurarCarrosselFeedback();
-      configurarEfeito3D();
       limparJSONP();
     };
 
@@ -1000,4 +1085,45 @@ document.addEventListener("DOMContentLoaded", () => {
       elemento.classList.add("show");
     });
   }
+
+  // =========================
+  // FALAS DO MASCOTE POR SEÇÃO
+  // =========================
+
+  const falasPorSecao = {
+    inicio: "Essa é a tela inicial do portfólio.",
+    "game-room": "Este é o quarto interativo. Clique nos objetos.",
+    sobre: "Aqui fica a trajetória e a forma como venho evoluindo.",
+    resumo: "Resumo rápido da minha evolução e foco atual.",
+    projetos: "Aqui estão os projetos principais.",
+    skills: "Esta é a árvore de habilidades.",
+    entretenimento: "Aqui aparece meu lado gamer e criativo.",
+    comentarios: "Essa área recebe feedbacks e sugestões.",
+    contato: "Aqui estão os caminhos para falar comigo."
+  };
+
+  if ("IntersectionObserver" in window) {
+    const observerSecoes = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const id = entry.target.getAttribute("id");
+          const fala = falasPorSecao[id];
+
+          if (fala) {
+            falarMascoteComIntervalo(fala);
+          }
+        });
+      },
+      {
+        threshold: 0.55,
+      }
+    );
+
+    sections.forEach((section) => {
+      observerSecoes.observe(section);
+    });
+  }
+
 });
