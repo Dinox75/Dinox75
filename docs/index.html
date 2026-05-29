@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#020617">
 
   <meta property="og:title" content="Vinicius Lima | Portfólio Game Interativo">
-  <meta property="og:description" content="Portfólio com Dev Profile Book, editor de projetos, animações 3D, pixel art e apresentação profissional.">
+  <meta property="og:description" content="Explore meus projetos em uma experiência estilo game com animações 3D, pixel art, editor de código e apresentação profissional.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dinox75.github.io/Dinox75/">
 
@@ -23,8 +23,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js" defer></script>
 
-  <link rel="stylesheet" href="style.css?v=17">
+  <link rel="stylesheet" href="style.css?v=18">
 </head>
 
 <body>
@@ -43,9 +45,11 @@
       <p>Uma experiência interativa com visual de game, livro de código, editor de projetos, animações 3D e apresentação profissional.</p>
 
       <div class="intro-terminal" aria-label="Terminal de carregamento">
-        <span>&gt; boot portfolio_game_v17</span>
+        <span>&gt; boot portfolio_game_v18</span>
         <span>&gt; import three.js background_scene</span>
         <span>&gt; import gsap scroll_animations</span>
+        <span>&gt; import vanilla_tilt card_3d</span>
+        <span>&gt; import typed.js hero_typing</span>
         <span>&gt; loading dev_profile_book...</span>
         <span>&gt; loading project_code_editor...</span>
         <span>&gt; mascot: online</span>
@@ -139,8 +143,8 @@
       <div class="hero-content reveal-up">
         <p class="tag"><i class="fa-solid fa-gamepad"></i> Modo Portfólio • Python • Dados • Automação</p>
         <h1>Olá, eu sou <span>Vinicius Lima</span></h1>
-        <h2>Desenvolvedor em formação criando soluções práticas com tecnologia</h2>
-        <p class="hero-description">Um portfólio com visual de game para apresentar minha evolução em tecnologia, projetos em Python, estudos em dados, automação, Power BI, GitHub e desenvolvimento de sistemas.</p>
+        <h2><span id="typedHero">Desenvolvedor em formação</span></h2>
+        <p class="hero-description">Uma experiência visual em estilo game para apresentar minha evolução em tecnologia, projetos em Python, estudos em dados, automação, Power BI, GitHub e desenvolvimento de sistemas.</p>
 
         <div class="hero-buttons">
           <a href="#sobre" class="btn btn-primary"><i class="fa-solid fa-book-open"></i> Abrir Dev Profile</a>
@@ -434,6 +438,6 @@
     <p>Desenvolvido por <strong>Vinicius Lima</strong> • Portfólio publicado com GitHub Pages</p>
   </footer>
 
-  <script src="script.js?v=17" defer></script>
+  <script src="script.js?v=18" defer></script>
 </body>
 </html>

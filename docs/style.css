@@ -2294,3 +2294,135 @@ body::before {
   .reveal-up,
   .reveal-scale { opacity: 1 !important; transform: none !important; }
 }
+
+
+/* =========================================================
+   PATCH v18 — CARDS 3D, TYPED HERO E POLIMENTO VISUAL
+   Este bloco reforça as animações mesmo quando alguma lib falha.
+========================================================= */
+
+.hero h2 {
+  min-height: 42px;
+}
+
+.hero h2 span,
+.typed-cursor {
+  color: var(--blue);
+}
+
+.profile-card.card-tilt {
+  animation: none;
+}
+
+.card-tilt,
+.profile-card,
+.skill-node,
+.feedback-card,
+.contact-card,
+.timeline-card,
+.mini-project-card,
+.project-preview,
+.code-window,
+.profile-avatar-frame {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+html.no-tilt .card-tilt:hover,
+html.no-tilt .profile-card:hover,
+html.no-tilt .skill-node:hover,
+html.no-tilt .feedback-card:hover,
+html.no-tilt .contact-card:hover,
+html.no-tilt .timeline-card:hover,
+html.no-tilt .mini-project-card:hover,
+html.no-tilt .project-preview:hover,
+html.no-tilt .code-window:hover,
+html.no-tilt .profile-avatar-frame:hover {
+  transform: translateY(-10px) scale(1.015);
+}
+
+.js-tilt-glare {
+  border-radius: inherit;
+}
+
+.project-editor,
+.dev-book,
+.feedback-terminal,
+.contact-grid {
+  position: relative;
+}
+
+.project-editor::after,
+.dev-book::after,
+.feedback-terminal::after,
+.contact-grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(56, 189, 248, 0.12), transparent 28%),
+    linear-gradient(315deg, rgba(139, 92, 246, 0.12), transparent 30%);
+  opacity: 0.75;
+}
+
+.file-item.active {
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.2),
+    0 10px 24px rgba(56, 189, 248, 0.08);
+}
+
+.project-preview-icon {
+  animation: iconPulse 3.2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: inset -6px -6px 0 rgba(2, 6, 23, 0.08), 0 0 0 rgba(56, 189, 248, 0);
+  }
+
+  50% {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: inset -6px -6px 0 rgba(2, 6, 23, 0.08), 0 0 28px rgba(56, 189, 248, 0.18);
+  }
+}
+
+.book-page {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.08), transparent),
+    radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08), transparent 42%),
+    var(--surface);
+}
+
+.code-lines li.active-line {
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.feedback-card {
+  cursor: grab;
+}
+
+.feedback-card:active {
+  cursor: grabbing;
+}
+
+@media (max-width: 720px) {
+  html.no-tilt .card-tilt:hover,
+  html.no-tilt .profile-card:hover,
+  html.no-tilt .skill-node:hover,
+  html.no-tilt .feedback-card:hover,
+  html.no-tilt .contact-card:hover,
+  html.no-tilt .timeline-card:hover,
+  html.no-tilt .mini-project-card:hover,
+  html.no-tilt .project-preview:hover,
+  html.no-tilt .code-window:hover,
+  html.no-tilt .profile-avatar-frame:hover {
+    transform: translateY(-6px) scale(1.01);
+  }
+}
+
+/* Ajuste v18: novas linhas do terminal da intro */
+.intro-terminal span:nth-child(8) { animation-delay: 1.6s; }
+.intro-terminal span:nth-child(9) { animation-delay: 1.8s; }

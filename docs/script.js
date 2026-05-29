@@ -1,6 +1,6 @@
 // =========================
 // PORTFÓLIO GAME PROFISSIONAL - VINICIUS LIMA
-// v17 | Dev Profile Book + Project Code Editor + Three.js + GSAP
+// v18 | Dev Profile Book + Project Code Editor + Three.js + GSAP + VanillaTilt + Typed.js
 // =========================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -478,6 +478,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================
+  // TYPED.JS HERO
+  // =========================
+
+  function iniciarTypedHero() {
+    const typedHero = document.getElementById("typedHero");
+
+    if (!typedHero) return;
+
+    if (typeof Typed === "undefined") {
+      typedHero.textContent = "Desenvolvedor em formação";
+      return;
+    }
+
+    new Typed("#typedHero", {
+      strings: [
+        "Desenvolvedor em formação",
+        "Estudante de Dados e Sistemas",
+        "Criador de projetos em Python",
+        "Explorando automação e Power BI",
+        "Construindo evolução no GitHub"
+      ],
+      typeSpeed: 42,
+      backSpeed: 22,
+      backDelay: 1350,
+      loop: true,
+      smartBackspace: true
+    });
+  }
+
+  iniciarTypedHero();
+
+
+  // =========================
   // THREE.JS BACKGROUND
   // =========================
 
@@ -884,41 +917,58 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
 
   function configurarEfeito3D() {
-    const elementos3D = document.querySelectorAll(".card-tilt, .profile-card");
+    const elementos3D = document.querySelectorAll(
+      ".card-tilt, .profile-card, .skill-node, .feedback-card, .contact-card, .timeline-card, .mini-project-card, .project-preview, .code-window, .profile-avatar-frame"
+    );
+
     const prefereMenosMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const dispositivoTouch = window.matchMedia("(pointer: coarse)").matches;
 
-    if (prefereMenosMovimento || dispositivoTouch) return;
+    if (!elementos3D.length) return;
 
-    elementos3D.forEach((elemento) => {
-      if (elemento.dataset.tiltConfigurado === "true") return;
+    if (prefereMenosMovimento) {
+      html.classList.add("no-tilt");
+      return;
+    }
 
-      elemento.dataset.tiltConfigurado = "true";
+    if (typeof VanillaTilt !== "undefined") {
+      html.classList.remove("no-tilt");
+
+      elementos3D.forEach((elemento) => {
+        if (elemento.vanillaTilt) return;
+
+        VanillaTilt.init(elemento, {
+          max: 8,
+          speed: 450,
+          glare: true,
+          "max-glare": 0.18,
+          scale: 1.015,
+          perspective: 900,
+        });
+      });
+
+      return;
+    }
+
+    html.classList.add("no-tilt");
+    configurarBrilhoFallback(elementos3D);
+  }
+
+  function configurarBrilhoFallback(elementos) {
+    elementos.forEach((elemento) => {
+      if (elemento.dataset.fallbackGlow === "true") return;
+
+      elemento.dataset.fallbackGlow = "true";
 
       elemento.addEventListener("mousemove", (event) => {
         const rect = elemento.getBoundingClientRect();
-        const posicaoX = event.clientX - rect.left;
-        const posicaoY = event.clientY - rect.top;
-        const centroX = rect.width / 2;
-        const centroY = rect.height / 2;
-        const rotacaoX = ((posicaoY - centroY) / centroY) * -6;
-        const rotacaoY = ((posicaoX - centroX) / centroX) * 6;
-        const brilhoX = (posicaoX / rect.width) * 100;
-        const brilhoY = (posicaoY / rect.height) * 100;
+        const brilhoX = ((event.clientX - rect.left) / rect.width) * 100;
+        const brilhoY = ((event.clientY - rect.top) / rect.height) * 100;
 
         elemento.style.setProperty("--glow-x", `${brilhoX}%`);
         elemento.style.setProperty("--glow-y", `${brilhoY}%`);
-
-        elemento.style.transform = `
-          perspective(900px)
-          rotateX(${rotacaoX}deg)
-          rotateY(${rotacaoY}deg)
-          translateY(-8px)
-        `;
       });
 
       elemento.addEventListener("mouseleave", () => {
-        elemento.style.transform = "";
         elemento.style.removeProperty("--glow-x");
         elemento.style.removeProperty("--glow-y");
       });
