@@ -27,7 +27,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
   >
 
-  <link rel="stylesheet" href="style.css?v=10">
+  <link rel="stylesheet" href="style.css?v=12">
 </head>
 
 <body>
@@ -61,21 +61,25 @@
   </div>
 
 
-  <!-- =========================
-       MASCOTE INTERATIVO
-  ========================== -->
+<!-- =========================
+     MASCOTE INTERATIVO
+========================== -->
   <aside class="mascot" id="mascot" aria-label="Mascote do portfólio">
     <div class="mascot-bubble" id="mascotBubble">
       Clique nos objetos do quarto para explorar o portfólio.
     </div>
 
     <button class="mascot-sprite" id="mascotButton" type="button" aria-label="Dica do mascote">
-      <span class="mascot-eye eye-left"></span>
-      <span class="mascot-eye eye-right"></span>
-      <span class="mascot-mouth"></span>
+      <img
+        src="assets/img/Robozinho.png"
+        alt="Mascote robô do portfólio"
+        class="mascot-img"
+      >
+
+      <span class="mascot-pupil pupil-left" id="pupilLeft"></span>
+      <span class="mascot-pupil pupil-right" id="pupilRight"></span>
     </button>
   </aside>
-
 
   <!-- =========================
        CABEÇALHO
@@ -953,6 +957,6 @@
   </footer>
 
 
-  <script src="script.js?v=10"></script>
+  <script src="script.js?v=12"></script>
 </body>
 </html>

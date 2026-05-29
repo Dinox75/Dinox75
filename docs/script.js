@@ -282,96 +282,82 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================
-  // MASCOTE
-  // =========================
+// MASCOTE FIXO COM OLHOS SEGUINDO O CURSOR
+// =========================
 
-  const mensagensMascote = [
-    "Clique no monitor para abrir os projetos.",
-    "A estante mostra a parte de estudos e evolução.",
-    "O portal leva para contato profissional.",
-    "O painel mostra dados e automação.",
-    "Você pode trocar o tema no botão do topo.",
-    "Passe o mouse nos cards para sentir o efeito 3D."
-  ];
+    const mensagensMascote = [
+      "Clique no monitor para abrir os projetos.",
+      "A estante mostra a parte de estudos e evolução.",
+      "O portal leva para contato profissional.",
+      "O painel mostra dados e automação.",
+      "Você pode trocar o tema no botão do topo.",
+      "Passe o mouse nos cards para sentir o efeito 3D."
+    ];
 
-  let timeoutMascote = null;
-  let alvoMascote = {
-    x: window.innerWidth - 120,
-    y: window.innerHeight - 110,
-  };
+    let timeoutMascote = null;
 
-  let posMascote = {
-    x: window.innerWidth - 120,
-    y: window.innerHeight - 110,
-  };
+    const pupilLeft = document.getElementById("pupilLeft");
+    const pupilRight = document.getElementById("pupilRight");
 
-  function falarMascote(mensagem, tempo = 4200) {
-    if (!mascot || !mascotBubble) return;
+    function falarMascote(mensagem, tempo = 4200) {
+      if (!mascot || !mascotBubble) return;
 
-    mascotBubble.textContent = mensagem;
-    mascot.classList.add("talking");
+      mascotBubble.textContent = mensagem;
+      mascot.classList.add("talking");
 
-    clearTimeout(timeoutMascote);
+      clearTimeout(timeoutMascote);
 
-    timeoutMascote = setTimeout(() => {
-      mascot.classList.remove("talking");
-    }, tempo);
-  }
+      timeoutMascote = setTimeout(() => {
+        mascot.classList.remove("talking");
+      }, tempo);
+    }
 
-  function mensagemAleatoriaMascote() {
-    const indice = Math.floor(Math.random() * mensagensMascote.length);
-    falarMascote(mensagensMascote[indice]);
-  }
+    function mensagemAleatoriaMascote() {
+      const indice = Math.floor(Math.random() * mensagensMascote.length);
+      falarMascote(mensagensMascote[indice]);
+    }
 
-  if (mascotButton) {
-    mascotButton.addEventListener("click", () => {
-      mensagemAleatoriaMascote();
+    function moverOlhosDoMascote(event) {
+      if (!pupilLeft || !pupilRight) return;
+
+      const prefereMenosMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (prefereMenosMovimento) return;
+
+      const pupilas = [pupilLeft, pupilRight];
+
+      pupilas.forEach((pupila) => {
+        const rect = pupila.getBoundingClientRect();
+
+        const centroX = rect.left + rect.width / 2;
+        const centroY = rect.top + rect.height / 2;
+
+        const angulo = Math.atan2(event.clientY - centroY, event.clientX - centroX);
+
+        const distancia = 5;
+
+        const moverX = Math.cos(angulo) * distancia;
+        const moverY = Math.sin(angulo) * distancia;
+
+        pupila.style.transform = `translate(${moverX}px, ${moverY}px)`;
+      });
+    }
+
+    if (mascotButton) {
+      mascotButton.addEventListener("click", () => {
+        mensagemAleatoriaMascote();
+      });
+    }
+
+    document.addEventListener("mousemove", moverOlhosDoMascote, {
+      passive: true,
     });
-  }
 
-  document.addEventListener("mousemove", (event) => {
-    if (!mascot) return;
-
-    const dispositivoTouch = window.matchMedia("(pointer: coarse)").matches;
-    const prefereMenosMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (dispositivoTouch || prefereMenosMovimento) return;
-
-    alvoMascote = {
-      x: Math.min(window.innerWidth - 110, Math.max(24, event.clientX + 26)),
-      y: Math.min(window.innerHeight - 105, Math.max(90, event.clientY + 24)),
-    };
-  }, {
-    passive: true,
-  });
-
-  function animarMascote() {
-    if (!mascot) return;
-
-    posMascote.x += (alvoMascote.x - posMascote.x) * 0.035;
-    posMascote.y += (alvoMascote.y - posMascote.y) * 0.035;
-
-    const baseX = window.innerWidth - 122;
-    const baseY = window.innerHeight - 122;
-
-    mascot.style.transform = `
-      translate3d(
-        ${posMascote.x - baseX}px,
-        ${posMascote.y - baseY}px,
-        0
-      )
-    `;
-
-    requestAnimationFrame(animarMascote);
-  }
-
-  if (mascot) {
-    requestAnimationFrame(animarMascote);
-
-    setTimeout(() => {
-      falarMascote("Bem-vindo ao meu portfólio. O quarto interativo está logo abaixo.");
-    }, 900);
-  }
+    if (mascot) {
+      setTimeout(() => {
+        falarMascote("Bem-vindo ao meu portfólio. Clique nos objetos do quarto para explorar.");
+      }, 900);
+    }
 
 
   // =========================
