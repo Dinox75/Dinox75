@@ -3154,3 +3154,292 @@ body::after {
     height: 7px;
   }
 }
+
+
+/* =========================
+   PATCH V16 - MASCOTE CSS PROFISSIONAL
+   Este bloco substitui visualmente o antigo mascote em PNG.
+   O HTML agora usa .robot em vez de .mascot-sprite.
+========================= */
+
+.robot {
+  position: relative;
+  width: 142px;
+  height: 168px;
+  padding: 0;
+  pointer-events: auto;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  image-rendering: pixelated;
+  transition: 0.3s ease;
+  animation: mascotFloat 3.8s ease-in-out infinite;
+}
+
+.robot:hover {
+  transform: translateY(-6px) rotateZ(-2deg);
+}
+
+.robot-antenna {
+  position: absolute;
+  left: 66px;
+  top: 0;
+  width: 9px;
+  height: 28px;
+  background: #1e3a8a;
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px rgba(2, 6, 23, 0.52);
+}
+
+.robot-antenna::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -13px;
+  width: 25px;
+  height: 25px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 35% 35%, #ffffff, var(--blue) 34%, var(--blue-strong));
+  border-radius: 50%;
+  box-shadow:
+    0 0 16px rgba(56, 189, 248, 0.75),
+    0 0 0 3px rgba(2, 6, 23, 0.34);
+}
+
+.robot-head {
+  position: absolute;
+  left: 12px;
+  top: 24px;
+  width: 118px;
+  height: 86px;
+  background:
+    radial-gradient(circle at 28% 20%, rgba(255, 255, 255, 0.88), transparent 20%),
+    linear-gradient(145deg, #e0f2fe 0 18%, #93c5fd 18% 42%, #1e3a8a 42% 100%);
+  border: 4px solid #020617;
+  border-radius: 36px 36px 30px 30px;
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.24),
+    inset -8px -8px 0 rgba(2, 6, 23, 0.16);
+  transform-origin: center bottom;
+  transform:
+    translateX(var(--head-x, 0px))
+    rotate(var(--head-rotate, 0deg));
+  transition:
+    transform 0.18s ease,
+    filter 0.3s ease;
+}
+
+.robot-face {
+  position: absolute;
+  left: 13px;
+  right: 13px;
+  top: 26px;
+  height: 40px;
+  background: linear-gradient(180deg, #020617, #071426);
+  border: 3px solid #0f172a;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 18px rgba(56, 189, 248, 0.18),
+    0 0 14px rgba(56, 189, 248, 0.18);
+}
+
+.robot-eye {
+  position: absolute;
+  top: 11px;
+  width: 21px;
+  height: 18px;
+  overflow: hidden;
+  background: radial-gradient(circle, #e0f2fe 0 18%, var(--blue) 20% 58%, #075985 60% 100%);
+  border-radius: 50%;
+  box-shadow:
+    0 0 10px rgba(56, 189, 248, 0.75),
+    inset 0 -3px 0 rgba(2, 6, 23, 0.25);
+}
+
+.robot-eye.eye-left {
+  left: 20px;
+}
+
+.robot-eye.eye-right {
+  right: 20px;
+}
+
+.robot-pupil {
+  position: absolute;
+  left: 7px;
+  top: 5px;
+  width: 7px;
+  height: 7px;
+  background: #020617;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.75);
+  transition: transform 0.08s linear;
+}
+
+.robot-mouth {
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  width: 20px;
+  height: 5px;
+  transform: translateX(-50%);
+  background: var(--blue);
+  border-radius: 0 0 999px 999px;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+}
+
+.mascot.happy .robot-mouth {
+  height: 8px;
+  border-radius: 0 0 12px 12px;
+}
+
+.mascot.thinking .robot-mouth {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.robot-body {
+  position: absolute;
+  left: 39px;
+  top: 105px;
+  width: 64px;
+  height: 52px;
+  background: linear-gradient(145deg, #dbeafe, #2563eb 50%, #111827);
+  border: 4px solid #020617;
+  border-radius: 22px 22px 18px 18px;
+  box-shadow:
+    0 12px 20px rgba(0, 0, 0, 0.25),
+    inset -6px -6px 0 rgba(2, 6, 23, 0.18);
+}
+
+.robot-core {
+  position: absolute;
+  left: 50%;
+  top: 14px;
+  width: 24px;
+  height: 24px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, #ffffff, var(--blue) 42%, #1e40af);
+  border: 3px solid #0f172a;
+  border-radius: 50%;
+  box-shadow:
+    0 0 18px rgba(56, 189, 248, 0.68),
+    inset 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.robot-arm,
+.robot-leg {
+  position: absolute;
+  background: linear-gradient(145deg, #bfdbfe, #2563eb 58%, #111827);
+  border: 3px solid #020617;
+}
+
+.robot-arm {
+  top: 8px;
+  width: 24px;
+  height: 35px;
+  border-radius: 16px;
+}
+
+.robot-arm.arm-left {
+  left: -22px;
+  transform-origin: top right;
+}
+
+.robot-arm.arm-right {
+  right: -22px;
+  transform-origin: top left;
+}
+
+.mascot.talking .robot-arm.arm-right {
+  animation: robotWave 0.9s ease-in-out infinite;
+}
+
+.robot-leg {
+  bottom: -26px;
+  width: 24px;
+  height: 28px;
+  border-radius: 10px;
+}
+
+.robot-leg.leg-left {
+  left: 9px;
+}
+
+.robot-leg.leg-right {
+  right: 9px;
+}
+
+.mascot.dizzy .robot {
+  animation:
+    mascotFloat 3.8s ease-in-out infinite,
+    mascotDizzy 0.45s ease-in-out infinite;
+}
+
+@keyframes robotWave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-32deg);
+  }
+}
+
+@media (max-width: 720px) {
+  .robot {
+    width: 105px;
+    height: 124px;
+  }
+
+  .robot-antenna {
+    left: 49px;
+    height: 22px;
+  }
+
+  .robot-head {
+    left: 8px;
+    top: 19px;
+    width: 89px;
+    height: 66px;
+    border-width: 3px;
+  }
+
+  .robot-face {
+    left: 10px;
+    right: 10px;
+    top: 20px;
+    height: 32px;
+  }
+
+  .robot-eye {
+    top: 8px;
+    width: 17px;
+    height: 15px;
+  }
+
+  .robot-eye.eye-left {
+    left: 15px;
+  }
+
+  .robot-eye.eye-right {
+    right: 15px;
+  }
+
+  .robot-pupil {
+    left: 5px;
+    top: 4px;
+    width: 6px;
+    height: 6px;
+  }
+
+  .robot-body {
+    left: 29px;
+    top: 80px;
+    width: 48px;
+    height: 40px;
+    border-width: 3px;
+  }
+}

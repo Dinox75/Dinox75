@@ -27,7 +27,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
   >
 
-  <link rel="stylesheet" href="style.css?v=13">
+  <link rel="stylesheet" href="style.css?v=16">
 </head>
 
 <body>
@@ -95,22 +95,38 @@
 
 
   <!-- =========================
-       MASCOTE INTERATIVO
+       MASCOTE INTERATIVO EM CSS
+       Sem PNG para evitar fundo quadrado
   ========================== -->
   <aside class="mascot" id="mascot" aria-label="Mascote robô do portfólio">
     <div class="mascot-bubble" id="mascotBubble">
       Bem-vindo! Clique nos objetos do quarto para explorar.
     </div>
 
-    <button class="mascot-sprite" id="mascotButton" type="button" aria-label="Pedir dica ao mascote">
-      <img
-        src="assets/img/Robozinho.png"
-        alt="Mascote robô do portfólio"
-        class="mascot-img"
-      >
+    <button class="robot" id="mascotButton" type="button" aria-label="Pedir dica ao mascote">
+      <span class="robot-antenna"></span>
 
-      <span class="mascot-pupil pupil-left" id="pupilLeft"></span>
-      <span class="mascot-pupil pupil-right" id="pupilRight"></span>
+      <span class="robot-head" id="robotHead">
+        <span class="robot-face">
+          <span class="robot-eye eye-left">
+            <span class="robot-pupil" id="pupilLeft"></span>
+          </span>
+
+          <span class="robot-eye eye-right">
+            <span class="robot-pupil" id="pupilRight"></span>
+          </span>
+
+          <span class="robot-mouth" id="robotMouth"></span>
+        </span>
+      </span>
+
+      <span class="robot-body">
+        <span class="robot-core"></span>
+        <span class="robot-arm arm-left"></span>
+        <span class="robot-arm arm-right"></span>
+        <span class="robot-leg leg-left"></span>
+        <span class="robot-leg leg-right"></span>
+      </span>
 
       <span class="dizzy-star dizzy-a"></span>
       <span class="dizzy-star dizzy-b"></span>
@@ -613,7 +629,13 @@
 
           <div class="project-actions">
             <a href="https://github.com/Dinox75/simulador-escala-trabalho" target="_blank" rel="noopener noreferrer" class="btn-card">
+              <i class="fa-brands fa-github"></i>
               Ver GitHub
+            </a>
+
+            <a href="https://dinox75.github.io/simulador-escala-trabalho/demo/" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-secondary">
+              <i class="fa-solid fa-play"></i>
+              Demo
             </a>
           </div>
         </article>
@@ -999,6 +1021,6 @@
   </footer>
 
 
-  <script src="script.js?v=13"></script>
+  <script src="script.js?v=16"></script>
 </body>
 </html>

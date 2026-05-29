@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mascot = document.getElementById("mascot");
   const mascotButton = document.getElementById("mascotButton");
   const mascotBubble = document.getElementById("mascotBubble");
+  const robotHead = document.getElementById("robotHead");
   const pupilLeft = document.getElementById("pupilLeft");
   const pupilRight = document.getElementById("pupilRight");
   const interactiveRoom = document.getElementById("interactiveRoom");
@@ -274,7 +275,26 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   let timeoutMascote = null;
+  let timeoutExpressaoMascote = null;
   let mascoteLivreParaFalar = true;
+
+  function definirExpressaoMascote(expressao, tempo = 2600) {
+    if (!mascot) return;
+
+    mascot.classList.remove("happy", "thinking", "dizzy");
+
+    if (expressao) {
+      mascot.classList.add(expressao);
+    }
+
+    clearTimeout(timeoutExpressaoMascote);
+
+    if (expressao && expressao !== "dizzy") {
+      timeoutExpressaoMascote = setTimeout(() => {
+        mascot.classList.remove("happy", "thinking");
+      }, tempo);
+    }
+  }
   let ultimoScrollY = window.scrollY;
   let ultimoTempoScroll = performance.now();
   let timeoutZonzo = null;
@@ -306,32 +326,39 @@ document.addEventListener("DOMContentLoaded", () => {
   function mensagemAleatoriaMascote() {
     const indice = Math.floor(Math.random() * mensagensMascote.length);
     falarMascote(mensagensMascote[indice]);
+    definirExpressaoMascote("happy");
   }
 
   function moverOlhosDoMascote(event) {
-    if (!pupilLeft || !pupilRight) return;
-
     const reduzido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (reduzido) return;
-
-    [pupilLeft, pupilRight].forEach((pupila) => {
-      const rect = pupila.getBoundingClientRect();
-      const centroX = rect.left + rect.width / 2;
-      const centroY = rect.top + rect.height / 2;
-      const angulo = Math.atan2(event.clientY - centroY, event.clientX - centroX);
-      const distancia = 5;
-      const moverX = Math.cos(angulo) * distancia;
-      const moverY = Math.sin(angulo) * distancia;
-
-      pupila.style.transform = `translate(${moverX}px, ${moverY}px)`;
-    });
 
     const mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
     const mouseY = (event.clientY / window.innerHeight - 0.5) * 2;
 
     html.style.setProperty("--mouse-x", mouseX.toFixed(3));
     html.style.setProperty("--mouse-y", mouseY.toFixed(3));
+
+    if (robotHead) {
+      const rotacao = mouseX * 7;
+      const deslocamento = mouseX * 4;
+
+      robotHead.style.setProperty("--head-rotate", `${rotacao.toFixed(2)}deg`);
+      robotHead.style.setProperty("--head-x", `${deslocamento.toFixed(2)}px`);
+    }
+
+    [pupilLeft, pupilRight].filter(Boolean).forEach((pupila) => {
+      const rect = pupila.getBoundingClientRect();
+      const centroX = rect.left + rect.width / 2;
+      const centroY = rect.top + rect.height / 2;
+      const angulo = Math.atan2(event.clientY - centroY, event.clientX - centroX);
+      const distancia = 4;
+      const moverX = Math.cos(angulo) * distancia;
+      const moverY = Math.sin(angulo) * distancia;
+
+      pupila.style.transform = `translate(${moverX}px, ${moverY}px)`;
+    });
   }
 
   if (mascotButton) {
@@ -345,6 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (mascot) {
     setTimeout(() => {
       falarMascote("Bem-vindo ao meu mapa! Comece pelo quarto interativo.");
+      definirExpressaoMascote("happy");
     }, 900);
   }
 
